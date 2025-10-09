@@ -21,7 +21,6 @@
  *
  * Modified by Red Hat, Inc.
  */
-
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
@@ -38,13 +37,18 @@ public class HalfPointFreeExpr extends Expression {
     private final NodeList<Expression> right;
 
     private final SimpleName operator;
+
     private boolean negated;
+
     private final Expression arg1;
+
     private final Expression arg2;
+
     private final Expression arg3;
+
     private final Expression arg4;
 
-    public HalfPointFreeExpr(TokenRange tokenRange, NodeList<Expression> right, SimpleName operator, Boolean negated, Expression arg1, Expression arg2 , Expression arg3, Expression arg4 ) {
+    public HalfPointFreeExpr(TokenRange tokenRange, NodeList<Expression> right, SimpleName operator, Boolean negated, Expression arg1, Expression arg2, Expression arg3, Expression arg4) {
         super(tokenRange);
         this.right = right;
         this.operator = operator;
@@ -57,14 +61,13 @@ public class HalfPointFreeExpr extends Expression {
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
-
 
     public NodeList<Expression> getRight() {
         return right;

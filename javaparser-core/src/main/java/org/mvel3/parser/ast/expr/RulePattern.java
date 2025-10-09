@@ -15,7 +15,6 @@
  *
  *
  */
-
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
@@ -28,11 +27,13 @@ import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 public class RulePattern extends RuleItem {
 
     private final SimpleName type;
+
     private final SimpleName bind;
+
     private final OOPathExpr expr;
 
-    public RulePattern(TokenRange range, SimpleName type, SimpleName bind, OOPathExpr expr ) {
-        super( range );
+    public RulePattern(TokenRange range, SimpleName type, SimpleName bind, OOPathExpr expr) {
+        super(range);
         this.type = type;
         this.bind = bind;
         this.expr = expr;
@@ -52,13 +53,12 @@ public class RulePattern extends RuleItem {
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v = RuleDeclaration.getDrlVoidVisitor(v);
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
-
 }

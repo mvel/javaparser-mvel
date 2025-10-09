@@ -24,7 +24,6 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import static com.github.javaparser.utils.Utils.capitalize;
 import static com.github.javaparser.utils.Utils.decapitalize;
 
@@ -50,7 +49,7 @@ public final class CodeGenerationUtils {
         if (getterName.startsWith("is")) {
             return decapitalize(getterName.substring("is".length()));
         }
-            if (getterName.startsWith("get")) {
+        if (getterName.startsWith("get")) {
             return decapitalize(getterName.substring("get".length()));
         }
         if (getterName.startsWith("has")) {

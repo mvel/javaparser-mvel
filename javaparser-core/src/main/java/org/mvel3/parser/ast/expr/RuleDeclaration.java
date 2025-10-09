@@ -15,7 +15,6 @@
  *
  *
  */
-
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
@@ -34,18 +33,18 @@ public class RuleDeclaration extends TypeDeclaration<RuleDeclaration> {
 
     private final RuleBody ruleBody;
 
-    public RuleDeclaration(TokenRange range, NodeList<AnnotationExpr> annotations, SimpleName name, RuleBody ruleBody ) {
-        super( range, NodeList.nodeList(), annotations, name, new NodeList<>() );
+    public RuleDeclaration(TokenRange range, NodeList<AnnotationExpr> annotations, SimpleName name, RuleBody ruleBody) {
+        super(range, NodeList.nodeList(), annotations, name, new NodeList<>());
         this.ruleBody = ruleBody;
     }
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     public static <A> VoidVisitor<A> getDrlVoidVisitor(VoidVisitor<A> v) {
-        if ( !(v instanceof DrlVoidVisitor)) {
+        if (!(v instanceof DrlVoidVisitor)) {
             v = new DrlVoidVisitorAdapter<>(v);
         }
         return v;
@@ -54,7 +53,7 @@ public class RuleDeclaration extends TypeDeclaration<RuleDeclaration> {
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v = getDrlVoidVisitor(v);
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
 
     public RuleBody getRuleBody() {

@@ -21,11 +21,9 @@
  *
  * Modified by Red Hat, Inc.
  */
-
 package org.mvel3.parser.ast.expr;
 
 import java.util.Optional;
-
 import com.github.javaparser.TokenRange;
 import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.Generated;
@@ -47,14 +45,9 @@ import com.github.javaparser.resolution.Resolvable;
 import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
 import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
-
 import static com.github.javaparser.utils.Utils.assertNotNull;
 
-public class NullSafeMethodCallExpr extends Expression implements NodeWithTypeArguments<NullSafeMethodCallExpr>,
-                                                                  NodeWithArguments<NullSafeMethodCallExpr>,
-                                                                  NodeWithSimpleName<NullSafeMethodCallExpr>,
-                                                                  NodeWithOptionalScope<NullSafeMethodCallExpr>,
-                                                                  Resolvable<ResolvedMethodDeclaration> {
+public class NullSafeMethodCallExpr extends Expression implements NodeWithTypeArguments<NullSafeMethodCallExpr>, NodeWithArguments<NullSafeMethodCallExpr>, NodeWithSimpleName<NullSafeMethodCallExpr>, NodeWithOptionalScope<NullSafeMethodCallExpr>, Resolvable<ResolvedMethodDeclaration> {
 
     @OptionalProperty
     private Expression scope;
@@ -114,12 +107,12 @@ public class NullSafeMethodCallExpr extends Expression implements NodeWithTypeAr
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
 
     @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
@@ -139,7 +132,7 @@ public class NullSafeMethodCallExpr extends Expression implements NodeWithTypeAr
 
     @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NullSafeMethodCallExpr setArguments(final NodeList<Expression> arguments) {
-    	assertNotNull(arguments);
+        assertNotNull(arguments);
         if (arguments == this.arguments) {
             return this;
         }
@@ -154,7 +147,7 @@ public class NullSafeMethodCallExpr extends Expression implements NodeWithTypeAr
 
     @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NullSafeMethodCallExpr setName(final SimpleName name) {
-    	assertNotNull(name);
+        assertNotNull(name);
         if (name == this.name) {
             return this;
         }
@@ -304,5 +297,4 @@ public class NullSafeMethodCallExpr extends Expression implements NodeWithTypeAr
     public ResolvedMethodDeclaration resolveInvokedMethod() {
         return resolve();
     }
-
 }

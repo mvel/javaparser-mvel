@@ -29,6 +29,7 @@ import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.modules.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.*;
+import org.mvel3.parser.ast.expr.InlineCastExpr;
 
 public class NoCommentHashCodeVisitor implements GenericVisitor<Integer, Void> {
 
@@ -453,5 +454,10 @@ public class NoCommentHashCodeVisitor implements GenericVisitor<Integer, Void> {
 
     public Integer visit(final CompactConstructorDeclaration n, final Void arg) {
         return (n.getBody().accept(this, arg)) * 31 + (n.getModifiers().accept(this, arg)) * 31 + (n.getName().accept(this, arg)) * 31 + (n.getThrownExceptions().accept(this, arg)) * 31 + (n.getTypeParameters().accept(this, arg)) * 31 + (n.getAnnotations().accept(this, arg));
+    }
+
+    @Override
+    public Integer visit(final InlineCastExpr n, final Void arg) {
+        return (n.getExpression().accept(this, arg)) * 31 + (n.getType().accept(this, arg));
     }
 }

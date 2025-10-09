@@ -30,10 +30,8 @@ import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.nodeTypes.NodeWithAnnotations;
-
 import java.util.Comparator;
 import java.util.List;
-
 import static java.lang.Integer.signum;
 
 public final class PositionUtils {
@@ -109,7 +107,6 @@ public final class PositionUtils {
     }
 
     private static Node firstNonAnnotationNode(Node node) {
-
         if (node instanceof ClassOrInterfaceDeclaration) {
             // Modifiers appear before the class name --
             ClassOrInterfaceDeclaration casted = (ClassOrInterfaceDeclaration) node;
@@ -119,7 +116,7 @@ public final class PositionUtils {
             }
             return earliestModifier;
         }
-            if (node instanceof MethodDeclaration) {
+        if (node instanceof MethodDeclaration) {
             // Modifiers appear before the class name --
             MethodDeclaration casted = (MethodDeclaration) node;
             Modifier earliestModifier = casted.getModifiers().stream().filter(modifier -> modifier.hasRange()).min(Comparator.comparing(o -> o.getRange().get().begin)).orElse(null);
@@ -128,7 +125,7 @@ public final class PositionUtils {
             }
             return earliestModifier;
         }
-            if (node instanceof FieldDeclaration) {
+        if (node instanceof FieldDeclaration) {
             // Modifiers appear before the class name --
             FieldDeclaration casted = (FieldDeclaration) node;
             Modifier earliestModifier = casted.getModifiers().stream().filter(modifier -> modifier.hasRange()).min(Comparator.comparing(o -> o.getRange().get().begin)).orElse(null);
@@ -179,7 +176,7 @@ public final class PositionUtils {
         // let's not consider it contained (i.e. it must be "strictly contained").
         Node nodeWithoutAnnotations = firstNonAnnotationNode(container);
         Range rangeWithoutAnnotations = container.getRange().get().withBegin(nodeWithoutAnnotations.getBegin().get());
-        return rangeWithoutAnnotations.// .contains(other.getRange().get());
-        strictlyContains(other.getRange().get());
+        return // .contains(other.getRange().get());
+        rangeWithoutAnnotations.strictlyContains(other.getRange().get());
     }
 }

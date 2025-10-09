@@ -15,7 +15,6 @@
  *
  *
  */
-
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.ast.expr.Expression;
@@ -23,8 +22,11 @@ import com.github.javaparser.ast.expr.Expression;
 public class TemporalLiteralArguments {
 
     private final Expression arg1;
+
     private final Expression arg2;
+
     private final Expression arg3;
+
     private final Expression arg4;
 
     public TemporalLiteralArguments(Expression arg1, Expression arg2, Expression arg3, Expression arg4) {

@@ -21,12 +21,10 @@
 package com.github.javaparser.resolution.types;
 
 import com.github.javaparser.utils.TypeUtils;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
 
 /**
  * @author Federico Tomassetti
@@ -66,14 +64,14 @@ public enum ResolvedPrimitiveType implements ResolvedType {
         }
         throw new IllegalArgumentException("Name " + name);
     }
-    
+
     /*
      * Returns true if the specified type is a boxed type of a primitive type.
      */
     public static boolean isBoxType(ResolvedType type) {
-    	if (!type.isReferenceType()) {
-    		return false;
-    	}
+        if (!type.isReferenceType()) {
+            return false;
+        }
         String qName = type.asReferenceType().getQualifiedName();
         for (ResolvedPrimitiveType ptu : values()) {
             if (ptu.getBoxTypeQName().equals(qName)) {
@@ -82,7 +80,7 @@ public enum ResolvedPrimitiveType implements ResolvedType {
         }
         return false;
     }
-    
+
     /*
      * Returns the primitive type corresponding to the specified boxed type canonical name.
      */
@@ -94,7 +92,7 @@ public enum ResolvedPrimitiveType implements ResolvedType {
         }
         return Optional.empty();
     }
-    
+
     /*
      * Returns an array containing all numeric types
      */
@@ -141,7 +139,7 @@ public enum ResolvedPrimitiveType implements ResolvedType {
         if (other.isPrimitive()) {
             return this == other || promotionTypes.contains(other);
         }
-            if (other.isReferenceType()) {
+        if (other.isReferenceType()) {
             if (other.asReferenceType().getQualifiedName().equals(getBoxTypeQName())) {
                 return true;
             }
@@ -158,7 +156,7 @@ public enum ResolvedPrimitiveType implements ResolvedType {
     public String getBoxTypeQName() {
         return boxTypeClass.getCanonicalName();
     }
-    
+
     /*
      * Returns the boxed class of the primitive type.
      */
@@ -182,12 +180,11 @@ public enum ResolvedPrimitiveType implements ResolvedType {
      * If any operand is of a reference type, it is subjected to unboxing conversion (§5.1.8).
      */
     public ResolvedPrimitiveType bnp(ResolvedPrimitiveType other) {
-
         if (this == ResolvedPrimitiveType.DOUBLE || other == ResolvedPrimitiveType.DOUBLE) {
             return ResolvedPrimitiveType.DOUBLE;
             // Otherwise, if either operand is of type float, the other is converted to float.
         }
-            if (this == ResolvedPrimitiveType.FLOAT || other == ResolvedPrimitiveType.FLOAT) {
+        if (this == ResolvedPrimitiveType.FLOAT || other == ResolvedPrimitiveType.FLOAT) {
             return ResolvedPrimitiveType.FLOAT;
             // Otherwise, if either operand is of type long, the other is converted to long.
         }

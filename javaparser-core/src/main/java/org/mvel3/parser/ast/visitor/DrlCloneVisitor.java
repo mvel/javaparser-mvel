@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.mvel3.parser.ast.visitor;
 
 import com.github.javaparser.ast.visitor.CloneVisitor;
@@ -67,7 +66,9 @@ public class DrlCloneVisitor extends CloneVisitor implements DrlGenericVisitor<V
         return null;
     }
 
-    public Visitable visit(RuleJoinedPatterns n, Object arg) { return null; }
+    public Visitable visit(RuleJoinedPatterns n, Object arg) {
+        return null;
+    }
 
     @Override
     public Visitable visit(DrlxExpression n, Object arg) {
@@ -183,6 +184,4 @@ public class DrlCloneVisitor extends CloneVisitor implements DrlGenericVisitor<V
     public Visitable visit(WithStatement withStatement, Object arg) {
         return null;
     }
-
-
 }

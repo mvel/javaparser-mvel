@@ -30,8 +30,9 @@ import com.github.javaparser.ast.validator.Validator;
  */
 public class Java17Validator extends Java16Validator {
 
-	final Validator sealedNotAllowedAsIdentifier = new ReservedKeywordValidator("sealed");
-	final Validator permitsNotAllowedAsIdentifier = new ReservedKeywordValidator("permits");
+    final Validator sealedNotAllowedAsIdentifier = new ReservedKeywordValidator("sealed");
+
+    final Validator permitsNotAllowedAsIdentifier = new ReservedKeywordValidator("permits");
 
     public Java17Validator() {
         super();

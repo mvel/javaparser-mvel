@@ -24,13 +24,11 @@ import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.javadoc.Javadoc;
 import com.github.javaparser.javadoc.JavadocBlockTag;
 import com.github.javaparser.javadoc.description.JavadocDescription;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
 import static com.github.javaparser.utils.Utils.*;
 
 /**
@@ -99,11 +97,11 @@ class JavadocParser {
                 return l;
             }
             if (l.length() > (asteriskIndex + 1)) {
-                    char c = l.charAt(asteriskIndex + 1);
-                    if (c == ' ' || c == '\t') {
-                        return l.substring(asteriskIndex + 2);
-                    }
+                char c = l.charAt(asteriskIndex + 1);
+                if (c == ' ' || c == '\t') {
+                    return l.substring(asteriskIndex + 2);
                 }
+            }
             return l.substring(asteriskIndex + 1);
         }).collect(Collectors.toList());
         // lines containing only whitespace are normalized to empty lines
@@ -127,7 +125,7 @@ class JavadocParser {
         if (line.startsWith("*")) {
             return 0;
         }
-            if ((line.startsWith(" ") || line.startsWith("\t")) && line.length() > 1) {
+        if ((line.startsWith(" ") || line.startsWith("\t")) && line.length() > 1) {
             int res = startsWithAsterisk(line.substring(1));
             if (res == -1) {
                 return -1;

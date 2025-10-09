@@ -14,9 +14,10 @@ public class WithStatement extends AbstractContextStatement<WithStatement, Expre
     public WithStatement(TokenRange tokenRange, Expression withExpression, NodeList<Statement> expressions) {
         super(tokenRange, withExpression, expressions);
     }
+
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
@@ -25,5 +26,4 @@ public class WithStatement extends AbstractContextStatement<WithStatement, Expre
             ((DrlVoidVisitor<A>) v).visit(this, arg);
         }
     }
-
 }

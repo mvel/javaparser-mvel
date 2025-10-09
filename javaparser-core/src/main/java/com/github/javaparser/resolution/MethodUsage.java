@@ -21,7 +21,6 @@
 package com.github.javaparser.resolution;
 
 import java.util.*;
-
 import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
 import com.github.javaparser.resolution.declarations.ResolvedReferenceTypeDeclaration;
 import com.github.javaparser.resolution.declarations.ResolvedTypeParameterDeclaration;
@@ -225,7 +224,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
         return exceptionTypes;
     }
 
-	/*
+    /*
 	 * Two methods or constructors, M and N, have the same signature if they have
 	 * the same name, the same type parameters (if any) (§8.4.4), and, after
 	 * adapting the formal parameter types of N to the the type parameters of M, the
@@ -234,7 +233,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
 	 * This method returns an approximation of this rule.
 	 */
     public boolean isSameSignature(MethodUsage otherMethodUsage) {
-    	return getSignature().equals(otherMethodUsage.getSignature());
+        return getSignature().equals(otherMethodUsage.getSignature());
     }
 
     /*
@@ -243,7 +242,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
      * the signature of m1 is the same as the erasure (§4.6) of the signature of m2.
      */
     public boolean isSubSignature(MethodUsage otherMethodUsage) {
-    	return getErasedSignature().equals(otherMethodUsage.getErasedSignature());
+        return getErasedSignature().equals(otherMethodUsage.getErasedSignature());
     }
 
     /*
@@ -255,7 +254,7 @@ public class MethodUsage implements ResolvedTypeParametrized {
      * R1 can be converted to a subtype of R2 by unchecked conversion (§5.1.9).
      * d1 does not have the same signature as d2 (§8.4.2), and R1 = |R2|.
      */
-	public boolean isReturnTypeSubstituable(MethodUsage otherMethodUsage) {
-		return getDeclaration().isReturnTypeSubstituable(otherMethodUsage.getDeclaration().getReturnType());
-	}
+    public boolean isReturnTypeSubstituable(MethodUsage otherMethodUsage) {
+        return getDeclaration().isReturnTypeSubstituable(otherMethodUsage.getDeclaration().getReturnType());
+    }
 }

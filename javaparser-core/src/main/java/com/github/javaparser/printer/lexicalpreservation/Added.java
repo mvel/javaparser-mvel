@@ -89,7 +89,7 @@ public class Added implements DifferenceElement {
         if (element instanceof LexicalDifferenceCalculator.CsmChild) {
             return new ChildTextElement(((LexicalDifferenceCalculator.CsmChild) element).getChild());
         }
-            if (element instanceof CsmToken) {
+        if (element instanceof CsmToken) {
             return new TokenTextElement(((CsmToken) element).getTokenType(), ((CsmToken) element).getContent());
         }
         throw new UnsupportedOperationException(element.getClass().getSimpleName());

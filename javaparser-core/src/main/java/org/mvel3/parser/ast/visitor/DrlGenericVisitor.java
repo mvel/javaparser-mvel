@@ -46,7 +46,7 @@ import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.WithStatement;
 
-public interface DrlGenericVisitor<R, A> extends GenericVisitor<R,A> {
+public interface DrlGenericVisitor<R, A> extends GenericVisitor<R, A> {
 
     R visit(RuleDeclaration ruleDeclaration, A arg);
 

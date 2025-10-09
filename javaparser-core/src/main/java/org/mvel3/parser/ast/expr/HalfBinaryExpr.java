@@ -38,14 +38,18 @@ import com.github.javaparser.metamodel.JavaParserMetaModel;
 import com.github.javaparser.printer.Stringable;
 import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
-
 import static com.github.javaparser.utils.Utils.assertNotNull;
 
 public final class HalfBinaryExpr extends Expression {
 
     public enum Operator implements Stringable {
 
-        EQUALS("=="), NOT_EQUALS("!="), LESS("<"), GREATER(">"), LESS_EQUALS("<="), GREATER_EQUALS(">=");
+        EQUALS("=="),
+        NOT_EQUALS("!="),
+        LESS("<"),
+        GREATER(">"),
+        LESS_EQUALS("<="),
+        GREATER_EQUALS(">=");
 
         private final String codeRepresentation;
 
@@ -58,13 +62,19 @@ public final class HalfBinaryExpr extends Expression {
         }
 
         public BinaryExpr.Operator toBinaryExprOperator() {
-            switch (this) {
-                case EQUALS: return BinaryExpr.Operator.EQUALS;
-                case NOT_EQUALS: return BinaryExpr.Operator.NOT_EQUALS;
-                case LESS: return BinaryExpr.Operator.LESS;
-                case GREATER: return BinaryExpr.Operator.GREATER;
-                case LESS_EQUALS: return BinaryExpr.Operator.LESS_EQUALS;
-                case GREATER_EQUALS: return BinaryExpr.Operator.GREATER_EQUALS;
+            switch(this) {
+                case EQUALS:
+                    return BinaryExpr.Operator.EQUALS;
+                case NOT_EQUALS:
+                    return BinaryExpr.Operator.NOT_EQUALS;
+                case LESS:
+                    return BinaryExpr.Operator.LESS;
+                case GREATER:
+                    return BinaryExpr.Operator.GREATER;
+                case LESS_EQUALS:
+                    return BinaryExpr.Operator.LESS_EQUALS;
+                case GREATER_EQUALS:
+                    return BinaryExpr.Operator.GREATER_EQUALS;
             }
             throw new UnsupportedOperationException("Unknown operator " + this);
         }
@@ -83,7 +93,9 @@ public final class HalfBinaryExpr extends Expression {
         this(null, right, operator);
     }
 
-    /**This constructor is used by the parser and is considered private.*/
+    /**
+     * This constructor is used by the parser and is considered private.
+     */
     public HalfBinaryExpr(TokenRange tokenRange, Expression right, Operator operator) {
         super(tokenRange);
         setRight(right);
@@ -93,12 +105,12 @@ public final class HalfBinaryExpr extends Expression {
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
-    public <A> void accept(VoidVisitor<A> v, A arg) {   
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+    public <A> void accept(VoidVisitor<A> v, A arg) {
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
 
     public Operator getOperator() {

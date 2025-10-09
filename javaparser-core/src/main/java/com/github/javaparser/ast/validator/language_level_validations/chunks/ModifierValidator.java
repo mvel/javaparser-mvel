@@ -31,10 +31,8 @@ import com.github.javaparser.ast.stmt.CatchClause;
 import com.github.javaparser.ast.validator.ProblemReporter;
 import com.github.javaparser.ast.validator.VisitorValidator;
 import com.github.javaparser.utils.SeparatedItemStringBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.github.javaparser.ast.Modifier.Keyword.*;
 import static java.util.Arrays.asList;
 

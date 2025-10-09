@@ -175,7 +175,7 @@ class TextElementIteratorsFactory {
                 }
             };
         }
-            if (textElement instanceof ChildTextElement) {
+        if (textElement instanceof ChildTextElement) {
             ChildTextElement childTextElement = (ChildTextElement) textElement;
             NodeText textForChild = childTextElement.getNodeTextForWrappedNode();
             return reverseIterator(textForChild);

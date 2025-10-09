@@ -131,10 +131,10 @@ import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.WithStatement;
 
 public class DrlVoidVisitorAdapter<A> extends VoidVisitorAdapter<A> implements DrlVoidVisitor<A> {
+
     protected VoidVisitor<A> wrapped;
 
     public DrlVoidVisitorAdapter() {
-
     }
 
     public DrlVoidVisitorAdapter(VoidVisitor<A> wrapped) {
@@ -172,7 +172,8 @@ public class DrlVoidVisitorAdapter<A> extends VoidVisitorAdapter<A> implements D
     }
 
     public void visit(OOPathChunk n, A arg) {
-        n.getConditions().forEach( c -> c.accept(this, arg)); // Why isn't this a NodeList?
+        // Why isn't this a NodeList?
+        n.getConditions().forEach(c -> c.accept(this, arg));
         n.getField().accept(this, arg);
         n.getInlineCast().accept(this, arg);
     }
@@ -187,15 +188,15 @@ public class DrlVoidVisitorAdapter<A> extends VoidVisitorAdapter<A> implements D
     }
 
     public void visit(FullyQualifiedInlineCastExpr n, A arg) {
-//        n.getType().accept(this, arg);
-//        n.getArguments().accept(this, arg);
-//        n.getExpression().accept(this, arg);
+        //        n.getType().accept(this, arg);
+        //        n.getArguments().accept(this, arg);
+        //        n.getExpression().accept(this, arg);
     }
 
     public void visit(NullSafeFieldAccessExpr n, A arg) {
         n.getName().accept(this, arg);
         n.getScope().accept(this, arg);
-        n.getTypeArguments().ifPresent( t -> t.accept(this, arg));
+        n.getTypeArguments().ifPresent(t -> t.accept(this, arg));
         //n.getMetaModel() // has no acccept method.
     }
 
@@ -203,21 +204,18 @@ public class DrlVoidVisitorAdapter<A> extends VoidVisitorAdapter<A> implements D
         n.getArguments().accept(this, arg);
         n.getName().accept(this, arg);
         n.getScope().ifPresent(s -> s.accept(this, arg));
-        n.getTypeArguments().ifPresent( t -> t.accept(this, arg));
+        n.getTypeArguments().ifPresent(t -> t.accept(this, arg));
     }
 
     public void visit(PointFreeExpr n, A arg) {
         n.getLeft().accept(this, arg);
-
         n.getOperator().accept(this, arg);
-
         n.getRight().accept(this, arg);
         n.getArg1().accept(this, arg);
         n.getArg2().accept(this, arg);
         n.getArg3().accept(this, arg);
         n.getArg4().accept(this, arg);
         n.getOperator().accept(this, arg);
-
         n.getRight().accept(this, arg);
     }
 
@@ -238,12 +236,10 @@ public class DrlVoidVisitorAdapter<A> extends VoidVisitorAdapter<A> implements D
 
     public void visit(HalfPointFreeExpr n, A arg) {
         n.getOperator().accept(this, arg);
-
         n.getArg1().accept(this, arg);
         n.getArg2().accept(this, arg);
         n.getArg3().accept(this, arg);
         n.getArg4().accept(this, arg);
-
         n.getRight().accept(this, arg);
     }
 
@@ -294,302 +290,894 @@ public class DrlVoidVisitorAdapter<A> extends VoidVisitorAdapter<A> implements D
 
     // Delegate all the none DRL methods to wrapped.
     @Override
-    public void visit(NodeList n, A arg)                          {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(AnnotationDeclaration n, A arg)             {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(AnnotationMemberDeclaration n, A arg)       {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ArrayAccessExpr n, A arg)                   {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ArrayCreationExpr n, A arg)                 {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ArrayCreationLevel n, A arg)                {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ArrayInitializerExpr n, A arg)              {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ArrayType n, A arg)                         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(AssertStmt n, A arg)                        {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(AssignExpr n, A arg)                        {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(BinaryExpr n, A arg)                        {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(BlockComment n, A arg)                      {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(BlockStmt n, A arg)                         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(BooleanLiteralExpr n, A arg)                {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(BreakStmt n, A arg)                         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(CastExpr n, A arg)                          {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(CatchClause n, A arg)                       {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(CharLiteralExpr n, A arg)                   {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ClassExpr n, A arg)                         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ClassOrInterfaceDeclaration n, A arg)       {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ClassOrInterfaceType n, A arg)              {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(CompilationUnit n, A arg)                   {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ConditionalExpr n, A arg)                   {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ConstructorDeclaration n, A arg)            {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ContinueStmt n, A arg)                      {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(DoStmt n, A arg)                            {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(DoubleLiteralExpr n, A arg)                 {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(EmptyStmt n, A arg)                         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(EnclosedExpr n, A arg)                      {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(EnumConstantDeclaration n, A arg)           {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(EnumDeclaration n, A arg)                   {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ExplicitConstructorInvocationStmt n, A arg) {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ExpressionStmt n, A arg)                    {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(FieldAccessExpr n, A arg)                   {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(FieldDeclaration n, A arg)                  {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ForStmt n, A arg)                           {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ForEachStmt n, A arg)                       {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(IfStmt n, A arg)                            {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ImportDeclaration n, A arg)                 {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(InitializerDeclaration n, A arg)            {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(InstanceOfExpr n, A arg)                    {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(IntegerLiteralExpr n, A arg)                {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(IntersectionType n, A arg)                  {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(JavadocComment n, A arg)                    {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(LabeledStmt n, A arg)                       {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(LambdaExpr n, A arg)                        {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(LineComment n, A arg)                       {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(LocalClassDeclarationStmt n, A arg)         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(LocalRecordDeclarationStmt n, A arg)        {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(LongLiteralExpr n, A arg)                   {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(MarkerAnnotationExpr n, A arg)              {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(MemberValuePair n, A arg)                   {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(MethodCallExpr n, A arg)                    {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(MethodDeclaration n, A arg)                 {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(MethodReferenceExpr n, A arg)               {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(NameExpr n, A arg)                          {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(Name n, A arg)                              {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(NormalAnnotationExpr n, A arg)              {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(NullLiteralExpr n, A arg)                   {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ObjectCreationExpr n, A arg)                {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(PackageDeclaration n, A arg)                {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(Parameter n, A arg)                         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(PrimitiveType n, A arg)                     {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(RecordDeclaration n, A arg)                 {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(CompactConstructorDeclaration n, A arg)     {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ReturnStmt n, A arg)                        {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(SimpleName n, A arg)                        {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(SingleMemberAnnotationExpr n, A arg)        {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(StringLiteralExpr n, A arg)                 {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(SuperExpr n, A arg)                         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(SwitchEntry n, A arg)                       {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(SwitchStmt n, A arg)                        {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(SynchronizedStmt n, A arg)                  {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ThisExpr n, A arg)                          {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ThrowStmt n, A arg)                         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(TryStmt n, A arg)                           {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(TypeExpr n, A arg)                          {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(TypeParameter n, A arg)                     {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(UnaryExpr n, A arg)                         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(UnionType n, A arg)                         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(UnknownType n, A arg)                       {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(VariableDeclarationExpr n, A arg)           {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(VariableDeclarator n, A arg)                {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(VoidType n, A arg)                          {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(WhileStmt n, A arg)                         {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(WildcardType n, A arg)                      {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ModuleDeclaration n, A arg)                 {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ModuleRequiresDirective n, A arg)           {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ModuleExportsDirective n, A arg)            {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ModuleProvidesDirective n, A arg)           {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ModuleUsesDirective n, A arg)               {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ModuleOpensDirective n, A arg)              {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(UnparsableStmt n, A arg)                    {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(ReceiverParameter n, A arg)                 {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(VarType n, A arg)                           {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(Modifier n, A arg)                          {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(SwitchExpr switchExpr, A arg)               {wrapped.visit(switchExpr, arg);}
-
-    @Override
-    public void visit(TextBlockLiteralExpr n, A arg)              {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
-
-    @Override
-    public void visit(YieldStmt yieldStmt, A arg)                 {wrapped.visit(yieldStmt, arg);}
-
-    @Override
-    public void visit(PatternExpr n, A arg)                       {if (wrapped != null) {wrapped.visit(n, arg);} else {super.visit(n, arg);}}
+    public void visit(NodeList n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(AnnotationDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(AnnotationMemberDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ArrayAccessExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ArrayCreationExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ArrayCreationLevel n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ArrayInitializerExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ArrayType n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(AssertStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(AssignExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(BinaryExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(BlockComment n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(BlockStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(BooleanLiteralExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(BreakStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(CastExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(CatchClause n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(CharLiteralExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ClassExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ClassOrInterfaceDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ClassOrInterfaceType n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(CompilationUnit n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ConditionalExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ConstructorDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ContinueStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(DoStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(DoubleLiteralExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(EmptyStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(EnclosedExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(EnumConstantDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(EnumDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ExplicitConstructorInvocationStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ExpressionStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(FieldAccessExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(FieldDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ForStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ForEachStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(IfStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ImportDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(InitializerDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(InstanceOfExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(IntegerLiteralExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(IntersectionType n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(JavadocComment n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(LabeledStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(LambdaExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(LineComment n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(LocalClassDeclarationStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(LocalRecordDeclarationStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(LongLiteralExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(MarkerAnnotationExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(MemberValuePair n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(MethodCallExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(MethodDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(MethodReferenceExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(NameExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(Name n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(NormalAnnotationExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(NullLiteralExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ObjectCreationExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(PackageDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(Parameter n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(PrimitiveType n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(RecordDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(CompactConstructorDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ReturnStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(SimpleName n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(SingleMemberAnnotationExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(StringLiteralExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(SuperExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(SwitchEntry n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(SwitchStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(SynchronizedStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ThisExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ThrowStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(TryStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(TypeExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(TypeParameter n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(UnaryExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(UnionType n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(UnknownType n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(VariableDeclarationExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(VariableDeclarator n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(VoidType n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(WhileStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(WildcardType n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ModuleDeclaration n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ModuleRequiresDirective n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ModuleExportsDirective n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ModuleProvidesDirective n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ModuleUsesDirective n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ModuleOpensDirective n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(UnparsableStmt n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(ReceiverParameter n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(VarType n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(Modifier n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(SwitchExpr switchExpr, A arg) {
+        wrapped.visit(switchExpr, arg);
+    }
+
+    @Override
+    public void visit(TextBlockLiteralExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
+
+    @Override
+    public void visit(YieldStmt yieldStmt, A arg) {
+        wrapped.visit(yieldStmt, arg);
+    }
+
+    @Override
+    public void visit(PatternExpr n, A arg) {
+        if (wrapped != null) {
+            wrapped.visit(n, arg);
+        } else {
+            super.visit(n, arg);
+        }
+    }
 }

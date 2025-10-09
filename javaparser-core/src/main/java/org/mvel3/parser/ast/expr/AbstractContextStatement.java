@@ -7,12 +7,12 @@ import com.github.javaparser.ast.observer.ObservableProperty;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
-
 import static com.github.javaparser.utils.Utils.assertNotNull;
 
 public class AbstractContextStatement<T extends AbstractContextStatement, R extends Expression> extends Statement {
 
-    private Expression            target;
+    private Expression target;
+
     private NodeList<Statement> expressions;
 
     public AbstractContextStatement(TokenRange tokenRange) {
@@ -62,9 +62,8 @@ public class AbstractContextStatement<T extends AbstractContextStatement, R exte
             this.expressions.setParentNode(null);
         }
         this.expressions = expressions;
-
-        setAsParentNodeOf(expressions); // refuses to work, wierd bug, so doing it manually
-
+        // refuses to work, wierd bug, so doing it manually
+        setAsParentNodeOf(expressions);
         return (T) this;
     }
 
@@ -75,6 +74,5 @@ public class AbstractContextStatement<T extends AbstractContextStatement, R exte
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
-
     }
 }

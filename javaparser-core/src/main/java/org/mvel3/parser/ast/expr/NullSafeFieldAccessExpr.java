@@ -21,11 +21,9 @@
  *
  * Modified by Red Hat, Inc.
  */
-
 package org.mvel3.parser.ast.expr;
 
 import java.util.Optional;
-
 import com.github.javaparser.TokenRange;
 import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.Generated;
@@ -50,13 +48,9 @@ import com.github.javaparser.resolution.UnsolvedSymbolException;
 import com.github.javaparser.resolution.declarations.ResolvedValueDeclaration;
 import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
-
 import static com.github.javaparser.utils.Utils.assertNotNull;
 
-public class NullSafeFieldAccessExpr extends Expression implements NodeWithSimpleName<NullSafeFieldAccessExpr>,
-                                                                   NodeWithTypeArguments<NullSafeFieldAccessExpr>,
-                                                                   NodeWithScope<NullSafeFieldAccessExpr>,
-                                                                   Resolvable<ResolvedValueDeclaration> {
+public class NullSafeFieldAccessExpr extends Expression implements NodeWithSimpleName<NullSafeFieldAccessExpr>, NodeWithTypeArguments<NullSafeFieldAccessExpr>, NodeWithScope<NullSafeFieldAccessExpr>, Resolvable<ResolvedValueDeclaration> {
 
     private Expression scope;
 
@@ -92,12 +86,12 @@ public class NullSafeFieldAccessExpr extends Expression implements NodeWithSimpl
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
 
     @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
@@ -107,7 +101,7 @@ public class NullSafeFieldAccessExpr extends Expression implements NodeWithSimpl
 
     @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NullSafeFieldAccessExpr setName(final SimpleName name) {
-    	assertNotNull(name);
+        assertNotNull(name);
         if (name == this.name) {
             return this;
         }
@@ -158,7 +152,7 @@ public class NullSafeFieldAccessExpr extends Expression implements NodeWithSimpl
      */
     @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NullSafeFieldAccessExpr setScope(final Expression scope) {
-    	assertNotNull(scope);
+        assertNotNull(scope);
         if (scope == this.scope) {
             return this;
         }
@@ -273,7 +267,6 @@ public class NullSafeFieldAccessExpr extends Expression implements NodeWithSimpl
     public ResolvedValueDeclaration resolve() {
         return getSymbolResolver().resolveDeclaration(this, ResolvedValueDeclaration.class);
     }
-    
 
     /**
      * Indicate if this NullSafeFieldAccessExpr is an element directly contained in a larger NullSafeFieldAccessExpr.

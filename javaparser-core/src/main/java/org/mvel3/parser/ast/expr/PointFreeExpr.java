@@ -15,7 +15,6 @@
  *
  *
  */
-
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
@@ -30,16 +29,22 @@ import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 public class PointFreeExpr extends Expression {
 
     private final Expression left;
+
     private final NodeList<Expression> right;
 
     private final SimpleName operator;
+
     private boolean negated;
+
     private final Expression arg1;
+
     private final Expression arg2;
+
     private final Expression arg3;
+
     private final Expression arg4;
 
-    public PointFreeExpr( TokenRange tokenRange, Expression left, NodeList<Expression> right, SimpleName operator, Boolean negated, Expression arg1, Expression arg2, Expression arg3, Expression arg4 ) {
+    public PointFreeExpr(TokenRange tokenRange, Expression left, NodeList<Expression> right, SimpleName operator, Boolean negated, Expression arg1, Expression arg2, Expression arg3, Expression arg4) {
         super(tokenRange);
         this.left = left;
         this.right = right;
@@ -53,12 +58,12 @@ public class PointFreeExpr extends Expression {
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
 
     public Expression getLeft() {

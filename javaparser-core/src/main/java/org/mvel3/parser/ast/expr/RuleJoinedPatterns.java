@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
@@ -24,10 +23,16 @@ import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 
 public class RuleJoinedPatterns extends RuleItem {
+
     private final Type type;
+
     private final NodeList<RuleItem> items;
 
-    public enum Type { AND, OR }
+    public enum Type {
+
+        AND, OR
+    }
+
     public RuleJoinedPatterns(TokenRange range, Type type, NodeList<RuleItem> items) {
         super(range);
         this.type = type;
@@ -44,14 +49,12 @@ public class RuleJoinedPatterns extends RuleItem {
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v = RuleDeclaration.getDrlVoidVisitor(v);
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
-
-
 }

@@ -10,6 +10,7 @@ import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 public class MapCreationLiteralExpressionKeyValuePair extends Expression {
 
     private final Expression key;
+
     private final Expression value;
 
     public MapCreationLiteralExpressionKeyValuePair(TokenRange tokenRange, Expression key, Expression value) {

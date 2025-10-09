@@ -15,7 +15,6 @@
  *
  *
  */
-
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
@@ -30,7 +29,7 @@ public class RuleConsequence extends RuleItem {
     private final Statement statement;
 
     public RuleConsequence(TokenRange range, Statement statement) {
-        super( range );
+        super(range);
         this.statement = statement;
     }
 
@@ -40,13 +39,12 @@ public class RuleConsequence extends RuleItem {
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
         v = RuleDeclaration.getDrlVoidVisitor(v);
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
-
 }

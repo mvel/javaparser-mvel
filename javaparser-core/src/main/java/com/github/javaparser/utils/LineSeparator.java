@@ -17,7 +17,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  */
-
 package com.github.javaparser.utils;
 
 import java.util.Optional;
@@ -123,10 +122,10 @@ public enum LineSeparator {
         if (CR.asRawString().equals(ending)) {
             return Optional.of(CR);
         }
-            if (LF.asRawString().equals(ending)) {
+        if (LF.asRawString().equals(ending)) {
             return Optional.of(LF);
         }
-            if (CRLF.asRawString().equals(ending)) {
+        if (CRLF.asRawString().equals(ending)) {
             return Optional.of(CRLF);
         }
         return Optional.empty();
@@ -136,10 +135,10 @@ public enum LineSeparator {
         if (CR.asEscapedString().equals(ending)) {
             return Optional.of(CR);
         }
-            if (LF.asEscapedString().equals(ending)) {
+        if (LF.asEscapedString().equals(ending)) {
             return Optional.of(LF);
         }
-            if (CRLF.asEscapedString().equals(ending)) {
+        if (CRLF.asEscapedString().equals(ending)) {
             return Optional.of(CRLF);
         }
         return Optional.empty();
@@ -168,18 +167,17 @@ public enum LineSeparator {
         return text;
     }
 
-//    // TODO: Determine if this should be used within TokenTypes.java -- thus leaving this as private for now.
-//    private Optional<JavaToken.Kind> asJavaTokenKind() {
-//        if (this == CR) {
-//            return Optional.of(JavaToken.Kind.OLD_MAC_EOL);
-//        } else if (this == LF) {
-//            return Optional.of(JavaToken.Kind.UNIX_EOL);
-//        } else if (this == CRLF) {
-//            return Optional.of(JavaToken.Kind.WINDOWS_EOL);
-//        }
-//        return Optional.empty();
-//    }
-
+    //    // TODO: Determine if this should be used within TokenTypes.java -- thus leaving this as private for now.
+    //    private Optional<JavaToken.Kind> asJavaTokenKind() {
+    //        if (this == CR) {
+    //            return Optional.of(JavaToken.Kind.OLD_MAC_EOL);
+    //        } else if (this == LF) {
+    //            return Optional.of(JavaToken.Kind.UNIX_EOL);
+    //        } else if (this == CRLF) {
+    //            return Optional.of(JavaToken.Kind.WINDOWS_EOL);
+    //        }
+    //        return Optional.empty();
+    //    }
     @Override
     public String toString() {
         return asRawString();

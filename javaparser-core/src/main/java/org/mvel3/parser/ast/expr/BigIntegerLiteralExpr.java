@@ -24,7 +24,6 @@
 package org.mvel3.parser.ast.expr;
 
 import java.math.BigInteger;
-
 import com.github.javaparser.TokenRange;
 import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.Node;

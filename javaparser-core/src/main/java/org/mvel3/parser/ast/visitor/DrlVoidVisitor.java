@@ -15,7 +15,6 @@
  *
  *
  */
-
 package org.mvel3.parser.ast.visitor;
 
 import com.github.javaparser.ast.visitor.VoidVisitor;
@@ -48,6 +47,7 @@ import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.WithStatement;
 
 public interface DrlVoidVisitor<A> extends VoidVisitor<A> {
+
     void visit(RuleDeclaration ruleDeclaration, A arg);
 
     void visit(RuleBody n, A arg);

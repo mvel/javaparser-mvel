@@ -29,6 +29,7 @@ import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.modules.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.*;
+import org.mvel3.parser.ast.expr.InlineCastExpr;
 
 /**
  * A visitor that returns nothing, and has a default implementation for all its visit
@@ -749,6 +750,13 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
         n.getThrownExceptions().forEach(p -> p.accept(this, arg));
         n.getTypeParameters().forEach(p -> p.accept(this, arg));
         n.getAnnotations().forEach(p -> p.accept(this, arg));
+        n.getComment().ifPresent(l -> l.accept(this, arg));
+    }
+
+    @Override
+    public void visit(final InlineCastExpr n, final A arg) {
+        n.getExpression().accept(this, arg);
+        n.getType().accept(this, arg);
         n.getComment().ifPresent(l -> l.accept(this, arg));
     }
 }

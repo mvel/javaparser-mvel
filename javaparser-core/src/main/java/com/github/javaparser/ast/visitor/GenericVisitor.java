@@ -29,6 +29,7 @@ import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.modules.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.*;
+import org.mvel3.parser.ast.expr.InlineCastExpr;
 
 /**
  * A visitor that has a return value.
@@ -241,4 +242,6 @@ public interface GenericVisitor<R, A> {
     R visit(TextBlockLiteralExpr n, A arg);
 
     R visit(PatternExpr n, A arg);
+
+    R visit(InlineCastExpr n, A arg);
 }

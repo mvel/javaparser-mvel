@@ -21,7 +21,6 @@
 package com.github.javaparser.printer.lexicalpreservation;
 
 import java.util.Optional;
-
 import com.github.javaparser.Range;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.comments.Comment;
@@ -135,9 +134,9 @@ public class ChildTextElement extends TextElement {
         return child.getRange();
     }
 
-	@Override
-	public void accept(LexicalPreservingVisitor visitor) {
-		NodeText nodeText = getNodeTextForWrappedNode();
-		nodeText.getElements().forEach(element -> element.accept(visitor));
-	}
+    @Override
+    public void accept(LexicalPreservingVisitor visitor) {
+        NodeText nodeText = getNodeTextForWrappedNode();
+        nodeText.getElements().forEach(element -> element.accept(visitor));
+    }
 }

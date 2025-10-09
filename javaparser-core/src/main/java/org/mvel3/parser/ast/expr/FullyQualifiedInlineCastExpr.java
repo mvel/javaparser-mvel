@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
@@ -27,7 +26,6 @@ import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 public class FullyQualifiedInlineCastExpr extends Expression {
 
     // @TODO make this work with Generics
-
     private Expression expression;
 
     private Type type;
@@ -35,8 +33,9 @@ public class FullyQualifiedInlineCastExpr extends Expression {
     public FullyQualifiedInlineCastExpr(Expression expression, ClassOrInterfaceType type) {
         this(null, expression, type);
     }
+
     public FullyQualifiedInlineCastExpr(TokenRange tokenRange, Expression expression, Type type) {
-        super( tokenRange );
+        super(tokenRange);
         setExpression(expression);
         setType(type);
     }
@@ -53,11 +52,8 @@ public class FullyQualifiedInlineCastExpr extends Expression {
         if (this.type != null) {
             this.type.setParentNode(null);
         }
-
         this.type = type;
-
         setAsParentNodeOf(type);
-
         return this;
     }
 
@@ -73,22 +69,18 @@ public class FullyQualifiedInlineCastExpr extends Expression {
         if (this.expression != null) {
             this.expression.setParentNode(null);
         }
-
         this.expression = scope;
-
         setAsParentNodeOf(scope);
-
         return this;
     }
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
-
 }

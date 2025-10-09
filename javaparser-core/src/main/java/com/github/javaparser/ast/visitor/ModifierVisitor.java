@@ -31,13 +31,12 @@ import com.github.javaparser.ast.modules.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.*;
 import com.github.javaparser.utils.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static com.github.javaparser.utils.Utils.removeElementByObjectIdentity;
 import static com.github.javaparser.utils.Utils.replaceElementByObjectIdentity;
+import org.mvel3.parser.ast.expr.InlineCastExpr;
 
 /**
  * This visitor can be used to save time when some specific nodes needs
@@ -1331,6 +1330,19 @@ public class ModifierVisitor<A> implements GenericVisitor<Visitable, A> {
             return null;
         n.setModifiers(modifiers);
         n.setName(name);
+        n.setType(type);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final InlineCastExpr n, final A arg) {
+        Expression expression = (Expression) n.getExpression().accept(this, arg);
+        Type type = (Type) n.getType().accept(this, arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        if (expression == null || type == null)
+            return null;
+        n.setExpression(expression);
         n.setType(type);
         n.setComment(comment);
         return n;

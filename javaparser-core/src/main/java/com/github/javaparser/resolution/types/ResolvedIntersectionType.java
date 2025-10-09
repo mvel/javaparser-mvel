@@ -22,7 +22,6 @@ package com.github.javaparser.resolution.types;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
 import com.github.javaparser.resolution.declarations.ResolvedTypeParameterDeclaration;
 
 /**

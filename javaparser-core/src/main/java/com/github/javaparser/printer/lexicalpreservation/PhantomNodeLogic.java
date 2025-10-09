@@ -24,10 +24,8 @@ import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.observer.AstObserver;
 import com.github.javaparser.ast.observer.AstObserverAdapter;
 import com.github.javaparser.ast.type.UnknownType;
-
 import java.util.IdentityHashMap;
 import java.util.Map;
-
 import static java.util.Collections.synchronizedMap;
 
 /**
@@ -54,8 +52,8 @@ public class PhantomNodeLogic {
             return isPhantomNodeCache.get(node);
         }
         if (node instanceof UnknownType) {
-                return true;
-            }
+            return true;
+        }
         boolean res = (node.getParentNode().isPresent() && node.getParentNode().get().hasRange() && node.hasRange() && !node.getParentNode().get().getRange().get().contains(node.getRange().get()) || inPhantomNode(node, LEVELS_TO_EXPLORE));
         isPhantomNodeCache.put(node, res);
         node.register(cacheCleaner);

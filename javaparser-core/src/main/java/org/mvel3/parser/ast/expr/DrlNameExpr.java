@@ -39,8 +39,7 @@ import com.github.javaparser.resolution.declarations.ResolvedValueDeclaration;
  * <br/>In <code>int x = a + 3;</code> a is a SimpleName inside a DrlNameExpr.
  * @author Julio Vilmar Gesser
  */
-public final class DrlNameExpr extends NameExpr implements NodeWithSimpleName<NameExpr>,
-                                                           Resolvable<ResolvedValueDeclaration> {
+public final class DrlNameExpr extends NameExpr implements NodeWithSimpleName<NameExpr>, Resolvable<ResolvedValueDeclaration> {
 
     private int backReferencesCount;
 

@@ -29,8 +29,8 @@ import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.modules.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.*;
-
 import java.util.Optional;
+import org.mvel3.parser.ast.expr.InlineCastExpr;
 
 public class NoCommentEqualsVisitor implements GenericVisitor<Boolean, Visitable> {
 
@@ -1156,6 +1156,16 @@ public class NoCommentEqualsVisitor implements GenericVisitor<Boolean, Visitable
         if (!nodesEquals(n.getTypeParameters(), n2.getTypeParameters()))
             return false;
         if (!nodesEquals(n.getAnnotations(), n2.getAnnotations()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final InlineCastExpr n, final Visitable arg) {
+        final InlineCastExpr n2 = (InlineCastExpr) arg;
+        if (!nodeEquals(n.getExpression(), n2.getExpression()))
+            return false;
+        if (!nodeEquals(n.getType(), n2.getType()))
             return false;
         return true;
     }

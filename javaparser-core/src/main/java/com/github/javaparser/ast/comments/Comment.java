@@ -29,10 +29,8 @@ import com.github.javaparser.ast.visitor.CloneVisitor;
 import com.github.javaparser.metamodel.CommentMetaModel;
 import com.github.javaparser.metamodel.InternalProperty;
 import com.github.javaparser.metamodel.JavaParserMetaModel;
-
 import java.util.Optional;
 import java.util.function.Consumer;
-
 import static com.github.javaparser.utils.CodeGenerationUtils.f;
 import static com.github.javaparser.utils.Utils.assertNotNull;
 
@@ -143,12 +141,11 @@ public abstract class Comment extends Node {
 
     @Override
     public boolean remove() {
-
         if (this.commentedNode != null) {
             this.commentedNode.setComment(null);
             return true;
         }
-            if (this.getParentNode().isPresent()) {
+        if (this.getParentNode().isPresent()) {
             return this.getParentNode().get().removeOrphanComment(this);
         }
         return false;
@@ -222,21 +219,21 @@ public abstract class Comment extends Node {
     public Optional<LineComment> toLineComment() {
         return Optional.empty();
     }
-    
+
     /*
      * Header is "//" for line comment 
      */
-    abstract public String getHeader(); 
-    
+    abstract public String getHeader();
+
     /*
      * 
      */
     abstract public String getFooter();
-    
+
     /*
      * Returns the content of the comment with header and footer
      */
     public String asString() {
-    	return getHeader()+getContent()+getFooter();
+        return getHeader() + getContent() + getFooter();
     }
 }

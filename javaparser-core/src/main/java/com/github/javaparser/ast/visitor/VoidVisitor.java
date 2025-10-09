@@ -29,6 +29,7 @@ import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.modules.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.*;
+import org.mvel3.parser.ast.expr.InlineCastExpr;
 
 /**
  * A visitor that does not return anything.
@@ -236,4 +237,6 @@ public interface VoidVisitor<A> {
     void visit(YieldStmt yieldStmt, A arg);
 
     void visit(PatternExpr n, A arg);
+
+    void visit(InlineCastExpr n, A arg);
 }

@@ -9,14 +9,15 @@ import com.github.javaparser.ast.visitor.VoidVisitor;
 import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 
-public class ModifyStatement  extends AbstractContextStatement<ModifyStatement, Expression> {
+public class ModifyStatement extends AbstractContextStatement<ModifyStatement, Expression> {
 
     public ModifyStatement(TokenRange tokenRange, Expression withObject, NodeList<Statement> expressions) {
         super(tokenRange, withObject, expressions);
     }
+
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
@@ -25,5 +26,4 @@ public class ModifyStatement  extends AbstractContextStatement<ModifyStatement, 
             ((DrlVoidVisitor<A>) v).visit(this, arg);
         }
     }
-
 }

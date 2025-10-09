@@ -15,11 +15,9 @@
  *
  *
  */
-
 package org.mvel3.parser.ast.expr;
 
 import java.util.concurrent.TimeUnit;
-
 import com.github.javaparser.TokenRange;
 import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
@@ -29,6 +27,7 @@ import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 public class TemporalLiteralChunkExpr extends TemporalChunkExpr {
 
     private int value;
+
     private TimeUnit timeUnit;
 
     public TemporalLiteralChunkExpr(TokenRange tokenRange, String value) {
@@ -45,12 +44,12 @@ public class TemporalLiteralChunkExpr extends TemporalChunkExpr {
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
 
     public int getValue() {

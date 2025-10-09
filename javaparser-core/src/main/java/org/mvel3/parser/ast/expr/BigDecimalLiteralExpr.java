@@ -24,7 +24,6 @@
 package org.mvel3.parser.ast.expr;
 
 import java.math.BigDecimal;
-
 import com.github.javaparser.TokenRange;
 import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.Node;
@@ -66,12 +65,12 @@ public final class BigDecimalLiteralExpr extends LiteralStringValueExpr {
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-         return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
-        if (v instanceof  DrlVoidVisitor) {
+        if (v instanceof DrlVoidVisitor) {
             ((DrlVoidVisitor<A>) v).visit(this, arg);
         }
     }

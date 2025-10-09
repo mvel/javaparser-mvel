@@ -15,7 +15,6 @@
  *
  *
  */
-
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
@@ -30,8 +29,8 @@ public class OOPathExpr extends Expression {
 
     private final NodeList<OOPathChunk> chunks;
 
-    public OOPathExpr( TokenRange range, NodeList<OOPathChunk> chunks ) {
-        super( range );
+    public OOPathExpr(TokenRange range, NodeList<OOPathChunk> chunks) {
+        super(range);
         this.chunks = chunks;
     }
 
@@ -41,12 +40,11 @@ public class OOPathExpr extends Expression {
 
     @Override
     public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>)v).visit(this, arg);
+        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
     }
 
     @Override
     public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>)v).visit(this, arg);
+        ((DrlVoidVisitor<A>) v).visit(this, arg);
     }
-
 }
