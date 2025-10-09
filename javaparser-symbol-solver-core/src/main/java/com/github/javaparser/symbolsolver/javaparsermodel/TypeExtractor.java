@@ -25,6 +25,7 @@ import static com.github.javaparser.ast.expr.Expression.EXCLUDE_ENCLOSED_EXPR;
 import static com.github.javaparser.ast.expr.Expression.IS_NOT_ENCLOSED_EXPR;
 import static com.github.javaparser.resolution.Navigator.demandParentNode;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -61,12 +62,16 @@ import com.github.javaparser.symbolsolver.resolution.typeinference.LeastUpperBou
 import com.github.javaparser.utils.Log;
 import com.github.javaparser.utils.Pair;
 import com.google.common.collect.ImmutableList;
+import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
 
 public class TypeExtractor extends DefaultVisitorAdapter {
 
     private static final String JAVA_LANG_STRING = String.class.getCanonicalName();
+    private static final String JAVA_MATH_BIG_DECIMAL = BigDecimal.class.getCanonicalName();
+
     private final ResolvedType stringReferenceType;
+    private final ResolvedType bigDecimalReferenceType;
 
     private TypeSolver typeSolver;
     private JavaParserFacade facade;
@@ -78,6 +83,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
         // pre-calculate the String reference (optimization)
         // consider a LazyType to avoid having to systematically declare a ReflectionTypeSolver
         stringReferenceType = new LazyType(v -> new ReferenceTypeImpl(typeSolver.solveType(JAVA_LANG_STRING)));
+        bigDecimalReferenceType = new LazyType(v -> new ReferenceTypeImpl(typeSolver.solveType(JAVA_MATH_BIG_DECIMAL)));
     }
 
     @Override
@@ -312,6 +318,11 @@ public class TypeExtractor extends DefaultVisitorAdapter {
             return ResolvedPrimitiveType.FLOAT;
         }
         return ResolvedPrimitiveType.DOUBLE;
+    }
+
+    @Override
+    public ResolvedType visit(BigDecimalLiteralExpr node, Boolean solveLambdas) {
+        return bigDecimalReferenceType;
     }
 
     @Override

@@ -48,6 +48,7 @@ import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration.C
 import com.github.javaparser.printer.configuration.ImportOrderingStrategy;
 import com.github.javaparser.printer.configuration.PrinterConfiguration;
 import com.github.javaparser.printer.configuration.imports.DefaultImportOrderingStrategy;
+import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
 
 /**
@@ -679,10 +680,10 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     public void visit(final InlineCastExpr n, final Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
-        printer.print("(");
+        n.getExpression().accept( this, arg );
+        printer.print( "#" );
         n.getType().accept(this, arg);
-        printer.print(") ");
-        n.getExpression().accept(this, arg);
+        printer.print( "#" );
     }
 
     @Override
@@ -757,6 +758,14 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
         printer.print(n.getValue());
+    }
+
+    @Override
+    public void visit(final BigDecimalLiteralExpr n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        printer.print(n.getValue());
+        printer.print("B");
     }
 
     @Override

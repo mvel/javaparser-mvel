@@ -33,6 +33,7 @@ import com.github.javaparser.metamodel.JavaParserMetaModel;
 import com.github.javaparser.printer.concretesyntaxmodel.CsmConditional;
 import com.github.javaparser.printer.concretesyntaxmodel.CsmElement;
 import com.github.javaparser.printer.concretesyntaxmodel.CsmMix;
+import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -143,7 +144,8 @@ public class ConcreteSyntaxModel {
         concreteSyntaxModelByClass.put(UnaryExpr.class, sequence(conditional(ObservableProperty.PREFIX, FLAG, attribute(ObservableProperty.OPERATOR)), child(ObservableProperty.EXPRESSION), conditional(ObservableProperty.POSTFIX, FLAG, attribute(ObservableProperty.OPERATOR))));
         concreteSyntaxModelByClass.put(VariableDeclarationExpr.class, sequence(comment(), list(ObservableProperty.ANNOTATIONS, space(), none(), space()), modifiers(), child(ObservableProperty.MAXIMUM_COMMON_TYPE), space(), list(ObservableProperty.VARIABLES, sequence(comma(), space()))));
         // Mvel3 nodes
-        concreteSyntaxModelByClass.put(InlineCastExpr.class, sequence(comment(), token(LPAREN), child(ObservableProperty.TYPE), token(RPAREN), space(), child(ObservableProperty.EXPRESSION)));
+        concreteSyntaxModelByClass.put(InlineCastExpr.class, sequence(comment(), child(ObservableProperty.EXPRESSION), string(GeneratedJavaParserConstants.IDENTIFIER, "#"), child(ObservableProperty.TYPE), string(GeneratedJavaParserConstants.IDENTIFIER, "#")));
+        concreteSyntaxModelByClass.put(BigDecimalLiteralExpr.class, sequence(comment(), attribute(ObservableProperty.VALUE), string(GeneratedJavaParserConstants.IDENTIFIER, "B")));
         // /
         // / Statements
         // /
