@@ -75,6 +75,11 @@ public class TypeCastingGenerator extends NodeGenerator {
         final ClassOrInterfaceDeclaration baseCoid = baseCode.b;
         final CompilationUnit baseCu = baseCode.a;
 
+        String basePackage = baseCu.getPackageDeclaration().map(pd -> pd.getName().asString()).orElse("");
+        if (!nodeMetaModel.getPackageName().equals(basePackage)) {
+            baseCu.addImport(nodeMetaModel.getQualifiedClassName());
+        }
+
         generateIsType(nodeMetaModel, baseCu, nodeCoid, baseCoid, typeName);
         generateAsType(nodeMetaModel, baseCu, nodeCoid, baseCoid, typeName);
         generateToType(nodeMetaModel, nodeCu, baseCu, nodeCoid, baseCoid, typeName);

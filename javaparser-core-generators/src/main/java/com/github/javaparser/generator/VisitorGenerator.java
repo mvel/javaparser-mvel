@@ -78,6 +78,11 @@ public abstract class VisitorGenerator extends Generator {
     }
 
     private void generateVisitMethodForNode(BaseNodeMetaModel node, ClassOrInterfaceDeclaration visitorClass, CompilationUnit compilationUnit) {
+        String nodePackage = node.getPackageName();
+        if (!nodePackage.equals(pkg)) {
+            compilationUnit.addImport(node.getQualifiedClassName());
+        }
+
         final Optional<MethodDeclaration> existingVisitMethod = visitorClass.getMethods().stream()
                 .filter(m -> m.getNameAsString().equals("visit"))
                 .filter(m -> m.getParameter(0).getType().toString().equals(node.getTypeName()))
