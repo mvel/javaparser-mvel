@@ -18,6 +18,8 @@
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
+import com.github.javaparser.ast.AllFieldsConstructor;
+import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.AnnotationExpr;
@@ -29,12 +31,28 @@ import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitorAdapter;
 
+/**
+ * Represents a rule declaration in a DRL (Drools Rule Language) file.
+ * Note that this is not tested in mvel3 project. Will be tested in drlx-parser project.
+ */
 public class RuleDeclaration extends TypeDeclaration<RuleDeclaration> {
 
     private final RuleBody ruleBody;
 
+    // This is the original constructor
     public RuleDeclaration(TokenRange range, NodeList<AnnotationExpr> annotations, SimpleName name, RuleBody ruleBody) {
-        super(range, NodeList.nodeList(), annotations, name, new NodeList<>());
+        this(range, new NodeList<>(), annotations, name, ruleBody);
+    }
+
+    // This is added for generator
+    @AllFieldsConstructor
+    public RuleDeclaration(NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, RuleBody ruleBody) {
+        this(null, modifiers, annotations, name, ruleBody);
+    }
+
+    // expected to be MainConstructor
+    public RuleDeclaration(TokenRange range, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, RuleBody ruleBody) {
+        super(range, modifiers, annotations, name, new NodeList<>());
         this.ruleBody = ruleBody;
     }
 
