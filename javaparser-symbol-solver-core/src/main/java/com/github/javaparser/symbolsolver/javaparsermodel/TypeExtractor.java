@@ -61,6 +61,7 @@ import com.github.javaparser.symbolsolver.resolution.typeinference.LeastUpperBou
 import com.github.javaparser.utils.Log;
 import com.github.javaparser.utils.Pair;
 import com.google.common.collect.ImmutableList;
+import org.mvel3.parser.ast.expr.InlineCastExpr;
 
 public class TypeExtractor extends DefaultVisitorAdapter {
 
@@ -161,6 +162,11 @@ public class TypeExtractor extends DefaultVisitorAdapter {
 
     @Override
     public ResolvedType visit(CastExpr node, Boolean solveLambdas) {
+        return facade.convertToUsage(node.getType(), JavaParserFactory.getContext(node, typeSolver));
+    }
+
+    @Override
+    public ResolvedType visit(InlineCastExpr node, Boolean solveLambdas) {
         return facade.convertToUsage(node.getType(), JavaParserFactory.getContext(node, typeSolver));
     }
 
