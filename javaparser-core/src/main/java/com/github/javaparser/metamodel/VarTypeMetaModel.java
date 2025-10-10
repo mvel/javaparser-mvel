@@ -23,6 +23,7 @@ package com.github.javaparser.metamodel;
 import java.util.Optional;
 import com.github.javaparser.ast.type.VarType;
 import com.github.javaparser.ast.Generated;
+import com.github.javaparser.ast.Node;
 
 /**
  * This file, class, and its contents are completely generated based on:
@@ -39,5 +40,10 @@ public class VarTypeMetaModel extends TypeMetaModel {
     @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     VarTypeMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
         super(superBaseNodeMetaModel, VarType.class, "VarType", "com.github.javaparser.ast.type", false, false);
+    }
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    protected VarTypeMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<? extends Node> type, String name, String packageName, boolean isAbstract, boolean hasWildcard) {
+        super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
     }
 }

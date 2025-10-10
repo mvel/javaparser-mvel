@@ -32,6 +32,7 @@ import com.github.javaparser.ast.type.*;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
 import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
 import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
+import org.mvel3.parser.ast.expr.DrlNameExpr;
 
 /**
  * A visitor that has a return value.
@@ -250,4 +251,6 @@ public interface GenericVisitor<R, A> {
     R visit(BigDecimalLiteralExpr n, A arg);
 
     R visit(BigIntegerLiteralExpr n, A arg);
+
+    R visit(DrlNameExpr n, A arg);
 }

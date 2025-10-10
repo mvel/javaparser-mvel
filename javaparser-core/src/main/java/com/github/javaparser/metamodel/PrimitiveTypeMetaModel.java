@@ -23,6 +23,7 @@ package com.github.javaparser.metamodel;
 import java.util.Optional;
 import com.github.javaparser.ast.type.PrimitiveType;
 import com.github.javaparser.ast.Generated;
+import com.github.javaparser.ast.Node;
 
 /**
  * This file, class, and its contents are completely generated based on:
@@ -39,6 +40,11 @@ public class PrimitiveTypeMetaModel extends TypeMetaModel {
     @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     PrimitiveTypeMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
         super(superBaseNodeMetaModel, PrimitiveType.class, "PrimitiveType", "com.github.javaparser.ast.type", false, false);
+    }
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    protected PrimitiveTypeMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<? extends Node> type, String name, String packageName, boolean isAbstract, boolean hasWildcard) {
+        super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
     }
 
     public PropertyMetaModel typePropertyMetaModel;

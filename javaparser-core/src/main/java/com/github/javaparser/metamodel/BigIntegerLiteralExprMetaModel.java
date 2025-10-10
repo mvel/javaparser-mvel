@@ -23,6 +23,7 @@ package com.github.javaparser.metamodel;
 import java.util.Optional;
 import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import com.github.javaparser.ast.Generated;
+import com.github.javaparser.ast.Node;
 
 /**
  * This file, class, and its contents are completely generated based on:
@@ -39,5 +40,10 @@ public class BigIntegerLiteralExprMetaModel extends LiteralStringValueExprMetaMo
     @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     BigIntegerLiteralExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
         super(superBaseNodeMetaModel, BigIntegerLiteralExpr.class, "BigIntegerLiteralExpr", "org.mvel3.parser.ast.expr", false, false);
+    }
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    protected BigIntegerLiteralExprMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<? extends Node> type, String name, String packageName, boolean isAbstract, boolean hasWildcard) {
+        super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
     }
 }

@@ -23,6 +23,7 @@ package com.github.javaparser.metamodel;
 import java.util.Optional;
 import com.github.javaparser.ast.expr.NullLiteralExpr;
 import com.github.javaparser.ast.Generated;
+import com.github.javaparser.ast.Node;
 
 /**
  * This file, class, and its contents are completely generated based on:
@@ -39,5 +40,10 @@ public class NullLiteralExprMetaModel extends LiteralExprMetaModel {
     @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     NullLiteralExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
         super(superBaseNodeMetaModel, NullLiteralExpr.class, "NullLiteralExpr", "com.github.javaparser.ast.expr", false, false);
+    }
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    protected NullLiteralExprMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<? extends Node> type, String name, String packageName, boolean isAbstract, boolean hasWildcard) {
+        super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
     }
 }

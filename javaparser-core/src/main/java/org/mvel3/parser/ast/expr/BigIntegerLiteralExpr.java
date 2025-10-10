@@ -119,20 +119,25 @@ public class BigIntegerLiteralExpr extends LiteralStringValueExpr {
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isBigIntegerLiteralExpr() {
         return true;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public BigIntegerLiteralExpr asBigIntegerLiteralExpr() {
         return this;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<BigIntegerLiteralExpr> toBigIntegerLiteralExpr() {
         return Optional.of(this);
     }
 
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifBigIntegerLiteralExpr(Consumer<BigIntegerLiteralExpr> action) {
         action.accept(this);
     }

@@ -33,13 +33,20 @@ import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import com.github.javaparser.resolution.Resolvable;
 import com.github.javaparser.resolution.declarations.ResolvedValueDeclaration;
+import java.util.Optional;
+import java.util.function.Consumer;
+import com.github.javaparser.ast.observer.ObservableProperty;
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.visitor.CloneVisitor;
+import com.github.javaparser.metamodel.DrlNameExprMetaModel;
+import com.github.javaparser.metamodel.JavaParserMetaModel;
 
 /**
  * Whenever a SimpleName is used in an expression, it is wrapped in DrlNameExpr.
  * <br/>In <code>int x = a + 3;</code> a is a SimpleName inside a DrlNameExpr.
  * @author Julio Vilmar Gesser
  */
-public final class DrlNameExpr extends NameExpr implements NodeWithSimpleName<NameExpr>, Resolvable<ResolvedValueDeclaration> {
+public class DrlNameExpr extends NameExpr implements NodeWithSimpleName<NameExpr>, Resolvable<ResolvedValueDeclaration> {
 
     private int backReferencesCount;
 
@@ -67,24 +74,62 @@ public final class DrlNameExpr extends NameExpr implements NodeWithSimpleName<Na
     @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public DrlNameExpr(TokenRange tokenRange, SimpleName name, int backReferencesCount) {
         super(tokenRange, name);
-        setName(name);
+        setBackReferencesCount(backReferencesCount);
         customInitialization();
-        this.backReferencesCount = backReferencesCount;
     }
 
     @Override
-    public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
         return v.visit(this, arg);
     }
 
     @Override
-    public <A> void accept(VoidVisitor<A> v, A arg) {
-        v = RuleDeclaration.getDrlVoidVisitor(v);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(final VoidVisitor<A> v, final A arg) {
         v.visit(this, arg);
     }
 
     @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public int getBackReferencesCount() {
         return backReferencesCount;
+    }
+
+    @Override
+    public boolean isDrlNameExpr() {
+        return true;
+    }
+
+    @Override
+    public DrlNameExpr asDrlNameExpr() {
+        return this;
+    }
+
+    @Override
+    public Optional<DrlNameExpr> toDrlNameExpr() {
+        return Optional.of(this);
+    }
+
+    public void ifDrlNameExpr(Consumer<DrlNameExpr> action) {
+        action.accept(this);
+    }
+
+    public DrlNameExpr setBackReferencesCount(final int backReferencesCount) {
+        if (backReferencesCount == this.backReferencesCount) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.BACK_REFERENCES_COUNT, this.backReferencesCount, backReferencesCount);
+        this.backReferencesCount = backReferencesCount;
+        return this;
+    }
+
+    @Override
+    public DrlNameExpr clone() {
+        return (DrlNameExpr) accept(new CloneVisitor(), null);
+    }
+
+    @Override
+    public DrlNameExprMetaModel getMetaModel() {
+        return JavaParserMetaModel.drlNameExprMetaModel;
     }
 }

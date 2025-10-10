@@ -32,6 +32,7 @@ import com.github.javaparser.ast.type.*;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
 import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
 import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
+import org.mvel3.parser.ast.expr.DrlNameExpr;
 
 /**
  * A visitor that returns nothing, and has a default implementation for all its visit
@@ -769,6 +770,12 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
 
     @Override
     public void visit(final BigIntegerLiteralExpr n, final A arg) {
+        n.getComment().ifPresent(l -> l.accept(this, arg));
+    }
+
+    @Override
+    public void visit(final DrlNameExpr n, final A arg) {
+        n.getName().accept(this, arg);
         n.getComment().ifPresent(l -> l.accept(this, arg));
     }
 }

@@ -21,7 +21,7 @@
 package com.github.javaparser.metamodel;
 
 import java.util.Optional;
-import com.github.javaparser.ast.expr.MemberValuePair;
+import org.mvel3.parser.ast.expr.DrlNameExpr;
 import com.github.javaparser.ast.Generated;
 import com.github.javaparser.ast.Node;
 
@@ -35,19 +35,17 @@ import com.github.javaparser.ast.Node;
  * For this reason, any changes made directly to this file will be overwritten the next time generators are run.
  */
 @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
-public class MemberValuePairMetaModel extends NodeMetaModel {
+public class DrlNameExprMetaModel extends NameExprMetaModel {
 
     @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
-    MemberValuePairMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
-        super(superBaseNodeMetaModel, MemberValuePair.class, "MemberValuePair", "com.github.javaparser.ast.expr", false, false);
+    DrlNameExprMetaModel(Optional<BaseNodeMetaModel> superBaseNodeMetaModel) {
+        super(superBaseNodeMetaModel, DrlNameExpr.class, "DrlNameExpr", "org.mvel3.parser.ast.expr", false, false);
     }
 
     @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
-    protected MemberValuePairMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<? extends Node> type, String name, String packageName, boolean isAbstract, boolean hasWildcard) {
+    protected DrlNameExprMetaModel(Optional<BaseNodeMetaModel> superNodeMetaModel, Class<? extends Node> type, String name, String packageName, boolean isAbstract, boolean hasWildcard) {
         super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);
     }
 
-    public PropertyMetaModel namePropertyMetaModel;
-
-    public PropertyMetaModel valuePropertyMetaModel;
+    public PropertyMetaModel backReferencesCountPropertyMetaModel;
 }
