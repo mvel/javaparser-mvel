@@ -34,6 +34,7 @@ import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.resolution.types.ResolvedType;
 import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
 import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
+import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
 
 public class DefaultVisitorAdapter implements GenericVisitor<ResolvedType, Boolean> {
@@ -264,6 +265,11 @@ public class DefaultVisitorAdapter implements GenericVisitor<ResolvedType, Boole
 
     @Override
     public ResolvedType visit(BigDecimalLiteralExpr node, Boolean aBoolean) {
+        throw new UnsupportedOperationException(node.getClass().getCanonicalName());
+    }
+
+    @Override
+    public ResolvedType visit(DrlNameExpr node, Boolean aBoolean) {
         throw new UnsupportedOperationException(node.getClass().getCanonicalName());
     }
 
