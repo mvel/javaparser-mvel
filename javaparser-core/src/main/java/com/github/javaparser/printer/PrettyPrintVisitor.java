@@ -50,7 +50,9 @@ import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
 import org.mvel3.parser.ast.expr.HalfBinaryExpr;
+import org.mvel3.parser.ast.expr.HalfPointFreeExpr;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
+import org.mvel3.parser.ast.expr.PointFreeExpr;
 
 /**
  * Outputs the AST as formatted Java source code.
@@ -719,6 +721,88 @@ public class PrettyPrintVisitor implements VoidVisitor<Void> {
         printer.print(n.getOperator().asString());
         printer.print(" ");
         n.getRight().accept(this, arg);
+    }
+
+    @Override
+    public void visit(final HalfPointFreeExpr n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        if (n.isNegated()) {
+            printer.print("not ");
+        }
+        n.getOperator().accept(this, arg);
+        if (n.getArg1() != null) {
+            printer.print("[");
+            n.getArg1().accept(this, arg);
+            if (n.getArg2() != null) {
+                printer.print(",");
+                n.getArg2().accept(this, arg);
+            }
+            if (n.getArg3() != null) {
+                printer.print(",");
+                n.getArg3().accept(this, arg);
+            }
+            if (n.getArg4() != null) {
+                printer.print(",");
+                n.getArg4().accept(this, arg);
+            }
+            printer.print("]");
+        }
+        printer.print(" ");
+        NodeList<Expression> rightExprs = n.getRight();
+        if (rightExprs.size() == 1) {
+            rightExprs.get(0).accept(this, arg);
+        } else {
+            printer.print("(");
+            rightExprs.get(0).accept(this, arg);
+            for (int i = 1; i < rightExprs.size(); i++) {
+                printer.print(", ");
+                rightExprs.get(i).accept(this, arg);
+            }
+            printer.print(")");
+        }
+    }
+
+    @Override
+    public void visit(final PointFreeExpr n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        n.getLeft().accept(this, arg);
+        if (n.isNegated()) {
+            printer.print(" not");
+        }
+        printer.print(" ");
+        n.getOperator().accept(this, arg);
+        if (n.getArg1() != null) {
+            printer.print("[");
+            n.getArg1().accept(this, arg);
+            if (n.getArg2() != null) {
+                printer.print(",");
+                n.getArg2().accept(this, arg);
+            }
+            if (n.getArg3() != null) {
+                printer.print(",");
+                n.getArg3().accept(this, arg);
+            }
+            if (n.getArg4() != null) {
+                printer.print(",");
+                n.getArg4().accept(this, arg);
+            }
+            printer.print("]");
+        }
+        printer.print(" ");
+        NodeList<Expression> rightExprs = n.getRight();
+        if (rightExprs.size() == 1) {
+            rightExprs.get(0).accept(this, arg);
+        } else {
+            printer.print("(");
+            rightExprs.get(0).accept(this, arg);
+            for (int i = 1; i < rightExprs.size(); i++) {
+                printer.print(", ");
+                rightExprs.get(i).accept(this, arg);
+            }
+            printer.print(")");
+        }
     }
 
     @Override

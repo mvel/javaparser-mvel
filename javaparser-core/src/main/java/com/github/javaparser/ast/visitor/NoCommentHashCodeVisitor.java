@@ -36,6 +36,8 @@ import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
 import org.mvel3.parser.ast.expr.HalfBinaryExpr;
+import org.mvel3.parser.ast.expr.HalfPointFreeExpr;
+import org.mvel3.parser.ast.expr.PointFreeExpr;
 
 public class NoCommentHashCodeVisitor implements GenericVisitor<Integer, Void> {
 
@@ -495,5 +497,15 @@ public class NoCommentHashCodeVisitor implements GenericVisitor<Integer, Void> {
     @Override
     public Integer visit(final HalfBinaryExpr n, final Void arg) {
         return (n.getOperator().hashCode()) * 31 + (n.getRight().accept(this, arg));
+    }
+
+    @Override
+    public Integer visit(final HalfPointFreeExpr n, final Void arg) {
+        return (n.getArg1().accept(this, arg)) * 31 + (n.getArg2().accept(this, arg)) * 31 + (n.getArg3().accept(this, arg)) * 31 + (n.getArg4().accept(this, arg)) * 31 + (n.isNegated() ? 1 : 0) * 31 + (n.getOperator().accept(this, arg)) * 31 + (n.getRight().accept(this, arg));
+    }
+
+    @Override
+    public Integer visit(final PointFreeExpr n, final Void arg) {
+        return (n.getArg1().accept(this, arg)) * 31 + (n.getArg2().accept(this, arg)) * 31 + (n.getArg3().accept(this, arg)) * 31 + (n.getArg4().accept(this, arg)) * 31 + (n.getLeft().accept(this, arg)) * 31 + (n.isNegated() ? 1 : 0) * 31 + (n.getOperator().accept(this, arg)) * 31 + (n.getRight().accept(this, arg));
     }
 }

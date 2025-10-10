@@ -43,6 +43,8 @@ import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
 import org.mvel3.parser.ast.expr.HalfBinaryExpr;
+import org.mvel3.parser.ast.expr.HalfPointFreeExpr;
+import org.mvel3.parser.ast.expr.PointFreeExpr;
 
 /**
  * This visitor can be used to save time when some specific nodes needs
@@ -1411,6 +1413,50 @@ public class ModifierVisitor<A> implements GenericVisitor<Visitable, A> {
         Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
         if (right == null)
             return null;
+        n.setRight(right);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final HalfPointFreeExpr n, final A arg) {
+        Expression arg1 = (Expression) n.getArg1().accept(this, arg);
+        Expression arg2 = (Expression) n.getArg2().accept(this, arg);
+        Expression arg3 = (Expression) n.getArg3().accept(this, arg);
+        Expression arg4 = (Expression) n.getArg4().accept(this, arg);
+        SimpleName operator = (SimpleName) n.getOperator().accept(this, arg);
+        NodeList<Expression> right = modifyList(n.getRight(), arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        if (arg1 == null || arg2 == null || arg3 == null || arg4 == null || operator == null)
+            return null;
+        n.setArg1(arg1);
+        n.setArg2(arg2);
+        n.setArg3(arg3);
+        n.setArg4(arg4);
+        n.setOperator(operator);
+        n.setRight(right);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final PointFreeExpr n, final A arg) {
+        Expression arg1 = (Expression) n.getArg1().accept(this, arg);
+        Expression arg2 = (Expression) n.getArg2().accept(this, arg);
+        Expression arg3 = (Expression) n.getArg3().accept(this, arg);
+        Expression arg4 = (Expression) n.getArg4().accept(this, arg);
+        Expression left = (Expression) n.getLeft().accept(this, arg);
+        SimpleName operator = (SimpleName) n.getOperator().accept(this, arg);
+        NodeList<Expression> right = modifyList(n.getRight(), arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        if (arg1 == null || arg2 == null || arg3 == null || arg4 == null || left == null || operator == null)
+            return null;
+        n.setArg1(arg1);
+        n.setArg2(arg2);
+        n.setArg3(arg3);
+        n.setArg4(arg4);
+        n.setLeft(left);
+        n.setOperator(operator);
         n.setRight(right);
         n.setComment(comment);
         return n;

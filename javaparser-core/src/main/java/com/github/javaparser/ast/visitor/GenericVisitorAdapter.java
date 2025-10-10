@@ -36,6 +36,8 @@ import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
 import org.mvel3.parser.ast.expr.HalfBinaryExpr;
+import org.mvel3.parser.ast.expr.HalfPointFreeExpr;
+import org.mvel3.parser.ast.expr.PointFreeExpr;
 
 /**
  * A visitor that has a return value (R), and has a default implementation for all its visit
@@ -2320,6 +2322,93 @@ public abstract class GenericVisitorAdapter<R, A> implements GenericVisitor<R, A
     @Override
     public R visit(final HalfBinaryExpr n, final A arg) {
         R result;
+        {
+            result = n.getRight().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        if (n.getComment().isPresent()) {
+            result = n.getComment().get().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
+
+    @Override
+    public R visit(final HalfPointFreeExpr n, final A arg) {
+        R result;
+        {
+            result = n.getArg1().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        {
+            result = n.getArg2().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        {
+            result = n.getArg3().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        {
+            result = n.getArg4().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        {
+            result = n.getOperator().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        {
+            result = n.getRight().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        if (n.getComment().isPresent()) {
+            result = n.getComment().get().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
+
+    @Override
+    public R visit(final PointFreeExpr n, final A arg) {
+        R result;
+        {
+            result = n.getArg1().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        {
+            result = n.getArg2().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        {
+            result = n.getArg3().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        {
+            result = n.getArg4().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        {
+            result = n.getLeft().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        {
+            result = n.getOperator().accept(this, arg);
+            if (result != null)
+                return result;
+        }
         {
             result = n.getRight().accept(this, arg);
             if (result != null)

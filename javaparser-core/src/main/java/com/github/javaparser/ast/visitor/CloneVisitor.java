@@ -38,6 +38,8 @@ import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
 import org.mvel3.parser.ast.expr.HalfBinaryExpr;
+import org.mvel3.parser.ast.expr.HalfPointFreeExpr;
+import org.mvel3.parser.ast.expr.PointFreeExpr;
 
 /**
  * A visitor that clones (copies) a node and all its children.
@@ -1372,6 +1374,39 @@ public class CloneVisitor implements GenericVisitor<Visitable, Object> {
         Expression right = cloneNode(n.getRight(), arg);
         Comment comment = cloneNode(n.getComment(), arg);
         HalfBinaryExpr r = new HalfBinaryExpr(n.getTokenRange().orElse(null), right, n.getOperator());
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final HalfPointFreeExpr n, final Object arg) {
+        Expression arg1 = cloneNode(n.getArg1(), arg);
+        Expression arg2 = cloneNode(n.getArg2(), arg);
+        Expression arg3 = cloneNode(n.getArg3(), arg);
+        Expression arg4 = cloneNode(n.getArg4(), arg);
+        SimpleName operator = cloneNode(n.getOperator(), arg);
+        NodeList<Expression> right = cloneList(n.getRight(), arg);
+        Comment comment = cloneNode(n.getComment(), arg);
+        HalfPointFreeExpr r = new HalfPointFreeExpr(n.getTokenRange().orElse(null), right, operator, n.isNegated(), arg1, arg2, arg3, arg4);
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final PointFreeExpr n, final Object arg) {
+        Expression arg1 = cloneNode(n.getArg1(), arg);
+        Expression arg2 = cloneNode(n.getArg2(), arg);
+        Expression arg3 = cloneNode(n.getArg3(), arg);
+        Expression arg4 = cloneNode(n.getArg4(), arg);
+        Expression left = cloneNode(n.getLeft(), arg);
+        SimpleName operator = cloneNode(n.getOperator(), arg);
+        NodeList<Expression> right = cloneList(n.getRight(), arg);
+        Comment comment = cloneNode(n.getComment(), arg);
+        PointFreeExpr r = new PointFreeExpr(n.getTokenRange().orElse(null), left, right, operator, n.isNegated(), arg1, arg2, arg3, arg4);
         r.setComment(comment);
         n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
         copyData(n, r);

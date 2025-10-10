@@ -36,6 +36,8 @@ import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
 import org.mvel3.parser.ast.expr.HalfBinaryExpr;
+import org.mvel3.parser.ast.expr.HalfPointFreeExpr;
+import org.mvel3.parser.ast.expr.PointFreeExpr;
 
 /**
  * A visitor that returns nothing, and has a default implementation for all its visit
@@ -799,6 +801,29 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
     @Override
     public void visit(final HalfBinaryExpr n, final A arg) {
         n.getRight().accept(this, arg);
+        n.getComment().ifPresent(l -> l.accept(this, arg));
+    }
+
+    @Override
+    public void visit(final HalfPointFreeExpr n, final A arg) {
+        n.getArg1().accept(this, arg);
+        n.getArg2().accept(this, arg);
+        n.getArg3().accept(this, arg);
+        n.getArg4().accept(this, arg);
+        n.getOperator().accept(this, arg);
+        n.getRight().forEach(p -> p.accept(this, arg));
+        n.getComment().ifPresent(l -> l.accept(this, arg));
+    }
+
+    @Override
+    public void visit(final PointFreeExpr n, final A arg) {
+        n.getArg1().accept(this, arg);
+        n.getArg2().accept(this, arg);
+        n.getArg3().accept(this, arg);
+        n.getArg4().accept(this, arg);
+        n.getLeft().accept(this, arg);
+        n.getOperator().accept(this, arg);
+        n.getRight().forEach(p -> p.accept(this, arg));
         n.getComment().ifPresent(l -> l.accept(this, arg));
     }
 }

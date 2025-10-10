@@ -38,8 +38,11 @@ import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.HalfBinaryExpr;
+import org.mvel3.parser.ast.expr.HalfPointFreeExpr;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
+import org.mvel3.parser.ast.expr.PointFreeExpr;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import static com.github.javaparser.GeneratedJavaParserConstants.*;
@@ -156,6 +159,8 @@ public class ConcreteSyntaxModel {
         concreteSyntaxModelByClass.put(DrlxExpression.class, sequence(comment(), child(ObservableProperty.BIND), space(), string(GeneratedJavaParserConstants.COLON), space(), child(ObservableProperty.EXPR)));
         concreteSyntaxModelByClass.put(FullyQualifiedInlineCastExpr.class, sequence(comment(), child(ObservableProperty.EXPRESSION), string(GeneratedJavaParserConstants.IDENTIFIER, "#"), child(ObservableProperty.TYPE), string(GeneratedJavaParserConstants.IDENTIFIER, "#")));
         concreteSyntaxModelByClass.put(HalfBinaryExpr.class, sequence(comment(), attribute(ObservableProperty.OPERATOR), space(), child(ObservableProperty.RIGHT)));
+        concreteSyntaxModelByClass.put(PointFreeExpr.class, sequence(comment(), child(ObservableProperty.LEFT), space(), child(ObservableProperty.OPERATOR), conditional(ObservableProperty.ARG1, IS_PRESENT, sequence(string(GeneratedJavaParserConstants.LBRACKET), child(ObservableProperty.ARG1), conditional(ObservableProperty.ARG2, IS_PRESENT, sequence(string(GeneratedJavaParserConstants.COMMA), child(ObservableProperty.ARG2))), conditional(ObservableProperty.ARG3, IS_PRESENT, sequence(string(GeneratedJavaParserConstants.COMMA), child(ObservableProperty.ARG3))), conditional(ObservableProperty.ARG4, IS_PRESENT, sequence(string(GeneratedJavaParserConstants.COMMA), child(ObservableProperty.ARG4))), string(GeneratedJavaParserConstants.RBRACKET))), space(), conditional(ObservableProperty.RIGHT, IS_NOT_EMPTY, sequence(string(GeneratedJavaParserConstants.LPAREN), list(ObservableProperty.RIGHT, sequence(string(GeneratedJavaParserConstants.COMMA), space())), string(GeneratedJavaParserConstants.RPAREN)), child(ObservableProperty.RIGHT))));
+        concreteSyntaxModelByClass.put(HalfPointFreeExpr.class, sequence(comment(), child(ObservableProperty.OPERATOR), conditional(ObservableProperty.ARG1, IS_PRESENT, sequence(string(GeneratedJavaParserConstants.LBRACKET), child(ObservableProperty.ARG1), conditional(ObservableProperty.ARG2, IS_PRESENT, sequence(string(GeneratedJavaParserConstants.COMMA), child(ObservableProperty.ARG2))), conditional(ObservableProperty.ARG3, IS_PRESENT, sequence(string(GeneratedJavaParserConstants.COMMA), child(ObservableProperty.ARG3))), conditional(ObservableProperty.ARG4, IS_PRESENT, sequence(string(GeneratedJavaParserConstants.COMMA), child(ObservableProperty.ARG4))), string(GeneratedJavaParserConstants.RBRACKET))), space(), conditional(ObservableProperty.RIGHT, IS_NOT_EMPTY, sequence(string(GeneratedJavaParserConstants.LPAREN), list(ObservableProperty.RIGHT, sequence(string(GeneratedJavaParserConstants.COMMA), space())), string(GeneratedJavaParserConstants.RPAREN)), child(ObservableProperty.RIGHT))));
         // /
         // / Statements
         // /

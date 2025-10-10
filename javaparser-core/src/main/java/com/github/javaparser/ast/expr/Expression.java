@@ -42,6 +42,8 @@ import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
 import org.mvel3.parser.ast.expr.HalfBinaryExpr;
+import org.mvel3.parser.ast.expr.HalfPointFreeExpr;
+import org.mvel3.parser.ast.expr.PointFreeExpr;
 
 /**
  * A base class for all expressions.
@@ -999,18 +1001,52 @@ public abstract class Expression extends Node {
     public void ifFullyQualifiedInlineCastExpr(Consumer<FullyQualifiedInlineCastExpr> action) {
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isHalfBinaryExpr() {
         return false;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public HalfBinaryExpr asHalfBinaryExpr() {
         throw new IllegalStateException(f("%s is not HalfBinaryExpr, it is %s", this, this.getClass().getSimpleName()));
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<HalfBinaryExpr> toHalfBinaryExpr() {
         return Optional.empty();
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifHalfBinaryExpr(Consumer<HalfBinaryExpr> action) {
+    }
+
+    public boolean isHalfPointFreeExpr() {
+        return false;
+    }
+
+    public HalfPointFreeExpr asHalfPointFreeExpr() {
+        throw new IllegalStateException(f("%s is not HalfPointFreeExpr, it is %s", this, this.getClass().getSimpleName()));
+    }
+
+    public Optional<HalfPointFreeExpr> toHalfPointFreeExpr() {
+        return Optional.empty();
+    }
+
+    public void ifHalfPointFreeExpr(Consumer<HalfPointFreeExpr> action) {
+    }
+
+    public boolean isPointFreeExpr() {
+        return false;
+    }
+
+    public PointFreeExpr asPointFreeExpr() {
+        throw new IllegalStateException(f("%s is not PointFreeExpr, it is %s", this, this.getClass().getSimpleName()));
+    }
+
+    public Optional<PointFreeExpr> toPointFreeExpr() {
+        return Optional.empty();
+    }
+
+    public void ifPointFreeExpr(Consumer<PointFreeExpr> action) {
     }
 }

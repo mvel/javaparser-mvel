@@ -36,6 +36,8 @@ import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
 import org.mvel3.parser.ast.expr.HalfBinaryExpr;
+import org.mvel3.parser.ast.expr.HalfPointFreeExpr;
+import org.mvel3.parser.ast.expr.PointFreeExpr;
 
 /**
  * A visitor that calculates deep node equality by comparing all properties and child nodes of the node.
@@ -582,6 +584,16 @@ public class ObjectIdentityEqualsVisitor implements GenericVisitor<Boolean, Visi
 
     @Override
     public Boolean visit(final HalfBinaryExpr n, final Visitable arg) {
+        return n == arg;
+    }
+
+    @Override
+    public Boolean visit(final HalfPointFreeExpr n, final Visitable arg) {
+        return n == arg;
+    }
+
+    @Override
+    public Boolean visit(final PointFreeExpr n, final Visitable arg) {
         return n == arg;
     }
 }

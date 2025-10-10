@@ -38,6 +38,8 @@ import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
 import org.mvel3.parser.ast.expr.HalfBinaryExpr;
+import org.mvel3.parser.ast.expr.HalfPointFreeExpr;
+import org.mvel3.parser.ast.expr.PointFreeExpr;
 
 /**
  * A visitor that calculates deep node equality by comparing all properties and child nodes of the node.
@@ -1492,6 +1494,52 @@ public class EqualsVisitor implements GenericVisitor<Boolean, Visitable> {
         if (!objEquals(n.getOperator(), n2.getOperator()))
             return false;
         if (!nodeEquals(n.getRight(), n2.getRight()))
+            return false;
+        if (!nodeEquals(n.getComment(), n2.getComment()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final HalfPointFreeExpr n, final Visitable arg) {
+        final HalfPointFreeExpr n2 = (HalfPointFreeExpr) arg;
+        if (!nodeEquals(n.getArg1(), n2.getArg1()))
+            return false;
+        if (!nodeEquals(n.getArg2(), n2.getArg2()))
+            return false;
+        if (!nodeEquals(n.getArg3(), n2.getArg3()))
+            return false;
+        if (!nodeEquals(n.getArg4(), n2.getArg4()))
+            return false;
+        if (!objEquals(n.isNegated(), n2.isNegated()))
+            return false;
+        if (!nodeEquals(n.getOperator(), n2.getOperator()))
+            return false;
+        if (!nodesEquals(n.getRight(), n2.getRight()))
+            return false;
+        if (!nodeEquals(n.getComment(), n2.getComment()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final PointFreeExpr n, final Visitable arg) {
+        final PointFreeExpr n2 = (PointFreeExpr) arg;
+        if (!nodeEquals(n.getArg1(), n2.getArg1()))
+            return false;
+        if (!nodeEquals(n.getArg2(), n2.getArg2()))
+            return false;
+        if (!nodeEquals(n.getArg3(), n2.getArg3()))
+            return false;
+        if (!nodeEquals(n.getArg4(), n2.getArg4()))
+            return false;
+        if (!nodeEquals(n.getLeft(), n2.getLeft()))
+            return false;
+        if (!objEquals(n.isNegated(), n2.isNegated()))
+            return false;
+        if (!nodeEquals(n.getOperator(), n2.getOperator()))
+            return false;
+        if (!nodesEquals(n.getRight(), n2.getRight()))
             return false;
         if (!nodeEquals(n.getComment(), n2.getComment()))
             return false;

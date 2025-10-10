@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.body.VariableDeclarator;
@@ -69,7 +70,9 @@ import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
 import org.mvel3.parser.ast.expr.HalfBinaryExpr;
+import org.mvel3.parser.ast.expr.HalfPointFreeExpr;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
+import org.mvel3.parser.ast.expr.PointFreeExpr;
 
 public class TypeExtractor extends DefaultVisitorAdapter {
 
@@ -192,7 +195,17 @@ public class TypeExtractor extends DefaultVisitorAdapter {
 
     @Override
     public ResolvedType visit(HalfBinaryExpr node, Boolean solveLambdas) {
-        return ResolvedPrimitiveType.BOOLEAN; // HalfBinaryExpr is always comparing operators
+        return ResolvedPrimitiveType.BOOLEAN;
+    }
+
+    @Override
+    public ResolvedType visit(HalfPointFreeExpr node, Boolean solveLambdas) {
+        return ResolvedPrimitiveType.BOOLEAN;
+    }
+
+    @Override
+    public ResolvedType visit(PointFreeExpr node, Boolean solveLambdas) {
+        return ResolvedPrimitiveType.BOOLEAN;
     }
 
     @Override

@@ -181,20 +181,25 @@ public class HalfBinaryExpr extends Expression {
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isHalfBinaryExpr() {
         return true;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public HalfBinaryExpr asHalfBinaryExpr() {
         return this;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<HalfBinaryExpr> toHalfBinaryExpr() {
         return Optional.of(this);
     }
 
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifHalfBinaryExpr(Consumer<HalfBinaryExpr> action) {
         action.accept(this);
     }

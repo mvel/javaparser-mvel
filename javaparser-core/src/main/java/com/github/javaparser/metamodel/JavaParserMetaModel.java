@@ -302,6 +302,21 @@ public final class JavaParserMetaModel {
         drlxExpressionMetaModel.getConstructorParameters().add(drlxExpressionMetaModel.exprPropertyMetaModel);
         halfBinaryExprMetaModel.getConstructorParameters().add(halfBinaryExprMetaModel.rightPropertyMetaModel);
         halfBinaryExprMetaModel.getConstructorParameters().add(halfBinaryExprMetaModel.operatorPropertyMetaModel);
+        pointFreeExprMetaModel.getConstructorParameters().add(pointFreeExprMetaModel.leftPropertyMetaModel);
+        pointFreeExprMetaModel.getConstructorParameters().add(pointFreeExprMetaModel.rightPropertyMetaModel);
+        pointFreeExprMetaModel.getConstructorParameters().add(pointFreeExprMetaModel.operatorPropertyMetaModel);
+        pointFreeExprMetaModel.getConstructorParameters().add(pointFreeExprMetaModel.negatedPropertyMetaModel);
+        pointFreeExprMetaModel.getConstructorParameters().add(pointFreeExprMetaModel.arg1PropertyMetaModel);
+        pointFreeExprMetaModel.getConstructorParameters().add(pointFreeExprMetaModel.arg2PropertyMetaModel);
+        pointFreeExprMetaModel.getConstructorParameters().add(pointFreeExprMetaModel.arg3PropertyMetaModel);
+        pointFreeExprMetaModel.getConstructorParameters().add(pointFreeExprMetaModel.arg4PropertyMetaModel);
+        halfPointFreeExprMetaModel.getConstructorParameters().add(halfPointFreeExprMetaModel.rightPropertyMetaModel);
+        halfPointFreeExprMetaModel.getConstructorParameters().add(halfPointFreeExprMetaModel.operatorPropertyMetaModel);
+        halfPointFreeExprMetaModel.getConstructorParameters().add(halfPointFreeExprMetaModel.negatedPropertyMetaModel);
+        halfPointFreeExprMetaModel.getConstructorParameters().add(halfPointFreeExprMetaModel.arg1PropertyMetaModel);
+        halfPointFreeExprMetaModel.getConstructorParameters().add(halfPointFreeExprMetaModel.arg2PropertyMetaModel);
+        halfPointFreeExprMetaModel.getConstructorParameters().add(halfPointFreeExprMetaModel.arg3PropertyMetaModel);
+        halfPointFreeExprMetaModel.getConstructorParameters().add(halfPointFreeExprMetaModel.arg4PropertyMetaModel);
     }
 
     public static List<BaseNodeMetaModel> getNodeMetaModels() {
@@ -358,6 +373,7 @@ public final class JavaParserMetaModel {
         nodeMetaModels.add(forStmtMetaModel);
         nodeMetaModels.add(fullyQualifiedInlineCastExprMetaModel);
         nodeMetaModels.add(halfBinaryExprMetaModel);
+        nodeMetaModels.add(halfPointFreeExprMetaModel);
         nodeMetaModels.add(ifStmtMetaModel);
         nodeMetaModels.add(importDeclarationMetaModel);
         nodeMetaModels.add(initializerDeclarationMetaModel);
@@ -396,6 +412,7 @@ public final class JavaParserMetaModel {
         nodeMetaModels.add(packageDeclarationMetaModel);
         nodeMetaModels.add(parameterMetaModel);
         nodeMetaModels.add(patternExprMetaModel);
+        nodeMetaModels.add(pointFreeExprMetaModel);
         nodeMetaModels.add(primitiveTypeMetaModel);
         nodeMetaModels.add(receiverParameterMetaModel);
         nodeMetaModels.add(recordDeclarationMetaModel);
@@ -881,6 +898,36 @@ public final class JavaParserMetaModel {
         halfBinaryExprMetaModel.getDeclaredPropertyMetaModels().add(halfBinaryExprMetaModel.operatorPropertyMetaModel);
         halfBinaryExprMetaModel.rightPropertyMetaModel = new PropertyMetaModel(halfBinaryExprMetaModel, "right", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
         halfBinaryExprMetaModel.getDeclaredPropertyMetaModels().add(halfBinaryExprMetaModel.rightPropertyMetaModel);
+        pointFreeExprMetaModel.arg1PropertyMetaModel = new PropertyMetaModel(pointFreeExprMetaModel, "arg1", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
+        pointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(pointFreeExprMetaModel.arg1PropertyMetaModel);
+        pointFreeExprMetaModel.arg2PropertyMetaModel = new PropertyMetaModel(pointFreeExprMetaModel, "arg2", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
+        pointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(pointFreeExprMetaModel.arg2PropertyMetaModel);
+        pointFreeExprMetaModel.arg3PropertyMetaModel = new PropertyMetaModel(pointFreeExprMetaModel, "arg3", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
+        pointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(pointFreeExprMetaModel.arg3PropertyMetaModel);
+        pointFreeExprMetaModel.arg4PropertyMetaModel = new PropertyMetaModel(pointFreeExprMetaModel, "arg4", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
+        pointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(pointFreeExprMetaModel.arg4PropertyMetaModel);
+        pointFreeExprMetaModel.leftPropertyMetaModel = new PropertyMetaModel(pointFreeExprMetaModel, "left", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
+        pointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(pointFreeExprMetaModel.leftPropertyMetaModel);
+        pointFreeExprMetaModel.negatedPropertyMetaModel = new PropertyMetaModel(pointFreeExprMetaModel, "negated", boolean.class, Optional.empty(), false, false, false, false);
+        pointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(pointFreeExprMetaModel.negatedPropertyMetaModel);
+        pointFreeExprMetaModel.operatorPropertyMetaModel = new PropertyMetaModel(pointFreeExprMetaModel, "operator", com.github.javaparser.ast.expr.SimpleName.class, Optional.of(simpleNameMetaModel), false, false, false, false);
+        pointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(pointFreeExprMetaModel.operatorPropertyMetaModel);
+        pointFreeExprMetaModel.rightPropertyMetaModel = new PropertyMetaModel(pointFreeExprMetaModel, "right", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, true, false);
+        pointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(pointFreeExprMetaModel.rightPropertyMetaModel);
+        halfPointFreeExprMetaModel.arg1PropertyMetaModel = new PropertyMetaModel(halfPointFreeExprMetaModel, "arg1", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
+        halfPointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(halfPointFreeExprMetaModel.arg1PropertyMetaModel);
+        halfPointFreeExprMetaModel.arg2PropertyMetaModel = new PropertyMetaModel(halfPointFreeExprMetaModel, "arg2", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
+        halfPointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(halfPointFreeExprMetaModel.arg2PropertyMetaModel);
+        halfPointFreeExprMetaModel.arg3PropertyMetaModel = new PropertyMetaModel(halfPointFreeExprMetaModel, "arg3", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
+        halfPointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(halfPointFreeExprMetaModel.arg3PropertyMetaModel);
+        halfPointFreeExprMetaModel.arg4PropertyMetaModel = new PropertyMetaModel(halfPointFreeExprMetaModel, "arg4", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
+        halfPointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(halfPointFreeExprMetaModel.arg4PropertyMetaModel);
+        halfPointFreeExprMetaModel.negatedPropertyMetaModel = new PropertyMetaModel(halfPointFreeExprMetaModel, "negated", boolean.class, Optional.empty(), false, false, false, false);
+        halfPointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(halfPointFreeExprMetaModel.negatedPropertyMetaModel);
+        halfPointFreeExprMetaModel.operatorPropertyMetaModel = new PropertyMetaModel(halfPointFreeExprMetaModel, "operator", com.github.javaparser.ast.expr.SimpleName.class, Optional.of(simpleNameMetaModel), false, false, false, false);
+        halfPointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(halfPointFreeExprMetaModel.operatorPropertyMetaModel);
+        halfPointFreeExprMetaModel.rightPropertyMetaModel = new PropertyMetaModel(halfPointFreeExprMetaModel, "right", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, true, false);
+        halfPointFreeExprMetaModel.getDeclaredPropertyMetaModels().add(halfPointFreeExprMetaModel.rightPropertyMetaModel);
     }
 
     public static Optional<BaseNodeMetaModel> getNodeMetaModel(Class<?> c) {
@@ -1248,6 +1295,12 @@ public final class JavaParserMetaModel {
 
     @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     public static final HalfBinaryExprMetaModel halfBinaryExprMetaModel = new HalfBinaryExprMetaModel(Optional.of(expressionMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final PointFreeExprMetaModel pointFreeExprMetaModel = new PointFreeExprMetaModel(Optional.of(expressionMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final HalfPointFreeExprMetaModel halfPointFreeExprMetaModel = new HalfPointFreeExprMetaModel(Optional.of(expressionMetaModel));
 
     static {
         initializeNodeMetaModels();
