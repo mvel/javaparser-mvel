@@ -39,8 +39,12 @@ import com.github.javaparser.printer.Stringable;
 import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 import static com.github.javaparser.utils.Utils.assertNotNull;
+import java.util.Optional;
+import java.util.function.Consumer;
+import com.github.javaparser.metamodel.HalfBinaryExprMetaModel;
+import com.github.javaparser.ast.Generated;
 
-public final class HalfBinaryExpr extends Expression {
+public class HalfBinaryExpr extends Expression {
 
     public enum Operator implements Stringable {
 
@@ -96,6 +100,7 @@ public final class HalfBinaryExpr extends Expression {
     /**
      * This constructor is used by the parser and is considered private.
      */
+    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public HalfBinaryExpr(TokenRange tokenRange, Expression right, Operator operator) {
         super(tokenRange);
         setRight(right);
@@ -104,23 +109,28 @@ public final class HalfBinaryExpr extends Expression {
     }
 
     @Override
-    public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+        return v.visit(this, arg);
     }
 
     @Override
-    public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+        v.visit(this, arg);
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Operator getOperator() {
         return operator;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public Expression getRight() {
         return right;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public HalfBinaryExpr setOperator(final Operator operator) {
         assertNotNull(operator);
         if (operator == this.operator) {
@@ -131,6 +141,7 @@ public final class HalfBinaryExpr extends Expression {
         return this;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public HalfBinaryExpr setRight(final Expression right) {
         assertNotNull(right);
         if (right == this.right) {
@@ -145,30 +156,46 @@ public final class HalfBinaryExpr extends Expression {
     }
 
     @Override
-    public boolean remove(Node node) {
-        if (node == null)
-            return false;
-        return super.remove(node);
-    }
-
-    @Override
+    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public HalfBinaryExpr clone() {
         return (HalfBinaryExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
-    public BinaryExprMetaModel getMetaModel() {
-        return JavaParserMetaModel.binaryExprMetaModel;
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    public HalfBinaryExprMetaModel getMetaModel() {
+        return JavaParserMetaModel.halfBinaryExprMetaModel;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
-        if (node == null)
+        if (node == null) {
             return false;
+        }
         if (node == right) {
             setRight((Expression) replacementNode);
             return true;
         }
         return super.replace(node, replacementNode);
+    }
+
+    @Override
+    public boolean isHalfBinaryExpr() {
+        return true;
+    }
+
+    @Override
+    public HalfBinaryExpr asHalfBinaryExpr() {
+        return this;
+    }
+
+    @Override
+    public Optional<HalfBinaryExpr> toHalfBinaryExpr() {
+        return Optional.of(this);
+    }
+
+    public void ifHalfBinaryExpr(Consumer<HalfBinaryExpr> action) {
+        action.accept(this);
     }
 }

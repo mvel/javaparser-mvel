@@ -35,6 +35,7 @@ import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
+import org.mvel3.parser.ast.expr.HalfBinaryExpr;
 
 /**
  * A visitor that returns nothing, and has default methods that are used when a specific visit method is not
@@ -579,6 +580,11 @@ public abstract class VoidVisitorWithDefaults<A> implements VoidVisitor<A> {
 
     @Override
     public void visit(final FullyQualifiedInlineCastExpr n, final A arg) {
+        defaultAction(n, arg);
+    }
+
+    @Override
+    public void visit(final HalfBinaryExpr n, final A arg) {
         defaultAction(n, arg);
     }
 }

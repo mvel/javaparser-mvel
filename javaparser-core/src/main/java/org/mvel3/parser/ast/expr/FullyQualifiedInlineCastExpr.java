@@ -106,25 +106,31 @@ public class FullyQualifiedInlineCastExpr extends Expression {
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isFullyQualifiedInlineCastExpr() {
         return true;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public FullyQualifiedInlineCastExpr asFullyQualifiedInlineCastExpr() {
         return this;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<FullyQualifiedInlineCastExpr> toFullyQualifiedInlineCastExpr() {
         return Optional.of(this);
     }
 
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifFullyQualifiedInlineCastExpr(Consumer<FullyQualifiedInlineCastExpr> action) {
         action.accept(this);
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -141,11 +147,13 @@ public class FullyQualifiedInlineCastExpr extends Expression {
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public FullyQualifiedInlineCastExpr clone() {
         return (FullyQualifiedInlineCastExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public FullyQualifiedInlineCastExprMetaModel getMetaModel() {
         return JavaParserMetaModel.fullyQualifiedInlineCastExprMetaModel;
     }

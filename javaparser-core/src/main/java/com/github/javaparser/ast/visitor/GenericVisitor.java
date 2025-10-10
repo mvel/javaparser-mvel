@@ -35,6 +35,7 @@ import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
+import org.mvel3.parser.ast.expr.HalfBinaryExpr;
 
 /**
  * A visitor that has a return value.
@@ -259,4 +260,6 @@ public interface GenericVisitor<R, A> {
     R visit(DrlxExpression n, A arg);
 
     R visit(FullyQualifiedInlineCastExpr n, A arg);
+
+    R visit(HalfBinaryExpr n, A arg);
 }

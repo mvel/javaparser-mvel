@@ -196,6 +196,7 @@ public class MetaModelGenerator extends AbstractGenerator {
         add(org.mvel3.parser.ast.expr.BigIntegerLiteralExpr.class);
         add(org.mvel3.parser.ast.expr.DrlNameExpr.class);
         add(org.mvel3.parser.ast.expr.DrlxExpression.class);
+        add(org.mvel3.parser.ast.expr.HalfBinaryExpr.class);
         //add(org.mvel3.parser.ast.expr.RuleDeclaration.class); // TODO: Higher level node should be generated later
     }};
 

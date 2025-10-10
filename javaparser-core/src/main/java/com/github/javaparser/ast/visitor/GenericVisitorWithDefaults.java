@@ -35,6 +35,7 @@ import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
+import org.mvel3.parser.ast.expr.HalfBinaryExpr;
 
 /**
  * A visitor that has a return value (R), and has default methods that are used when a specific visit method is not
@@ -583,6 +584,11 @@ public abstract class GenericVisitorWithDefaults<R, A> implements GenericVisitor
 
     @Override
     public R visit(final FullyQualifiedInlineCastExpr n, final A arg) {
+        return defaultAction(n, arg);
+    }
+
+    @Override
+    public R visit(final HalfBinaryExpr n, final A arg) {
         return defaultAction(n, arg);
     }
 }

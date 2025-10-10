@@ -300,6 +300,8 @@ public final class JavaParserMetaModel {
         drlNameExprMetaModel.getConstructorParameters().add(drlNameExprMetaModel.backReferencesCountPropertyMetaModel);
         drlxExpressionMetaModel.getConstructorParameters().add(drlxExpressionMetaModel.bindPropertyMetaModel);
         drlxExpressionMetaModel.getConstructorParameters().add(drlxExpressionMetaModel.exprPropertyMetaModel);
+        halfBinaryExprMetaModel.getConstructorParameters().add(halfBinaryExprMetaModel.rightPropertyMetaModel);
+        halfBinaryExprMetaModel.getConstructorParameters().add(halfBinaryExprMetaModel.operatorPropertyMetaModel);
     }
 
     public static List<BaseNodeMetaModel> getNodeMetaModels() {
@@ -355,6 +357,7 @@ public final class JavaParserMetaModel {
         nodeMetaModels.add(forEachStmtMetaModel);
         nodeMetaModels.add(forStmtMetaModel);
         nodeMetaModels.add(fullyQualifiedInlineCastExprMetaModel);
+        nodeMetaModels.add(halfBinaryExprMetaModel);
         nodeMetaModels.add(ifStmtMetaModel);
         nodeMetaModels.add(importDeclarationMetaModel);
         nodeMetaModels.add(initializerDeclarationMetaModel);
@@ -874,6 +877,10 @@ public final class JavaParserMetaModel {
         drlxExpressionMetaModel.getDeclaredPropertyMetaModels().add(drlxExpressionMetaModel.bindPropertyMetaModel);
         drlxExpressionMetaModel.exprPropertyMetaModel = new PropertyMetaModel(drlxExpressionMetaModel, "expr", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
         drlxExpressionMetaModel.getDeclaredPropertyMetaModels().add(drlxExpressionMetaModel.exprPropertyMetaModel);
+        halfBinaryExprMetaModel.operatorPropertyMetaModel = new PropertyMetaModel(halfBinaryExprMetaModel, "operator", org.mvel3.parser.ast.expr.HalfBinaryExpr.Operator.class, Optional.empty(), false, false, false, false);
+        halfBinaryExprMetaModel.getDeclaredPropertyMetaModels().add(halfBinaryExprMetaModel.operatorPropertyMetaModel);
+        halfBinaryExprMetaModel.rightPropertyMetaModel = new PropertyMetaModel(halfBinaryExprMetaModel, "right", com.github.javaparser.ast.expr.Expression.class, Optional.of(expressionMetaModel), false, false, false, false);
+        halfBinaryExprMetaModel.getDeclaredPropertyMetaModels().add(halfBinaryExprMetaModel.rightPropertyMetaModel);
     }
 
     public static Optional<BaseNodeMetaModel> getNodeMetaModel(Class<?> c) {
@@ -1238,6 +1245,9 @@ public final class JavaParserMetaModel {
 
     @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     public static final DrlxExpressionMetaModel drlxExpressionMetaModel = new DrlxExpressionMetaModel(Optional.of(expressionMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final HalfBinaryExprMetaModel halfBinaryExprMetaModel = new HalfBinaryExprMetaModel(Optional.of(expressionMetaModel));
 
     static {
         initializeNodeMetaModels();

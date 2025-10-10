@@ -42,6 +42,7 @@ import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
+import org.mvel3.parser.ast.expr.HalfBinaryExpr;
 
 /**
  * This visitor can be used to save time when some specific nodes needs
@@ -1400,6 +1401,17 @@ public class ModifierVisitor<A> implements GenericVisitor<Visitable, A> {
             return null;
         n.setExpression(expression);
         n.setType(type);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final HalfBinaryExpr n, final A arg) {
+        Expression right = (Expression) n.getRight().accept(this, arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        if (right == null)
+            return null;
+        n.setRight(right);
         n.setComment(comment);
         return n;
     }

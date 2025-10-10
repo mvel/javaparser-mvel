@@ -35,6 +35,7 @@ import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
+import org.mvel3.parser.ast.expr.HalfBinaryExpr;
 
 public class NoCommentHashCodeVisitor implements GenericVisitor<Integer, Void> {
 
@@ -489,5 +490,10 @@ public class NoCommentHashCodeVisitor implements GenericVisitor<Integer, Void> {
     @Override
     public Integer visit(final FullyQualifiedInlineCastExpr n, final Void arg) {
         return (n.getExpression().accept(this, arg)) * 31 + (n.getType().accept(this, arg));
+    }
+
+    @Override
+    public Integer visit(final HalfBinaryExpr n, final Void arg) {
+        return (n.getOperator().hashCode()) * 31 + (n.getRight().accept(this, arg));
     }
 }

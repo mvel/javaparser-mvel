@@ -35,6 +35,7 @@ import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
+import org.mvel3.parser.ast.expr.HalfBinaryExpr;
 
 /**
  * A visitor that returns nothing, and has a default implementation for all its visit
@@ -792,6 +793,12 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
     public void visit(final FullyQualifiedInlineCastExpr n, final A arg) {
         n.getExpression().accept(this, arg);
         n.getType().accept(this, arg);
+        n.getComment().ifPresent(l -> l.accept(this, arg));
+    }
+
+    @Override
+    public void visit(final HalfBinaryExpr n, final A arg) {
+        n.getRight().accept(this, arg);
         n.getComment().ifPresent(l -> l.accept(this, arg));
     }
 }

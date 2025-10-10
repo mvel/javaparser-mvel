@@ -35,6 +35,7 @@ import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import org.mvel3.parser.ast.expr.DrlNameExpr;
 import org.mvel3.parser.ast.expr.DrlxExpression;
 import org.mvel3.parser.ast.expr.FullyQualifiedInlineCastExpr;
+import org.mvel3.parser.ast.expr.HalfBinaryExpr;
 
 /**
  * A visitor that does not return anything.
@@ -254,4 +255,6 @@ public interface VoidVisitor<A> {
     void visit(DrlxExpression n, A arg);
 
     void visit(FullyQualifiedInlineCastExpr n, A arg);
+
+    void visit(HalfBinaryExpr n, A arg);
 }
