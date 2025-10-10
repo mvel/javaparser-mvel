@@ -96,24 +96,30 @@ public class DrlNameExpr extends NameExpr implements NodeWithSimpleName<NameExpr
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isDrlNameExpr() {
         return true;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public DrlNameExpr asDrlNameExpr() {
         return this;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<DrlNameExpr> toDrlNameExpr() {
         return Optional.of(this);
     }
 
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifDrlNameExpr(Consumer<DrlNameExpr> action) {
         action.accept(this);
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public DrlNameExpr setBackReferencesCount(final int backReferencesCount) {
         if (backReferencesCount == this.backReferencesCount) {
             return this;
@@ -124,11 +130,13 @@ public class DrlNameExpr extends NameExpr implements NodeWithSimpleName<NameExpr
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public DrlNameExpr clone() {
         return (DrlNameExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public DrlNameExprMetaModel getMetaModel() {
         return JavaParserMetaModel.drlNameExprMetaModel;
     }

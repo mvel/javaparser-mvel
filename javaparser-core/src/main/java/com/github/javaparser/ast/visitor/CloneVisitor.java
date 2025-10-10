@@ -35,6 +35,7 @@ import org.mvel3.parser.ast.expr.InlineCastExpr;
 import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
 import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import org.mvel3.parser.ast.expr.DrlNameExpr;
+import org.mvel3.parser.ast.expr.DrlxExpression;
 
 /**
  * A visitor that clones (copies) a node and all its children.
@@ -1334,6 +1335,18 @@ public class CloneVisitor implements GenericVisitor<Visitable, Object> {
         SimpleName name = cloneNode(n.getName(), arg);
         Comment comment = cloneNode(n.getComment(), arg);
         DrlNameExpr r = new DrlNameExpr(n.getTokenRange().orElse(null), name, n.getBackReferencesCount());
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final DrlxExpression n, final Object arg) {
+        SimpleName bind = cloneNode(n.getBind(), arg);
+        Expression expr = cloneNode(n.getExpr(), arg);
+        Comment comment = cloneNode(n.getComment(), arg);
+        DrlxExpression r = new DrlxExpression(n.getTokenRange().orElse(null), bind, expr);
         r.setComment(comment);
         n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
         copyData(n, r);

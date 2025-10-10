@@ -101,10 +101,10 @@ public class ConcreteSyntaxModel {
         // FIXME: we should introduce a derived property
         // FIXME: we should introduce a derived property
         // FIXME: we should introduce a derived property
+        // FIXME: we should introduce a derived property
         concreteSyntaxModelByClass.// FIXME: we should introduce a derived property
-        put(// FIXME: we should introduce a derived property
-        VariableDeclarator.class, // list(ObservableProperty.EXTRA_ARRAY_LEVELS),
-        sequence(comment(), child(ObservableProperty.NAME), conditional(ObservableProperty.INITIALIZER, IS_PRESENT, sequence(space(), token(GeneratedJavaParserConstants.ASSIGN), space(), child(ObservableProperty.INITIALIZER)))));
+        put(// list(ObservableProperty.EXTRA_ARRAY_LEVELS),
+        VariableDeclarator.class, sequence(comment(), child(ObservableProperty.NAME), conditional(ObservableProperty.INITIALIZER, IS_PRESENT, sequence(space(), token(GeneratedJavaParserConstants.ASSIGN), space(), child(ObservableProperty.INITIALIZER)))));
         // /
         // / Expressions
         // /

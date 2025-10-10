@@ -39,6 +39,7 @@ import org.mvel3.parser.ast.expr.InlineCastExpr;
 import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
 import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import org.mvel3.parser.ast.expr.DrlNameExpr;
+import org.mvel3.parser.ast.expr.DrlxExpression;
 
 /**
  * A base class for all expressions.
@@ -939,18 +940,37 @@ public abstract class Expression extends Node {
     public void ifBigIntegerLiteralExpr(Consumer<BigIntegerLiteralExpr> action) {
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isDrlNameExpr() {
         return false;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public DrlNameExpr asDrlNameExpr() {
         throw new IllegalStateException(f("%s is not DrlNameExpr, it is %s", this, this.getClass().getSimpleName()));
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<DrlNameExpr> toDrlNameExpr() {
         return Optional.empty();
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifDrlNameExpr(Consumer<DrlNameExpr> action) {
+    }
+
+    public boolean isDrlxExpression() {
+        return false;
+    }
+
+    public DrlxExpression asDrlxExpression() {
+        throw new IllegalStateException(f("%s is not DrlxExpression, it is %s", this, this.getClass().getSimpleName()));
+    }
+
+    public Optional<DrlxExpression> toDrlxExpression() {
+        return Optional.empty();
+    }
+
+    public void ifDrlxExpression(Consumer<DrlxExpression> action) {
     }
 }

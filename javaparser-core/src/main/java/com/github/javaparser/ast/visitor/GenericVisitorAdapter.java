@@ -33,6 +33,7 @@ import org.mvel3.parser.ast.expr.InlineCastExpr;
 import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
 import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 import org.mvel3.parser.ast.expr.DrlNameExpr;
+import org.mvel3.parser.ast.expr.DrlxExpression;
 
 /**
  * A visitor that has a return value (R), and has a default implementation for all its visit
@@ -2261,6 +2262,27 @@ public abstract class GenericVisitorAdapter<R, A> implements GenericVisitor<R, A
         R result;
         {
             result = n.getName().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        if (n.getComment().isPresent()) {
+            result = n.getComment().get().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
+
+    @Override
+    public R visit(final DrlxExpression n, final A arg) {
+        R result;
+        {
+            result = n.getBind().accept(this, arg);
+            if (result != null)
+                return result;
+        }
+        {
+            result = n.getExpr().accept(this, arg);
             if (result != null)
                 return result;
         }
