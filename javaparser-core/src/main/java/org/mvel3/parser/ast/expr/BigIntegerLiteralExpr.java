@@ -39,8 +39,12 @@ import com.github.javaparser.metamodel.JavaParserMetaModel;
 import com.github.javaparser.metamodel.LongLiteralExprMetaModel;
 import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
+import java.util.Optional;
+import java.util.function.Consumer;
+import com.github.javaparser.metamodel.BigIntegerLiteralExprMetaModel;
+import com.github.javaparser.ast.Generated;
 
-public final class BigIntegerLiteralExpr extends LiteralStringValueExpr {
+public class BigIntegerLiteralExpr extends LiteralStringValueExpr {
 
     public BigIntegerLiteralExpr() {
         this(null, "0");
@@ -54,6 +58,7 @@ public final class BigIntegerLiteralExpr extends LiteralStringValueExpr {
     /**
      * This constructor is used by the parser and is considered private.
      */
+    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public BigIntegerLiteralExpr(TokenRange tokenRange, String value) {
         super(tokenRange, value);
         customInitialization();
@@ -64,23 +69,15 @@ public final class BigIntegerLiteralExpr extends LiteralStringValueExpr {
     }
 
     @Override
-    public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+        return v.visit(this, arg);
     }
 
     @Override
-    public <A> void accept(VoidVisitor<A> v, A arg) {
-        if (v instanceof DrlVoidVisitor) {
-            ((DrlVoidVisitor<A>) v).visit(this, arg);
-        }
-    }
-
-    @Override
-    public boolean remove(Node node) {
-        if (node == null) {
-            return false;
-        }
-        return super.remove(node);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+        v.visit(this, arg);
     }
 
     /**
@@ -106,16 +103,37 @@ public final class BigIntegerLiteralExpr extends LiteralStringValueExpr {
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public BigIntegerLiteralExpr clone() {
         return (BigIntegerLiteralExpr) accept(new CloneVisitor(), null);
     }
 
     @Override
-    public LongLiteralExprMetaModel getMetaModel() {
-        return JavaParserMetaModel.longLiteralExprMetaModel;
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    public BigIntegerLiteralExprMetaModel getMetaModel() {
+        return JavaParserMetaModel.bigIntegerLiteralExprMetaModel;
     }
 
     public ObjectCreationExpr convertToObjectCreationExpr() {
         return new ObjectCreationExpr(null, new ClassOrInterfaceType(null, BigInteger.class.getCanonicalName()), NodeList.nodeList(new StringLiteralExpr(getValue())));
+    }
+
+    @Override
+    public boolean isBigIntegerLiteralExpr() {
+        return true;
+    }
+
+    @Override
+    public BigIntegerLiteralExpr asBigIntegerLiteralExpr() {
+        return this;
+    }
+
+    @Override
+    public Optional<BigIntegerLiteralExpr> toBigIntegerLiteralExpr() {
+        return Optional.of(this);
+    }
+
+    public void ifBigIntegerLiteralExpr(Consumer<BigIntegerLiteralExpr> action) {
+        action.accept(this);
     }
 }

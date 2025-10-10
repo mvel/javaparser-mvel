@@ -33,6 +33,7 @@ import com.github.javaparser.ast.type.*;
 import java.util.Optional;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
 import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
+import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 
 /**
  * A visitor that clones (copies) a node and all its children.
@@ -1311,6 +1312,16 @@ public class CloneVisitor implements GenericVisitor<Visitable, Object> {
     public Visitable visit(final BigDecimalLiteralExpr n, final Object arg) {
         Comment comment = cloneNode(n.getComment(), arg);
         BigDecimalLiteralExpr r = new BigDecimalLiteralExpr(n.getTokenRange().orElse(null), n.getValue());
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final BigIntegerLiteralExpr n, final Object arg) {
+        Comment comment = cloneNode(n.getComment(), arg);
+        BigIntegerLiteralExpr r = new BigIntegerLiteralExpr(n.getTokenRange().orElse(null), n.getValue());
         r.setComment(comment);
         n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
         copyData(n, r);

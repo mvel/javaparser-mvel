@@ -680,10 +680,10 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
     public void visit(final InlineCastExpr n, final Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
-        n.getExpression().accept( this, arg );
-        printer.print( "#" );
+        n.getExpression().accept(this, arg);
+        printer.print("#");
         n.getType().accept(this, arg);
-        printer.print( "#" );
+        printer.print("#");
     }
 
     @Override

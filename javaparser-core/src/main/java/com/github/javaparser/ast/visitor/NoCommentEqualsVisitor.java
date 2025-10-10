@@ -32,6 +32,7 @@ import com.github.javaparser.ast.type.*;
 import java.util.Optional;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
 import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
+import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 
 public class NoCommentEqualsVisitor implements GenericVisitor<Boolean, Visitable> {
 
@@ -1174,6 +1175,14 @@ public class NoCommentEqualsVisitor implements GenericVisitor<Boolean, Visitable
     @Override
     public Boolean visit(final BigDecimalLiteralExpr n, final Visitable arg) {
         final BigDecimalLiteralExpr n2 = (BigDecimalLiteralExpr) arg;
+        if (!objEquals(n.getValue(), n2.getValue()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final BigIntegerLiteralExpr n, final Visitable arg) {
+        final BigIntegerLiteralExpr n2 = (BigIntegerLiteralExpr) arg;
         if (!objEquals(n.getValue(), n2.getValue()))
             return false;
         return true;

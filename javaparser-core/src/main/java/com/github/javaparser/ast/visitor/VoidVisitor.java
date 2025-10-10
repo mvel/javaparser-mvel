@@ -31,6 +31,7 @@ import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.*;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
 import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
+import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 
 /**
  * A visitor that does not return anything.
@@ -242,4 +243,6 @@ public interface VoidVisitor<A> {
     void visit(InlineCastExpr n, A arg);
 
     void visit(BigDecimalLiteralExpr n, A arg);
+
+    void visit(BigIntegerLiteralExpr n, A arg);
 }

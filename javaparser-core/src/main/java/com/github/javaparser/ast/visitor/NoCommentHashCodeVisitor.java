@@ -31,6 +31,7 @@ import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.*;
 import org.mvel3.parser.ast.expr.InlineCastExpr;
 import org.mvel3.parser.ast.expr.BigDecimalLiteralExpr;
+import org.mvel3.parser.ast.expr.BigIntegerLiteralExpr;
 
 public class NoCommentHashCodeVisitor implements GenericVisitor<Integer, Void> {
 
@@ -464,6 +465,11 @@ public class NoCommentHashCodeVisitor implements GenericVisitor<Integer, Void> {
 
     @Override
     public Integer visit(final BigDecimalLiteralExpr n, final Void arg) {
+        return (n.getValue().hashCode());
+    }
+
+    @Override
+    public Integer visit(final BigIntegerLiteralExpr n, final Void arg) {
         return (n.getValue().hashCode());
     }
 }
