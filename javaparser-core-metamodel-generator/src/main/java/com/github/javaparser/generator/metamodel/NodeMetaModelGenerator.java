@@ -127,19 +127,17 @@ public class NodeMetaModelGenerator extends AbstractGenerator {
                 );
         annotateGenerated(classMMConstructor);
 
-        // ?Abstract protected constructor?
-        if (typeAnalysis.isAbstract) {
-            classMetaModelJavaFile.addImport(Node.class);
-            BodyDeclaration<?> bodyDeclaration = parseBodyDeclaration(f(
-                    "protected %s(Optional<%s> superNodeMetaModel, Class<? extends Node> type, String name, String packageName, boolean isAbstract, boolean hasWildcard) {" +
-                            "super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);" +
-                            " }",
-                    className,
-                    MetaModelGenerator.BASE_NODE_META_MODEL
-            ));
-            annotateGenerated(bodyDeclaration);
-            nodeMetaModelClass.addMember(bodyDeclaration);
-        }
+        // Always add the protected forwarding constructor so subclasses can pass their own node type.
+        classMetaModelJavaFile.addImport(Node.class);
+        BodyDeclaration<?> bodyDeclaration = parseBodyDeclaration(f(
+                "protected %s(Optional<%s> superNodeMetaModel, Class<? extends Node> type, String name, String packageName, boolean isAbstract, boolean hasWildcard) {" +
+                        "super(superNodeMetaModel, type, name, packageName, isAbstract, hasWildcard);" +
+                        " }",
+                className,
+                MetaModelGenerator.BASE_NODE_META_MODEL
+        ));
+        annotateGenerated(bodyDeclaration);
+        nodeMetaModelClass.addMember(bodyDeclaration);
 
         // Fields, sorted by name.
         final List<Field> fields = new ArrayList<>(Arrays.asList(nodeClass.getDeclaredFields()));
