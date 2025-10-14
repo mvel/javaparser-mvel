@@ -50,6 +50,10 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 
 /**
  * A base class for all expressions.
@@ -1140,33 +1144,117 @@ public abstract class Expression extends Node {
     public void ifMapCreationLiteralExpression(Consumer<MapCreationLiteralExpression> action) {
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isNullSafeFieldAccessExpr() {
         return false;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public NullSafeFieldAccessExpr asNullSafeFieldAccessExpr() {
         throw new IllegalStateException(f("%s is not NullSafeFieldAccessExpr, it is %s", this, this.getClass().getSimpleName()));
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<NullSafeFieldAccessExpr> toNullSafeFieldAccessExpr() {
         return Optional.empty();
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifNullSafeFieldAccessExpr(Consumer<NullSafeFieldAccessExpr> action) {
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isNullSafeMethodCallExpr() {
         return false;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public NullSafeMethodCallExpr asNullSafeMethodCallExpr() {
         throw new IllegalStateException(f("%s is not NullSafeMethodCallExpr, it is %s", this, this.getClass().getSimpleName()));
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<NullSafeMethodCallExpr> toNullSafeMethodCallExpr() {
         return Optional.empty();
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifNullSafeMethodCallExpr(Consumer<NullSafeMethodCallExpr> action) {
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public boolean isTemporalChunkExpr() {
+        return false;
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public TemporalChunkExpr asTemporalChunkExpr() {
+        throw new IllegalStateException(f("%s is not TemporalChunkExpr, it is %s", this, this.getClass().getSimpleName()));
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public Optional<TemporalChunkExpr> toTemporalChunkExpr() {
+        return Optional.empty();
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public void ifTemporalChunkExpr(Consumer<TemporalChunkExpr> action) {
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public boolean isTemporalLiteralChunkExpr() {
+        return false;
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public TemporalLiteralChunkExpr asTemporalLiteralChunkExpr() {
+        throw new IllegalStateException(f("%s is not TemporalLiteralChunkExpr, it is %s", this, this.getClass().getSimpleName()));
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public Optional<TemporalLiteralChunkExpr> toTemporalLiteralChunkExpr() {
+        return Optional.empty();
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public void ifTemporalLiteralChunkExpr(Consumer<TemporalLiteralChunkExpr> action) {
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public boolean isTemporalLiteralExpr() {
+        return false;
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public TemporalLiteralExpr asTemporalLiteralExpr() {
+        throw new IllegalStateException(f("%s is not TemporalLiteralExpr, it is %s", this, this.getClass().getSimpleName()));
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public Optional<TemporalLiteralExpr> toTemporalLiteralExpr() {
+        return Optional.empty();
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public void ifTemporalLiteralExpr(Consumer<TemporalLiteralExpr> action) {
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public boolean isTemporalLiteralInfiniteChunkExpr() {
+        return false;
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public TemporalLiteralInfiniteChunkExpr asTemporalLiteralInfiniteChunkExpr() {
+        throw new IllegalStateException(f("%s is not TemporalLiteralInfiniteChunkExpr, it is %s", this, this.getClass().getSimpleName()));
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public Optional<TemporalLiteralInfiniteChunkExpr> toTemporalLiteralInfiniteChunkExpr() {
+        return Optional.empty();
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public void ifTemporalLiteralInfiniteChunkExpr(Consumer<TemporalLiteralInfiniteChunkExpr> action) {
     }
 }

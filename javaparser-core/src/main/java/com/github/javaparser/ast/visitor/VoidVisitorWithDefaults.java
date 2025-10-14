@@ -44,6 +44,9 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 
 /**
  * A visitor that returns nothing, and has default methods that are used when a specific visit method is not
@@ -633,6 +636,21 @@ public abstract class VoidVisitorWithDefaults<A> implements VoidVisitor<A> {
 
     @Override
     public void visit(final NullSafeMethodCallExpr n, final A arg) {
+        defaultAction(n, arg);
+    }
+
+    @Override
+    public void visit(final TemporalLiteralChunkExpr n, final A arg) {
+        defaultAction(n, arg);
+    }
+
+    @Override
+    public void visit(final TemporalLiteralExpr n, final A arg) {
+        defaultAction(n, arg);
+    }
+
+    @Override
+    public void visit(final TemporalLiteralInfiniteChunkExpr n, final A arg) {
         defaultAction(n, arg);
     }
 }

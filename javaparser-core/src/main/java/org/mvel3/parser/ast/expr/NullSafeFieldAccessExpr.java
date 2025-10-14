@@ -285,20 +285,25 @@ public class NullSafeFieldAccessExpr extends Expression implements NodeWithSimpl
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isNullSafeFieldAccessExpr() {
         return true;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public NullSafeFieldAccessExpr asNullSafeFieldAccessExpr() {
         return this;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<NullSafeFieldAccessExpr> toNullSafeFieldAccessExpr() {
         return Optional.of(this);
     }
 
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifNullSafeFieldAccessExpr(Consumer<NullSafeFieldAccessExpr> action) {
         action.accept(this);
     }

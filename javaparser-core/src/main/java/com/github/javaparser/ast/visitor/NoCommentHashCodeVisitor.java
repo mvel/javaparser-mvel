@@ -44,6 +44,9 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 
 public class NoCommentHashCodeVisitor implements GenericVisitor<Integer, Void> {
 
@@ -543,5 +546,20 @@ public class NoCommentHashCodeVisitor implements GenericVisitor<Integer, Void> {
     @Override
     public Integer visit(final NullSafeMethodCallExpr n, final Void arg) {
         return (n.getArguments().accept(this, arg)) * 31 + (n.getName().accept(this, arg)) * 31 + (n.getScope().isPresent() ? n.getScope().get().accept(this, arg) : 0) * 31 + (n.getTypeArguments().isPresent() ? n.getTypeArguments().get().accept(this, arg) : 0);
+    }
+
+    @Override
+    public Integer visit(final TemporalLiteralChunkExpr n, final Void arg) {
+        return (n.getTimeUnit().hashCode()) * 31 + n.getValue();
+    }
+
+    @Override
+    public Integer visit(final TemporalLiteralExpr n, final Void arg) {
+        return (n.getChunks().accept(this, arg));
+    }
+
+    @Override
+    public Integer visit(final TemporalLiteralInfiniteChunkExpr n, final Void arg) {
+        return (n.getTimeUnit().hashCode()) * 31 + (n.getValue().hashCode());
     }
 }

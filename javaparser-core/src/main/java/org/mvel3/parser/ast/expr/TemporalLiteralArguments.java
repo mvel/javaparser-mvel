@@ -19,6 +19,9 @@ package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.ast.expr.Expression;
 
+/**
+ * THis is not an AST node
+ */
 public class TemporalLiteralArguments {
 
     private final Expression arg1;

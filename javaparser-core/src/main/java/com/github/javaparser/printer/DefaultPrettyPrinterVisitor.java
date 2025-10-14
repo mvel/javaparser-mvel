@@ -63,6 +63,10 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.PointFreeExpr;
 
 /**
@@ -865,6 +869,48 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
         printTypeArgs(n, arg);
         n.getName().accept(this, arg);
         printArguments(n.getArguments(), arg);
+    }
+
+    @Override
+    public void visit(final TemporalLiteralExpr n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        for (TemporalChunkExpr chunk : n.getChunks()) {
+            chunk.accept(this, arg);
+        }
+    }
+
+    @Override
+    public void visit(final TemporalLiteralChunkExpr n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        printer.print(Integer.toString(n.getValue()));
+        switch (n.getTimeUnit()) {
+            case MILLISECONDS:
+                printer.print("ms");
+                break;
+            case SECONDS:
+                printer.print("s");
+                break;
+            case MINUTES:
+                printer.print("m");
+                break;
+            case HOURS:
+                printer.print("h");
+                break;
+            case DAYS:
+                printer.print("d");
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void visit(final TemporalLiteralInfiniteChunkExpr n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        printer.print("*");
     }
 
     @Override

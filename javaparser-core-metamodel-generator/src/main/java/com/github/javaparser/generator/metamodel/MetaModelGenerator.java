@@ -205,6 +205,12 @@ public class MetaModelGenerator extends AbstractGenerator {
         add(org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair.class);
         add(org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr.class);
         add(org.mvel3.parser.ast.expr.NullSafeMethodCallExpr.class);
+
+        add(org.mvel3.parser.ast.expr.TemporalChunkExpr.class);
+        add(org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr.class);
+        add(org.mvel3.parser.ast.expr.TemporalLiteralExpr.class);
+        add(org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr.class);
+
         //add(org.mvel3.parser.ast.expr.RuleDeclaration.class); // TODO: Higher level node should be generated later
     }};
 

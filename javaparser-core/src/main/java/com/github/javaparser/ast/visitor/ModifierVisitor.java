@@ -51,6 +51,10 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 
 /**
  * This visitor can be used to save time when some specific nodes needs
@@ -1538,6 +1542,29 @@ public class ModifierVisitor<A> implements GenericVisitor<Visitable, A> {
         n.setName(name);
         n.setScope(scope);
         n.setTypeArguments(typeArguments);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final TemporalLiteralChunkExpr n, final A arg) {
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final TemporalLiteralExpr n, final A arg) {
+        NodeList<TemporalChunkExpr> chunks = modifyList(n.getChunks(), arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        n.setChunks(chunks);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final TemporalLiteralInfiniteChunkExpr n, final A arg) {
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
         n.setComment(comment);
         return n;
     }

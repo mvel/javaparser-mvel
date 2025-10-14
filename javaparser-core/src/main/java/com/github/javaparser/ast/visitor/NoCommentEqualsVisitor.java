@@ -45,6 +45,9 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 
 public class NoCommentEqualsVisitor implements GenericVisitor<Boolean, Visitable> {
 
@@ -1338,6 +1341,34 @@ public class NoCommentEqualsVisitor implements GenericVisitor<Boolean, Visitable
         if (!nodeEquals(n.getScope(), n2.getScope()))
             return false;
         if (!nodesEquals(n.getTypeArguments(), n2.getTypeArguments()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final TemporalLiteralChunkExpr n, final Visitable arg) {
+        final TemporalLiteralChunkExpr n2 = (TemporalLiteralChunkExpr) arg;
+        if (!objEquals(n.getTimeUnit(), n2.getTimeUnit()))
+            return false;
+        if (!objEquals(n.getValue(), n2.getValue()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final TemporalLiteralExpr n, final Visitable arg) {
+        final TemporalLiteralExpr n2 = (TemporalLiteralExpr) arg;
+        if (!nodesEquals(n.getChunks(), n2.getChunks()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final TemporalLiteralInfiniteChunkExpr n, final Visitable arg) {
+        final TemporalLiteralInfiniteChunkExpr n2 = (TemporalLiteralInfiniteChunkExpr) arg;
+        if (!objEquals(n.getTimeUnit(), n2.getTimeUnit()))
+            return false;
+        if (!objEquals(n.getValue(), n2.getValue()))
             return false;
         return true;
     }

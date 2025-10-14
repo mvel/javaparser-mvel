@@ -19,28 +19,123 @@ package org.mvel3.parser.ast.expr;
 
 import java.util.concurrent.TimeUnit;
 import com.github.javaparser.TokenRange;
+import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
+import java.util.Optional;
+import java.util.function.Consumer;
+import com.github.javaparser.ast.observer.ObservableProperty;
+import static com.github.javaparser.utils.Utils.assertNotNull;
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.visitor.CloneVisitor;
+import com.github.javaparser.metamodel.TemporalLiteralInfiniteChunkExprMetaModel;
+import com.github.javaparser.metamodel.JavaParserMetaModel;
+import com.github.javaparser.ast.Generated;
 
 public class TemporalLiteralInfiniteChunkExpr extends TemporalChunkExpr {
 
-    public TemporalLiteralInfiniteChunkExpr(TokenRange tokenRange, String value) {
-        super(tokenRange);
+    private String value;
+
+    private TimeUnit timeUnit;
+
+    @AllFieldsConstructor
+    public TemporalLiteralInfiniteChunkExpr(String value, TimeUnit timeUnit) {
+        this(null, value, timeUnit);
     }
 
+    public TemporalLiteralInfiniteChunkExpr(TokenRange tokenRange, String value) {
+        this(tokenRange, value, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * This constructor is used by the parser and is considered private.
+     */
+    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public TemporalLiteralInfiniteChunkExpr(TokenRange tokenRange, String value, TimeUnit timeUnit) {
         super(tokenRange);
+        setValue(value);
+        setTimeUnit(timeUnit);
+        customInitialization();
     }
 
     @Override
-    public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+        return v.visit(this, arg);
     }
 
     @Override
-    public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+        v.visit(this, arg);
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public String getValue() {
+        return value;
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public TimeUnit getTimeUnit() {
+        return timeUnit;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public boolean isTemporalLiteralInfiniteChunkExpr() {
+        return true;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public TemporalLiteralInfiniteChunkExpr asTemporalLiteralInfiniteChunkExpr() {
+        return this;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public Optional<TemporalLiteralInfiniteChunkExpr> toTemporalLiteralInfiniteChunkExpr() {
+        return Optional.of(this);
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public void ifTemporalLiteralInfiniteChunkExpr(Consumer<TemporalLiteralInfiniteChunkExpr> action) {
+        action.accept(this);
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public TemporalLiteralInfiniteChunkExpr setTimeUnit(final TimeUnit timeUnit) {
+        assertNotNull(timeUnit);
+        if (timeUnit == this.timeUnit) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.TIME_UNIT, this.timeUnit, timeUnit);
+        this.timeUnit = timeUnit;
+        return this;
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public TemporalLiteralInfiniteChunkExpr setValue(final String value) {
+        assertNotNull(value);
+        if (value == this.value) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.VALUE, this.value, value);
+        this.value = value;
+        return this;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    public TemporalLiteralInfiniteChunkExpr clone() {
+        return (TemporalLiteralInfiniteChunkExpr) accept(new CloneVisitor(), null);
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    public TemporalLiteralInfiniteChunkExprMetaModel getMetaModel() {
+        return JavaParserMetaModel.temporalLiteralInfiniteChunkExprMetaModel;
     }
 }

@@ -44,6 +44,9 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 
 /**
  * A visitor that has a return value.
@@ -286,4 +289,10 @@ public interface GenericVisitor<R, A> {
     R visit(NullSafeFieldAccessExpr n, A arg);
 
     R visit(NullSafeMethodCallExpr n, A arg);
+
+    R visit(TemporalLiteralChunkExpr n, A arg);
+
+    R visit(TemporalLiteralExpr n, A arg);
+
+    R visit(TemporalLiteralInfiniteChunkExpr n, A arg);
 }

@@ -80,10 +80,15 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 
 public class TypeExtractor extends DefaultVisitorAdapter {
 
     private static final String JAVA_LANG_STRING = String.class.getCanonicalName();
+    private static final String JAVA_LANG_OBJECT = Object.class.getCanonicalName();
     private static final String JAVA_MATH_BIG_DECIMAL = BigDecimal.class.getCanonicalName();
     private static final String JAVA_MATH_BIG_INTEGER = BigInteger.class.getCanonicalName();
     private static final String JAVA_UTIL_LIST = List.class.getCanonicalName();
@@ -96,6 +101,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
     private final ResolvedType listReferenceType;
     private final ResolvedType mapReferenceType;
     private final ResolvedType mapEntryReferenceType;
+    private final ResolvedType objectReferenceType;
 
     private TypeSolver typeSolver;
     private JavaParserFacade facade;
@@ -112,6 +118,7 @@ public class TypeExtractor extends DefaultVisitorAdapter {
         listReferenceType = new LazyType(v -> new ReferenceTypeImpl(typeSolver.solveType(JAVA_UTIL_LIST)));
         mapReferenceType = new LazyType(v -> new ReferenceTypeImpl(typeSolver.solveType(JAVA_UTIL_MAP)));
         mapEntryReferenceType = new LazyType(v -> new ReferenceTypeImpl(typeSolver.solveType(JAVA_UTIL_MAP_ENTRY)));
+        objectReferenceType = new LazyType(v -> new ReferenceTypeImpl(typeSolver.solveType(JAVA_LANG_OBJECT)));
     }
 
     @Override
@@ -254,6 +261,21 @@ public class TypeExtractor extends DefaultVisitorAdapter {
         return node.getScope()
                 .map(scope -> scope.accept(this, solveLambdas))
                 .orElseThrow(() -> new IllegalStateException("Null-safe method call without scope: " + node));
+    }
+
+    @Override
+    public ResolvedType visit(TemporalLiteralExpr node, Boolean solveLambdas) {
+        return objectReferenceType;
+    }
+
+    @Override
+    public ResolvedType visit(TemporalLiteralChunkExpr node, Boolean solveLambdas) {
+        return ResolvedPrimitiveType.INT;
+    }
+
+    @Override
+    public ResolvedType visit(TemporalLiteralInfiniteChunkExpr node, Boolean solveLambdas) {
+        return objectReferenceType;
     }
 
     @Override

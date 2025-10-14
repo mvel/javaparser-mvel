@@ -44,6 +44,9 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 
 /**
  * A visitor that does not return anything.
@@ -281,4 +284,10 @@ public interface VoidVisitor<A> {
     void visit(NullSafeFieldAccessExpr n, A arg);
 
     void visit(NullSafeMethodCallExpr n, A arg);
+
+    void visit(TemporalLiteralChunkExpr n, A arg);
+
+    void visit(TemporalLiteralExpr n, A arg);
+
+    void visit(TemporalLiteralInfiniteChunkExpr n, A arg);
 }

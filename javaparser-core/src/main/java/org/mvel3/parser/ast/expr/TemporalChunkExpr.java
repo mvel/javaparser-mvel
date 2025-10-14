@@ -18,14 +18,63 @@
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
+import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.expr.LiteralExpr;
+import java.util.Optional;
+import java.util.function.Consumer;
+import com.github.javaparser.ast.Generated;
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.visitor.CloneVisitor;
+import com.github.javaparser.metamodel.TemporalChunkExprMetaModel;
+import com.github.javaparser.metamodel.JavaParserMetaModel;
 
 public abstract class TemporalChunkExpr extends LiteralExpr {
 
+    @AllFieldsConstructor
     public TemporalChunkExpr() {
     }
 
+    /**
+     * This constructor is used by the parser and is considered private.
+     */
+    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
     public TemporalChunkExpr(TokenRange tokenRange) {
         super(tokenRange);
+        customInitialization();
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public boolean isTemporalChunkExpr() {
+        return true;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public TemporalChunkExpr asTemporalChunkExpr() {
+        return this;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public Optional<TemporalChunkExpr> toTemporalChunkExpr() {
+        return Optional.of(this);
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public void ifTemporalChunkExpr(Consumer<TemporalChunkExpr> action) {
+        action.accept(this);
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    public TemporalChunkExpr clone() {
+        return (TemporalChunkExpr) accept(new CloneVisitor(), null);
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    public TemporalChunkExprMetaModel getMetaModel() {
+        return JavaParserMetaModel.temporalChunkExprMetaModel;
     }
 }

@@ -44,6 +44,9 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 
 /**
  * A visitor that returns nothing, and has a default implementation for all its visit
@@ -872,6 +875,22 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
         n.getName().accept(this, arg);
         n.getScope().ifPresent(l -> l.accept(this, arg));
         n.getTypeArguments().ifPresent(l -> l.forEach(v -> v.accept(this, arg)));
+        n.getComment().ifPresent(l -> l.accept(this, arg));
+    }
+
+    @Override
+    public void visit(final TemporalLiteralChunkExpr n, final A arg) {
+        n.getComment().ifPresent(l -> l.accept(this, arg));
+    }
+
+    @Override
+    public void visit(final TemporalLiteralExpr n, final A arg) {
+        n.getChunks().forEach(p -> p.accept(this, arg));
+        n.getComment().ifPresent(l -> l.accept(this, arg));
+    }
+
+    @Override
+    public void visit(final TemporalLiteralInfiniteChunkExpr n, final A arg) {
         n.getComment().ifPresent(l -> l.accept(this, arg));
     }
 }

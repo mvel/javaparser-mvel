@@ -46,6 +46,10 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 
 /**
  * A visitor that clones (copies) a node and all its children.
@@ -1485,6 +1489,37 @@ public class CloneVisitor implements GenericVisitor<Visitable, Object> {
         NodeList<Type> typeArguments = cloneList(n.getTypeArguments().orElse(null), arg);
         Comment comment = cloneNode(n.getComment(), arg);
         NullSafeMethodCallExpr r = new NullSafeMethodCallExpr(n.getTokenRange().orElse(null), scope, typeArguments, name, arguments);
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final TemporalLiteralChunkExpr n, final Object arg) {
+        Comment comment = cloneNode(n.getComment(), arg);
+        TemporalLiteralChunkExpr r = new TemporalLiteralChunkExpr(n.getTokenRange().orElse(null), n.getValue(), n.getTimeUnit());
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final TemporalLiteralExpr n, final Object arg) {
+        NodeList<TemporalChunkExpr> chunks = cloneList(n.getChunks(), arg);
+        Comment comment = cloneNode(n.getComment(), arg);
+        TemporalLiteralExpr r = new TemporalLiteralExpr(n.getTokenRange().orElse(null), chunks);
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final TemporalLiteralInfiniteChunkExpr n, final Object arg) {
+        Comment comment = cloneNode(n.getComment(), arg);
+        TemporalLiteralInfiniteChunkExpr r = new TemporalLiteralInfiniteChunkExpr(n.getTokenRange().orElse(null), n.getValue(), n.getTimeUnit());
         r.setComment(comment);
         n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
         copyData(n, r);

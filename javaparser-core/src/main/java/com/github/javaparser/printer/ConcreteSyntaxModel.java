@@ -47,6 +47,9 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpression;
 import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
+import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.PointFreeExpr;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -170,6 +173,9 @@ public class ConcreteSyntaxModel {
         concreteSyntaxModelByClass.put(ListCreationLiteralExpressionElement.class, sequence(comment(), child(ObservableProperty.VALUE)));
         concreteSyntaxModelByClass.put(MapCreationLiteralExpression.class, sequence(comment(), string(GeneratedJavaParserConstants.LBRACE), list(ObservableProperty.EXPRESSIONS, sequence(string(GeneratedJavaParserConstants.COMMA), space())), string(GeneratedJavaParserConstants.RBRACE)));
         concreteSyntaxModelByClass.put(MapCreationLiteralExpressionKeyValuePair.class, sequence(comment(), child(ObservableProperty.KEY), space(), string(GeneratedJavaParserConstants.COLON), space(), child(ObservableProperty.VALUE)));
+        concreteSyntaxModelByClass.put(TemporalLiteralExpr.class, sequence(comment(), list(ObservableProperty.CHUNKS)));
+        concreteSyntaxModelByClass.put(TemporalLiteralChunkExpr.class, sequence(comment(), attribute(ObservableProperty.VALUE), attribute(ObservableProperty.TIME_UNIT)));
+        concreteSyntaxModelByClass.put(TemporalLiteralInfiniteChunkExpr.class, sequence(comment(), string(GeneratedJavaParserConstants.STAR)));
         concreteSyntaxModelByClass.put(NullSafeFieldAccessExpr.class, sequence(comment(), child(ObservableProperty.SCOPE), string(GeneratedJavaParserConstants.IDENTIFIER, "!"), string(GeneratedJavaParserConstants.DOT), child(ObservableProperty.NAME)));
         concreteSyntaxModelByClass.put(NullSafeMethodCallExpr.class, sequence(comment(), conditional(ObservableProperty.SCOPE, IS_PRESENT, sequence(child(ObservableProperty.SCOPE), string(GeneratedJavaParserConstants.IDENTIFIER, "!"), string(GeneratedJavaParserConstants.DOT))), list(ObservableProperty.TYPE_ARGUMENTS, sequence(string(GeneratedJavaParserConstants.COMMA), space()), string(GeneratedJavaParserConstants.LT), string(GeneratedJavaParserConstants.GT)), child(ObservableProperty.NAME), string(GeneratedJavaParserConstants.LPAREN), list(ObservableProperty.ARGUMENTS, sequence(string(GeneratedJavaParserConstants.COMMA), space())), string(GeneratedJavaParserConstants.RPAREN)));
         // /

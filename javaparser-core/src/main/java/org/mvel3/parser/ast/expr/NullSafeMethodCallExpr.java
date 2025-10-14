@@ -300,25 +300,31 @@ public class NullSafeMethodCallExpr extends Expression implements NodeWithTypeAr
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isNullSafeMethodCallExpr() {
         return true;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public NullSafeMethodCallExpr asNullSafeMethodCallExpr() {
         return this;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<NullSafeMethodCallExpr> toNullSafeMethodCallExpr() {
         return Optional.of(this);
     }
 
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifNullSafeMethodCallExpr(Consumer<NullSafeMethodCallExpr> action) {
         action.accept(this);
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public NullSafeMethodCallExprMetaModel getMetaModel() {
         return JavaParserMetaModel.nullSafeMethodCallExprMetaModel;
     }

@@ -329,6 +329,11 @@ public final class JavaParserMetaModel {
         nullSafeMethodCallExprMetaModel.getConstructorParameters().add(nullSafeMethodCallExprMetaModel.typeArgumentsPropertyMetaModel);
         nullSafeMethodCallExprMetaModel.getConstructorParameters().add(nullSafeMethodCallExprMetaModel.namePropertyMetaModel);
         nullSafeMethodCallExprMetaModel.getConstructorParameters().add(nullSafeMethodCallExprMetaModel.argumentsPropertyMetaModel);
+        temporalLiteralChunkExprMetaModel.getConstructorParameters().add(temporalLiteralChunkExprMetaModel.valuePropertyMetaModel);
+        temporalLiteralChunkExprMetaModel.getConstructorParameters().add(temporalLiteralChunkExprMetaModel.timeUnitPropertyMetaModel);
+        temporalLiteralExprMetaModel.getConstructorParameters().add(temporalLiteralExprMetaModel.chunksPropertyMetaModel);
+        temporalLiteralInfiniteChunkExprMetaModel.getConstructorParameters().add(temporalLiteralInfiniteChunkExprMetaModel.valuePropertyMetaModel);
+        temporalLiteralInfiniteChunkExprMetaModel.getConstructorParameters().add(temporalLiteralInfiniteChunkExprMetaModel.timeUnitPropertyMetaModel);
     }
 
     public static List<BaseNodeMetaModel> getNodeMetaModels() {
@@ -445,6 +450,10 @@ public final class JavaParserMetaModel {
         nodeMetaModels.add(switchExprMetaModel);
         nodeMetaModels.add(switchStmtMetaModel);
         nodeMetaModels.add(synchronizedStmtMetaModel);
+        nodeMetaModels.add(temporalChunkExprMetaModel);
+        nodeMetaModels.add(temporalLiteralChunkExprMetaModel);
+        nodeMetaModels.add(temporalLiteralExprMetaModel);
+        nodeMetaModels.add(temporalLiteralInfiniteChunkExprMetaModel);
         nodeMetaModels.add(textBlockLiteralExprMetaModel);
         nodeMetaModels.add(thisExprMetaModel);
         nodeMetaModels.add(throwStmtMetaModel);
@@ -974,6 +983,16 @@ public final class JavaParserMetaModel {
         nullSafeMethodCallExprMetaModel.getDeclaredPropertyMetaModels().add(nullSafeMethodCallExprMetaModel.typeArgumentsPropertyMetaModel);
         nullSafeMethodCallExprMetaModel.usingDiamondOperatorPropertyMetaModel = new PropertyMetaModel(nullSafeMethodCallExprMetaModel, "usingDiamondOperator", boolean.class, Optional.empty(), false, false, false, false);
         nullSafeMethodCallExprMetaModel.getDerivedPropertyMetaModels().add(nullSafeMethodCallExprMetaModel.usingDiamondOperatorPropertyMetaModel);
+        temporalLiteralChunkExprMetaModel.timeUnitPropertyMetaModel = new PropertyMetaModel(temporalLiteralChunkExprMetaModel, "timeUnit", java.util.concurrent.TimeUnit.class, Optional.empty(), false, false, false, false);
+        temporalLiteralChunkExprMetaModel.getDeclaredPropertyMetaModels().add(temporalLiteralChunkExprMetaModel.timeUnitPropertyMetaModel);
+        temporalLiteralChunkExprMetaModel.valuePropertyMetaModel = new PropertyMetaModel(temporalLiteralChunkExprMetaModel, "value", int.class, Optional.empty(), false, false, false, false);
+        temporalLiteralChunkExprMetaModel.getDeclaredPropertyMetaModels().add(temporalLiteralChunkExprMetaModel.valuePropertyMetaModel);
+        temporalLiteralExprMetaModel.chunksPropertyMetaModel = new PropertyMetaModel(temporalLiteralExprMetaModel, "chunks", org.mvel3.parser.ast.expr.TemporalChunkExpr.class, Optional.of(temporalChunkExprMetaModel), false, false, true, false);
+        temporalLiteralExprMetaModel.getDeclaredPropertyMetaModels().add(temporalLiteralExprMetaModel.chunksPropertyMetaModel);
+        temporalLiteralInfiniteChunkExprMetaModel.timeUnitPropertyMetaModel = new PropertyMetaModel(temporalLiteralInfiniteChunkExprMetaModel, "timeUnit", java.util.concurrent.TimeUnit.class, Optional.empty(), false, false, false, false);
+        temporalLiteralInfiniteChunkExprMetaModel.getDeclaredPropertyMetaModels().add(temporalLiteralInfiniteChunkExprMetaModel.timeUnitPropertyMetaModel);
+        temporalLiteralInfiniteChunkExprMetaModel.valuePropertyMetaModel = new PropertyMetaModel(temporalLiteralInfiniteChunkExprMetaModel, "value", java.lang.String.class, Optional.empty(), false, false, false, false);
+        temporalLiteralInfiniteChunkExprMetaModel.getDeclaredPropertyMetaModels().add(temporalLiteralInfiniteChunkExprMetaModel.valuePropertyMetaModel);
     }
 
     public static Optional<BaseNodeMetaModel> getNodeMetaModel(Class<?> c) {
@@ -1365,6 +1384,18 @@ public final class JavaParserMetaModel {
 
     @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     public static final NullSafeMethodCallExprMetaModel nullSafeMethodCallExprMetaModel = new NullSafeMethodCallExprMetaModel(Optional.of(expressionMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final TemporalChunkExprMetaModel temporalChunkExprMetaModel = new TemporalChunkExprMetaModel(Optional.of(literalExprMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final TemporalLiteralChunkExprMetaModel temporalLiteralChunkExprMetaModel = new TemporalLiteralChunkExprMetaModel(Optional.of(temporalChunkExprMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final TemporalLiteralExprMetaModel temporalLiteralExprMetaModel = new TemporalLiteralExprMetaModel(Optional.of(literalExprMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final TemporalLiteralInfiniteChunkExprMetaModel temporalLiteralInfiniteChunkExprMetaModel = new TemporalLiteralInfiniteChunkExprMetaModel(Optional.of(temporalChunkExprMetaModel));
 
     static {
         initializeNodeMetaModels();

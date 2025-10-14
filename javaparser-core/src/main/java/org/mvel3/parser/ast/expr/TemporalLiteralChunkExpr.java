@@ -19,16 +19,31 @@ package org.mvel3.parser.ast.expr;
 
 import java.util.concurrent.TimeUnit;
 import com.github.javaparser.TokenRange;
+import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
+import java.util.Optional;
+import java.util.function.Consumer;
+import com.github.javaparser.ast.observer.ObservableProperty;
+import static com.github.javaparser.utils.Utils.assertNotNull;
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.visitor.CloneVisitor;
+import com.github.javaparser.metamodel.TemporalLiteralChunkExprMetaModel;
+import com.github.javaparser.metamodel.JavaParserMetaModel;
+import com.github.javaparser.ast.Generated;
 
 public class TemporalLiteralChunkExpr extends TemporalChunkExpr {
 
     private int value;
 
     private TimeUnit timeUnit;
+
+    @AllFieldsConstructor
+    public TemporalLiteralChunkExpr(String value, TimeUnit timeUnit) {
+        this((TokenRange) null, value, timeUnit);
+    }
 
     public TemporalLiteralChunkExpr(TokenRange tokenRange, String value) {
         super(tokenRange);
@@ -43,20 +58,91 @@ public class TemporalLiteralChunkExpr extends TemporalChunkExpr {
     }
 
     @Override
-    public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+        return v.visit(this, arg);
     }
 
     @Override
-    public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+        v.visit(this, arg);
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public int getValue() {
         return value;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public TimeUnit getTimeUnit() {
         return timeUnit;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public boolean isTemporalLiteralChunkExpr() {
+        return true;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public TemporalLiteralChunkExpr asTemporalLiteralChunkExpr() {
+        return this;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public Optional<TemporalLiteralChunkExpr> toTemporalLiteralChunkExpr() {
+        return Optional.of(this);
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public void ifTemporalLiteralChunkExpr(Consumer<TemporalLiteralChunkExpr> action) {
+        action.accept(this);
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public TemporalLiteralChunkExpr setTimeUnit(final TimeUnit timeUnit) {
+        assertNotNull(timeUnit);
+        if (timeUnit == this.timeUnit) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.TIME_UNIT, this.timeUnit, timeUnit);
+        this.timeUnit = timeUnit;
+        return this;
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public TemporalLiteralChunkExpr setValue(final int value) {
+        if (value == this.value) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.VALUE, this.value, value);
+        this.value = value;
+        return this;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    public TemporalLiteralChunkExpr clone() {
+        return (TemporalLiteralChunkExpr) accept(new CloneVisitor(), null);
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    public TemporalLiteralChunkExprMetaModel getMetaModel() {
+        return JavaParserMetaModel.temporalLiteralChunkExprMetaModel;
+    }
+
+    /**
+     * This constructor is used by the parser and is considered private.
+     */
+    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public TemporalLiteralChunkExpr(TokenRange tokenRange, int value, TimeUnit timeUnit) {
+        super(tokenRange);
+        setValue(value);
+        setTimeUnit(timeUnit);
+        customInitialization();
     }
 }
