@@ -344,6 +344,18 @@ public final class JavaParserMetaModel {
         oOPathChunkMetaModel.getConstructorParameters().add(oOPathChunkMetaModel.inlineCastPropertyMetaModel);
         oOPathChunkMetaModel.getConstructorParameters().add(oOPathChunkMetaModel.conditionPropertyMetaModel);
         oOPathExprMetaModel.getConstructorParameters().add(oOPathExprMetaModel.chunksPropertyMetaModel);
+        rulePatternMetaModel.getConstructorParameters().add(rulePatternMetaModel.typePropertyMetaModel);
+        rulePatternMetaModel.getConstructorParameters().add(rulePatternMetaModel.bindPropertyMetaModel);
+        rulePatternMetaModel.getConstructorParameters().add(rulePatternMetaModel.exprPropertyMetaModel);
+        ruleJoinedPatternsMetaModel.getConstructorParameters().add(ruleJoinedPatternsMetaModel.typePropertyMetaModel);
+        ruleJoinedPatternsMetaModel.getConstructorParameters().add(ruleJoinedPatternsMetaModel.itemsPropertyMetaModel);
+        ruleConsequenceMetaModel.getConstructorParameters().add(ruleConsequenceMetaModel.statementPropertyMetaModel);
+        ruleBodyMetaModel.getConstructorParameters().add(ruleBodyMetaModel.itemsPropertyMetaModel);
+        ruleDeclarationMetaModel.getConstructorParameters().add(typeDeclarationMetaModel.modifiersPropertyMetaModel);
+        ruleDeclarationMetaModel.getConstructorParameters().add(bodyDeclarationMetaModel.annotationsPropertyMetaModel);
+        ruleDeclarationMetaModel.getConstructorParameters().add(typeDeclarationMetaModel.namePropertyMetaModel);
+        ruleDeclarationMetaModel.getConstructorParameters().add(typeDeclarationMetaModel.membersPropertyMetaModel);
+        ruleDeclarationMetaModel.getConstructorParameters().add(ruleDeclarationMetaModel.ruleBodyPropertyMetaModel);
     }
 
     public static List<BaseNodeMetaModel> getNodeMetaModels() {
@@ -455,6 +467,12 @@ public final class JavaParserMetaModel {
         nodeMetaModels.add(recordDeclarationMetaModel);
         nodeMetaModels.add(referenceTypeMetaModel);
         nodeMetaModels.add(returnStmtMetaModel);
+        nodeMetaModels.add(ruleBodyMetaModel);
+        nodeMetaModels.add(ruleConsequenceMetaModel);
+        nodeMetaModels.add(ruleDeclarationMetaModel);
+        nodeMetaModels.add(ruleItemMetaModel);
+        nodeMetaModels.add(ruleJoinedPatternsMetaModel);
+        nodeMetaModels.add(rulePatternMetaModel);
         nodeMetaModels.add(simpleNameMetaModel);
         nodeMetaModels.add(singleMemberAnnotationExprMetaModel);
         nodeMetaModels.add(statementMetaModel);
@@ -1024,6 +1042,22 @@ public final class JavaParserMetaModel {
         oOPathChunkMetaModel.getDeclaredPropertyMetaModels().add(oOPathChunkMetaModel.singleValuePropertyMetaModel);
         oOPathExprMetaModel.chunksPropertyMetaModel = new PropertyMetaModel(oOPathExprMetaModel, "chunks", org.mvel3.parser.ast.expr.OOPathChunk.class, Optional.of(oOPathChunkMetaModel), false, false, true, false);
         oOPathExprMetaModel.getDeclaredPropertyMetaModels().add(oOPathExprMetaModel.chunksPropertyMetaModel);
+        rulePatternMetaModel.bindPropertyMetaModel = new PropertyMetaModel(rulePatternMetaModel, "bind", com.github.javaparser.ast.expr.SimpleName.class, Optional.of(simpleNameMetaModel), false, false, false, false);
+        rulePatternMetaModel.getDeclaredPropertyMetaModels().add(rulePatternMetaModel.bindPropertyMetaModel);
+        rulePatternMetaModel.exprPropertyMetaModel = new PropertyMetaModel(rulePatternMetaModel, "expr", org.mvel3.parser.ast.expr.OOPathExpr.class, Optional.of(oOPathExprMetaModel), false, false, false, false);
+        rulePatternMetaModel.getDeclaredPropertyMetaModels().add(rulePatternMetaModel.exprPropertyMetaModel);
+        rulePatternMetaModel.typePropertyMetaModel = new PropertyMetaModel(rulePatternMetaModel, "type", com.github.javaparser.ast.expr.SimpleName.class, Optional.of(simpleNameMetaModel), false, false, false, false);
+        rulePatternMetaModel.getDeclaredPropertyMetaModels().add(rulePatternMetaModel.typePropertyMetaModel);
+        ruleJoinedPatternsMetaModel.itemsPropertyMetaModel = new PropertyMetaModel(ruleJoinedPatternsMetaModel, "items", org.mvel3.parser.ast.expr.RuleItem.class, Optional.of(ruleItemMetaModel), false, false, true, false);
+        ruleJoinedPatternsMetaModel.getDeclaredPropertyMetaModels().add(ruleJoinedPatternsMetaModel.itemsPropertyMetaModel);
+        ruleJoinedPatternsMetaModel.typePropertyMetaModel = new PropertyMetaModel(ruleJoinedPatternsMetaModel, "type", org.mvel3.parser.ast.expr.RuleJoinedPatterns.Type.class, Optional.empty(), false, false, false, false);
+        ruleJoinedPatternsMetaModel.getDeclaredPropertyMetaModels().add(ruleJoinedPatternsMetaModel.typePropertyMetaModel);
+        ruleConsequenceMetaModel.statementPropertyMetaModel = new PropertyMetaModel(ruleConsequenceMetaModel, "statement", com.github.javaparser.ast.stmt.Statement.class, Optional.of(statementMetaModel), false, false, false, false);
+        ruleConsequenceMetaModel.getDeclaredPropertyMetaModels().add(ruleConsequenceMetaModel.statementPropertyMetaModel);
+        ruleBodyMetaModel.itemsPropertyMetaModel = new PropertyMetaModel(ruleBodyMetaModel, "items", org.mvel3.parser.ast.expr.RuleItem.class, Optional.of(ruleItemMetaModel), false, false, true, false);
+        ruleBodyMetaModel.getDeclaredPropertyMetaModels().add(ruleBodyMetaModel.itemsPropertyMetaModel);
+        ruleDeclarationMetaModel.ruleBodyPropertyMetaModel = new PropertyMetaModel(ruleDeclarationMetaModel, "ruleBody", org.mvel3.parser.ast.expr.RuleBody.class, Optional.of(ruleBodyMetaModel), false, false, false, false);
+        ruleDeclarationMetaModel.getDeclaredPropertyMetaModels().add(ruleDeclarationMetaModel.ruleBodyPropertyMetaModel);
     }
 
     public static Optional<BaseNodeMetaModel> getNodeMetaModel(Class<?> c) {
@@ -1442,6 +1476,24 @@ public final class JavaParserMetaModel {
 
     @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
     public static final OOPathExprMetaModel oOPathExprMetaModel = new OOPathExprMetaModel(Optional.of(expressionMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final RuleItemMetaModel ruleItemMetaModel = new RuleItemMetaModel(Optional.of(nodeMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final RulePatternMetaModel rulePatternMetaModel = new RulePatternMetaModel(Optional.of(ruleItemMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final RuleJoinedPatternsMetaModel ruleJoinedPatternsMetaModel = new RuleJoinedPatternsMetaModel(Optional.of(ruleItemMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final RuleConsequenceMetaModel ruleConsequenceMetaModel = new RuleConsequenceMetaModel(Optional.of(ruleItemMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final RuleBodyMetaModel ruleBodyMetaModel = new RuleBodyMetaModel(Optional.of(nodeMetaModel));
+
+    @Generated("com.github.javaparser.generator.metamodel.NodeMetaModelGenerator")
+    public static final RuleDeclarationMetaModel ruleDeclarationMetaModel = new RuleDeclarationMetaModel(Optional.of(typeDeclarationMetaModel));
 
     static {
         initializeNodeMetaModels();

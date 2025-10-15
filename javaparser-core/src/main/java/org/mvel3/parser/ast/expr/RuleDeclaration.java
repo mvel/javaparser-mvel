@@ -21,6 +21,7 @@ import com.github.javaparser.TokenRange;
 import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.SimpleName;
@@ -37,22 +38,22 @@ import org.mvel3.parser.ast.visitor.DrlVoidVisitorAdapter;
  */
 public class RuleDeclaration extends TypeDeclaration<RuleDeclaration> {
 
-    private final RuleBody ruleBody;
+    private RuleBody ruleBody;
 
     // This is the original constructor
     public RuleDeclaration(TokenRange range, NodeList<AnnotationExpr> annotations, SimpleName name, RuleBody ruleBody) {
-        this(range, new NodeList<>(), annotations, name, ruleBody);
+        this(range, new NodeList<>(), annotations, name, new NodeList<>(), ruleBody);
     }
 
     // This is added for generator
     @AllFieldsConstructor
-    public RuleDeclaration(NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, RuleBody ruleBody) {
-        this(null, modifiers, annotations, name, ruleBody);
+    public RuleDeclaration(NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<BodyDeclaration<?>> members, RuleBody ruleBody) {
+        this(null, modifiers, annotations, name, members, ruleBody);
     }
 
     // expected to be MainConstructor
-    public RuleDeclaration(TokenRange range, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, RuleBody ruleBody) {
-        super(range, modifiers, annotations, name, new NodeList<>());
+    public RuleDeclaration(TokenRange range, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name,  NodeList<BodyDeclaration<?>> members, RuleBody ruleBody) {
+        super(range, modifiers, annotations, name, members);
         this.ruleBody = ruleBody;
     }
 

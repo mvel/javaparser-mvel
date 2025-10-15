@@ -18,6 +18,7 @@
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
+import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
@@ -26,7 +27,12 @@ import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 
 public class RuleConsequence extends RuleItem {
 
-    private final Statement statement;
+    private Statement statement;
+
+    @AllFieldsConstructor
+    public RuleConsequence(Statement statement) {
+        this(null, statement);
+    }
 
     public RuleConsequence(TokenRange range, Statement statement) {
         super(range);

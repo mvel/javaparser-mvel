@@ -16,6 +16,7 @@
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
+import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
@@ -24,13 +25,18 @@ import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 
 public class RuleJoinedPatterns extends RuleItem {
 
-    private final Type type;
+    private Type type;
 
-    private final NodeList<RuleItem> items;
+    private NodeList<RuleItem> items;
 
     public enum Type {
 
         AND, OR
+    }
+
+    @AllFieldsConstructor
+    public RuleJoinedPatterns(Type type, NodeList<RuleItem> items) {
+        this(null, type, items);
     }
 
     public RuleJoinedPatterns(TokenRange range, Type type, NodeList<RuleItem> items) {

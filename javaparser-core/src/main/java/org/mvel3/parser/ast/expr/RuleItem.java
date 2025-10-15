@@ -18,9 +18,15 @@
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
+import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.Node;
 
 public abstract class RuleItem extends Node {
+
+    @AllFieldsConstructor
+    public RuleItem() {
+        this(null);
+    }
 
     public RuleItem(TokenRange range) {
         super(range);

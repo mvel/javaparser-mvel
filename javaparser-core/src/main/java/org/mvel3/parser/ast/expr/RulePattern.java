@@ -18,6 +18,7 @@
 package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
+import com.github.javaparser.ast.AllFieldsConstructor;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
@@ -26,11 +27,16 @@ import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 
 public class RulePattern extends RuleItem {
 
-    private final SimpleName type;
+    private SimpleName type;
 
-    private final SimpleName bind;
+    private SimpleName bind;
 
-    private final OOPathExpr expr;
+    private OOPathExpr expr;
+
+    @AllFieldsConstructor
+    public RulePattern(SimpleName type, SimpleName bind, OOPathExpr expr) {
+        this(null, type, bind, expr);
+    }
 
     public RulePattern(TokenRange range, SimpleName type, SimpleName bind, OOPathExpr expr) {
         super(range);

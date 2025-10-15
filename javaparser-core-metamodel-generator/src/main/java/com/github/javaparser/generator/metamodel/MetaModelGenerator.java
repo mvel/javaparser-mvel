@@ -219,6 +219,13 @@ public class MetaModelGenerator extends AbstractGenerator {
         add(org.mvel3.parser.ast.expr.OOPathChunk.class);
         add(org.mvel3.parser.ast.expr.OOPathExpr.class);
 
+        add(org.mvel3.parser.ast.expr.RuleItem.class);
+        add(org.mvel3.parser.ast.expr.RulePattern.class);
+        add(org.mvel3.parser.ast.expr.RuleJoinedPatterns.class);
+        add(org.mvel3.parser.ast.expr.RuleConsequence.class);
+        add(org.mvel3.parser.ast.expr.RuleBody.class);
+        add(org.mvel3.parser.ast.expr.RuleDeclaration.class);
+
         //add(org.mvel3.parser.ast.expr.RuleDeclaration.class); // TODO: Higher level node should be generated later
     }};
 
