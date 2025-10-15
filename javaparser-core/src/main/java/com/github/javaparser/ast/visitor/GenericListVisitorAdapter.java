@@ -2711,8 +2711,8 @@ public abstract class GenericListVisitorAdapter<R, A> implements GenericVisitor<
             if (tmp != null)
                 result.addAll(tmp);
         }
-        {
-            tmp = n.getInlineCast().accept(this, arg);
+        if (n.getInlineCast().isPresent()) {
+            tmp = n.getInlineCast().get().accept(this, arg);
             if (tmp != null)
                 result.addAll(tmp);
         }

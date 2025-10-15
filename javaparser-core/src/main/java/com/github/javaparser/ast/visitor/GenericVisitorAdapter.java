@@ -2676,8 +2676,8 @@ public abstract class GenericVisitorAdapter<R, A> implements GenericVisitor<R, A
             if (result != null)
                 return result;
         }
-        {
-            result = n.getInlineCast().accept(this, arg);
+        if (n.getInlineCast().isPresent()) {
+            result = n.getInlineCast().get().accept(this, arg);
             if (result != null)
                 return result;
         }

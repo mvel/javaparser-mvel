@@ -897,10 +897,10 @@ public class DefaultPrettyPrinterVisitor implements VoidVisitor<Void> {
             printer.print("/");
         }
         n.getField().accept(this, arg);
-        if (n.getInlineCast() != null) {
+        n.getInlineCast().ifPresent(inlineCast -> {
             printer.print("#");
-            n.getInlineCast().accept(this, arg);
-        }
+            inlineCast.accept(this, arg);
+        });
         List<DrlxExpression> conditions = n.getConditions();
         if (!conditions.isEmpty()) {
             printer.print("[");

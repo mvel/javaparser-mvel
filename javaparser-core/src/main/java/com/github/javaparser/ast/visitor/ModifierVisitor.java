@@ -1617,9 +1617,9 @@ public class ModifierVisitor<A> implements GenericVisitor<Visitable, A> {
     public Visitable visit(final OOPathChunk n, final A arg) {
         NodeList<DrlxExpression> condition = modifyList(n.getCondition(), arg);
         SimpleName field = (SimpleName) n.getField().accept(this, arg);
-        SimpleName inlineCast = (SimpleName) n.getInlineCast().accept(this, arg);
+        SimpleName inlineCast = n.getInlineCast().map(s -> (SimpleName) s.accept(this, arg)).orElse(null);
         Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
-        if (field == null || inlineCast == null)
+        if (field == null)
             return null;
         n.setCondition(condition);
         n.setField(field);

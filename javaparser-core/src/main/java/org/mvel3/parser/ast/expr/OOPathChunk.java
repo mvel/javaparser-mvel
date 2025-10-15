@@ -24,8 +24,6 @@ import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
-import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
-import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 import java.util.Optional;
 import java.util.function.Consumer;
 import com.github.javaparser.ast.observer.ObservableProperty;
@@ -35,11 +33,13 @@ import com.github.javaparser.ast.visitor.CloneVisitor;
 import com.github.javaparser.metamodel.OOPathChunkMetaModel;
 import com.github.javaparser.metamodel.JavaParserMetaModel;
 import com.github.javaparser.ast.Generated;
+import com.github.javaparser.metamodel.OptionalProperty;
 
 public class OOPathChunk extends Expression {
 
     private SimpleName field;
 
+    @OptionalProperty
     private SimpleName inlineCast;
 
     private NodeList<DrlxExpression> condition;
@@ -71,8 +71,8 @@ public class OOPathChunk extends Expression {
     }
 
     @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
-    public SimpleName getInlineCast() {
-        return inlineCast;
+    public Optional<SimpleName> getInlineCast() {
+        return Optional.ofNullable(inlineCast);
     }
 
     public NodeList<DrlxExpression> getConditions() {
@@ -112,28 +112,35 @@ public class OOPathChunk extends Expression {
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isOOPathChunk() {
         return true;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public OOPathChunk asOOPathChunk() {
         return this;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<OOPathChunk> toOOPathChunk() {
         return Optional.of(this);
     }
 
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifOOPathChunk(Consumer<OOPathChunk> action) {
         action.accept(this);
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<DrlxExpression> getCondition() {
         return condition;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public OOPathChunk setCondition(final NodeList<DrlxExpression> condition) {
         assertNotNull(condition);
         if (condition == this.condition) {
@@ -147,6 +154,7 @@ public class OOPathChunk extends Expression {
         return this;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public OOPathChunk setField(final SimpleName field) {
         assertNotNull(field);
         if (field == this.field) {
@@ -160,8 +168,8 @@ public class OOPathChunk extends Expression {
         return this;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public OOPathChunk setInlineCast(final SimpleName inlineCast) {
-        assertNotNull(inlineCast);
         if (inlineCast == this.inlineCast) {
             return this;
         }
@@ -173,6 +181,7 @@ public class OOPathChunk extends Expression {
         return this;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public OOPathChunk setPassive(final boolean passive) {
         if (passive == this.passive) {
             return this;
@@ -182,6 +191,7 @@ public class OOPathChunk extends Expression {
         return this;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public OOPathChunk setSingleValue(final boolean singleValue) {
         if (singleValue == this.singleValue) {
             return this;
@@ -192,6 +202,7 @@ public class OOPathChunk extends Expression {
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public boolean remove(Node node) {
         if (node == null) {
             return false;
@@ -202,10 +213,17 @@ public class OOPathChunk extends Expression {
                 return true;
             }
         }
+        if (inlineCast != null) {
+            if (node == inlineCast) {
+                removeInlineCast();
+                return true;
+            }
+        }
         return super.remove(node);
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
     public boolean replace(Node node, Node replacementNode) {
         if (node == null) {
             return false;
@@ -220,20 +238,28 @@ public class OOPathChunk extends Expression {
             setField((SimpleName) replacementNode);
             return true;
         }
-        if (node == inlineCast) {
-            setInlineCast((SimpleName) replacementNode);
-            return true;
+        if (inlineCast != null) {
+            if (node == inlineCast) {
+                setInlineCast((SimpleName) replacementNode);
+                return true;
+            }
         }
         return super.replace(node, replacementNode);
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public OOPathChunk clone() {
         return (OOPathChunk) accept(new CloneVisitor(), null);
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public OOPathChunkMetaModel getMetaModel() {
         return JavaParserMetaModel.oOPathChunkMetaModel;
+    }
+
+    public OOPathChunk removeInlineCast() {
+        return setInlineCast((SimpleName) null);
     }
 }

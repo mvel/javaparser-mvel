@@ -1571,7 +1571,8 @@ public class CloneVisitor implements GenericVisitor<Visitable, Object> {
     public Visitable visit(final OOPathChunk n, final Object arg) {
         NodeList<DrlxExpression> condition = cloneList(n.getCondition(), arg);
         SimpleName field = cloneNode(n.getField(), arg);
-        SimpleName inlineCast = cloneNode(n.getInlineCast(), arg);
+        Optional<SimpleName> inlineCastOptional = n.getInlineCast();
+        SimpleName inlineCast = cloneNode(inlineCastOptional, arg);
         Comment comment = cloneNode(n.getComment(), arg);
         OOPathChunk r = new OOPathChunk(n.getTokenRange().orElse(null), field, inlineCast, condition);
         r.setComment(comment);

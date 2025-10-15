@@ -201,10 +201,10 @@ public class ConcreteSyntaxModel {
             if (chunk.getField() != null) {
                 forClass(chunk.getField().getClass()).prettyPrint(chunk.getField(), printer);
             }
-            if (chunk.getInlineCast() != null) {
+            chunk.getInlineCast().ifPresent(inlineCast -> {
                 printer.print("#");
-                forClass(chunk.getInlineCast().getClass()).prettyPrint(chunk.getInlineCast(), printer);
-            }
+                forClass(inlineCast.getClass()).prettyPrint(inlineCast, printer);
+            });
             List<DrlxExpression> conditions = chunk.getConditions();
             if (!conditions.isEmpty()) {
                 printer.print("[");

@@ -1260,33 +1260,41 @@ public abstract class Expression extends Node {
     public void ifTemporalLiteralInfiniteChunkExpr(Consumer<TemporalLiteralInfiniteChunkExpr> action) {
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isOOPathChunk() {
         return false;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public OOPathChunk asOOPathChunk() {
         throw new IllegalStateException(f("%s is not OOPathChunk, it is %s", this, this.getClass().getSimpleName()));
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<OOPathChunk> toOOPathChunk() {
         return Optional.empty();
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifOOPathChunk(Consumer<OOPathChunk> action) {
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isOOPathExpr() {
         return false;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public OOPathExpr asOOPathExpr() {
         throw new IllegalStateException(f("%s is not OOPathExpr, it is %s", this, this.getClass().getSimpleName()));
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<OOPathExpr> toOOPathExpr() {
         return Optional.empty();
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifOOPathExpr(Consumer<OOPathExpr> action) {
     }
 }

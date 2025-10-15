@@ -924,7 +924,7 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
     public void visit(final OOPathChunk n, final A arg) {
         n.getCondition().forEach(p -> p.accept(this, arg));
         n.getField().accept(this, arg);
-        n.getInlineCast().accept(this, arg);
+        n.getInlineCast().ifPresent(l -> l.accept(this, arg));
         n.getComment().ifPresent(l -> l.accept(this, arg));
     }
 

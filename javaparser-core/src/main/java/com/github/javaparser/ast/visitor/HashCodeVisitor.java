@@ -593,7 +593,7 @@ public class HashCodeVisitor implements GenericVisitor<Integer, Void> {
 
     @Override
     public Integer visit(final OOPathChunk n, final Void arg) {
-        return (n.getCondition().accept(this, arg)) * 31 + (n.getField().accept(this, arg)) * 31 + (n.getInlineCast().accept(this, arg)) * 31 + (n.isPassive() ? 1 : 0) * 31 + (n.isSingleValue() ? 1 : 0) * 31 + (n.getComment().isPresent() ? n.getComment().get().accept(this, arg) : 0);
+        return (n.getCondition().accept(this, arg)) * 31 + (n.getField().accept(this, arg)) * 31 + (n.getInlineCast().isPresent() ? n.getInlineCast().get().accept(this, arg) : 0) * 31 + (n.isPassive() ? 1 : 0) * 31 + (n.isSingleValue() ? 1 : 0) * 31 + (n.getComment().isPresent() ? n.getComment().get().accept(this, arg) : 0);
     }
 
     @Override

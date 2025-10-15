@@ -175,7 +175,7 @@ public class DrlVoidVisitorAdapter<A> extends VoidVisitorAdapter<A> implements D
         // Why isn't this a NodeList?
         n.getConditions().forEach(c -> c.accept(this, arg));
         n.getField().accept(this, arg);
-        n.getInlineCast().accept(this, arg);
+        n.getInlineCast().ifPresent(inlineCast -> inlineCast.accept(this, arg));
     }
 
     public void visit(RuleConsequence n, A arg) {

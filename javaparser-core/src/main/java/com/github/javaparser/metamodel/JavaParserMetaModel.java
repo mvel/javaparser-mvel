@@ -1016,7 +1016,7 @@ public final class JavaParserMetaModel {
         oOPathChunkMetaModel.getDeclaredPropertyMetaModels().add(oOPathChunkMetaModel.conditionPropertyMetaModel);
         oOPathChunkMetaModel.fieldPropertyMetaModel = new PropertyMetaModel(oOPathChunkMetaModel, "field", com.github.javaparser.ast.expr.SimpleName.class, Optional.of(simpleNameMetaModel), false, false, false, false);
         oOPathChunkMetaModel.getDeclaredPropertyMetaModels().add(oOPathChunkMetaModel.fieldPropertyMetaModel);
-        oOPathChunkMetaModel.inlineCastPropertyMetaModel = new PropertyMetaModel(oOPathChunkMetaModel, "inlineCast", com.github.javaparser.ast.expr.SimpleName.class, Optional.of(simpleNameMetaModel), false, false, false, false);
+        oOPathChunkMetaModel.inlineCastPropertyMetaModel = new PropertyMetaModel(oOPathChunkMetaModel, "inlineCast", com.github.javaparser.ast.expr.SimpleName.class, Optional.of(simpleNameMetaModel), true, false, false, false);
         oOPathChunkMetaModel.getDeclaredPropertyMetaModels().add(oOPathChunkMetaModel.inlineCastPropertyMetaModel);
         oOPathChunkMetaModel.passivePropertyMetaModel = new PropertyMetaModel(oOPathChunkMetaModel, "passive", boolean.class, Optional.empty(), false, false, false, false);
         oOPathChunkMetaModel.getDeclaredPropertyMetaModels().add(oOPathChunkMetaModel.passivePropertyMetaModel);
