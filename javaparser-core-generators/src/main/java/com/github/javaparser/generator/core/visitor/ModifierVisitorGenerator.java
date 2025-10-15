@@ -64,7 +64,7 @@ public class ModifierVisitorGenerator extends VisitorGenerator {
                 .collect(Collectors.toList());
 
         //
-        sortedPropertyMetaModels.forEach(property -> extracted(body, property));
+        sortedPropertyMetaModels.forEach(property -> extracted(body, compilationUnit, property));
 
         //
         if (node.is(BinaryExpr.class)) {
@@ -99,8 +99,13 @@ public class ModifierVisitorGenerator extends VisitorGenerator {
         body.addStatement("return n;");
     }
 
-    private void extracted(BlockStmt body, PropertyMetaModel property) {
+    private void extracted(BlockStmt body, CompilationUnit compilationUnit, PropertyMetaModel property) {
         if (property.isNode()) {
+            property.getNodeReference().ifPresent(nodeRef -> {
+                if (!nodeRef.getQualifiedClassName().startsWith(compilationUnit.getPackageDeclaration().map(pd -> pd.getNameAsString()).orElse(""))) {
+                    compilationUnit.addImport(nodeRef.getQualifiedClassName());
+                }
+            });
             if (property.isNodeList()) {
                 body.addStatement(f("NodeList<%s> %s = modifyList(n.%s(), arg);",
                         property.getTypeNameGenerified(),
