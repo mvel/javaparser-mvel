@@ -51,6 +51,15 @@ public class CloneVisitorGenerator extends VisitorGenerator {
         for (PropertyMetaModel field : node.getAllPropertyMetaModels()) {
             final String getter = field.getGetterMethodName() + "()";
             if (field.getNodeReference().isPresent()) {
+                field.getNodeReference().ifPresent(nodeRef -> {
+                    String cuPackage = compilationUnit.getPackageDeclaration()
+                            .map(pd -> pd.getNameAsString())
+                            .orElse("");
+                    if (!nodeRef.getPackageName().equals(cuPackage)) {
+                        compilationUnit.addImport(nodeRef.getQualifiedClassName());
+                    }
+                });
+
                 if (field.isOptional() && field.isNodeList()) {
                     body.addStatement(f("NodeList<%s> %s = cloneList(n.%s.orElse(null), arg);", field.getTypeNameGenerified(), field.getName(), getter));
                 } else if (field.isNodeList()) {
