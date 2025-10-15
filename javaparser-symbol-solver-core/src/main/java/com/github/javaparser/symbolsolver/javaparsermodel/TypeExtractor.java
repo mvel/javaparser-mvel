@@ -87,6 +87,8 @@ import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.WithStatement;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 
 public class TypeExtractor extends DefaultVisitorAdapter {
 
@@ -264,6 +266,16 @@ public class TypeExtractor extends DefaultVisitorAdapter {
         return node.getScope()
                 .map(scope -> scope.accept(this, solveLambdas))
                 .orElseThrow(() -> new IllegalStateException("Null-safe method call without scope: " + node));
+    }
+
+    @Override
+    public ResolvedType visit(OOPathExpr node, Boolean solveLambdas) {
+        return objectReferenceType;
+    }
+
+    @Override
+    public ResolvedType visit(OOPathChunk node, Boolean solveLambdas) {
+        return objectReferenceType;
     }
 
     @Override

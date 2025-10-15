@@ -485,48 +485,60 @@ public abstract class Statement extends Node {
     public void ifYieldStmt(Consumer<YieldStmt> action) {
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isAbstractContextStatement() {
         return false;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public AbstractContextStatement asAbstractContextStatement() {
         throw new IllegalStateException(f("%s is not AbstractContextStatement, it is %s", this, this.getClass().getSimpleName()));
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<AbstractContextStatement> toAbstractContextStatement() {
         return Optional.empty();
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifAbstractContextStatement(Consumer<AbstractContextStatement> action) {
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isModifyStatement() {
         return false;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public ModifyStatement asModifyStatement() {
         throw new IllegalStateException(f("%s is not ModifyStatement, it is %s", this, this.getClass().getSimpleName()));
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<ModifyStatement> toModifyStatement() {
         return Optional.empty();
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifModifyStatement(Consumer<ModifyStatement> action) {
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isWithStatement() {
         return false;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public WithStatement asWithStatement() {
         throw new IllegalStateException(f("%s is not WithStatement, it is %s", this, this.getClass().getSimpleName()));
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<WithStatement> toWithStatement() {
         return Optional.empty();
     }
 
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifWithStatement(Consumer<WithStatement> action) {
     }
 }

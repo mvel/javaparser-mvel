@@ -28,8 +28,6 @@ import java.util.List;
 import static com.github.javaparser.utils.Utils.assertNotNull;
 import static java.util.stream.Collectors.toList;
 
-
-
 /**
  * Outputs a YAML file containing the AST meant for inspecting it.
  */

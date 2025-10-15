@@ -46,30 +46,37 @@ public class WithStatement extends AbstractContextStatement<WithStatement, Expre
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public boolean isWithStatement() {
         return true;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public WithStatement asWithStatement() {
         return this;
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public Optional<WithStatement> toWithStatement() {
         return Optional.of(this);
     }
 
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifWithStatement(Consumer<WithStatement> action) {
         action.accept(this);
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
     public WithStatement clone() {
         return (WithStatement) accept(new CloneVisitor(), null);
     }
 
     @Override
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
     public WithStatementMetaModel getMetaModel() {
         return JavaParserMetaModel.withStatementMetaModel;
     }

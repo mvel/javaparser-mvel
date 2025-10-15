@@ -26,8 +26,6 @@ import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration;
 import com.github.javaparser.printer.configuration.PrinterConfiguration;
 import java.util.function.Function;
 
-
-
 /**
  * Pretty printer for AST nodes.
  */

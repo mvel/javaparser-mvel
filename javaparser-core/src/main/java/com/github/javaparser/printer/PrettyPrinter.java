@@ -26,8 +26,6 @@ import com.github.javaparser.printer.configuration.PrettyPrinterConfiguration;
 import com.github.javaparser.printer.configuration.PrinterConfiguration;
 import java.util.function.Function;
 
-
-
 /**
  * Pretty printer for AST nodes.
  * This class is no longer acceptable to use because it is not sufficiently configurable and it is too tied to a specific implementation

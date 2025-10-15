@@ -54,6 +54,8 @@ import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.WithStatement;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 
 public class DefaultVisitorAdapter implements GenericVisitor<ResolvedType, Boolean> {
     @Override
@@ -268,6 +270,16 @@ public class DefaultVisitorAdapter implements GenericVisitor<ResolvedType, Boole
 
     @Override
     public ResolvedType visit(NullSafeMethodCallExpr node, Boolean aBoolean) {
+        throw new UnsupportedOperationException(node.getClass().getCanonicalName());
+    }
+
+    @Override
+    public ResolvedType visit(OOPathExpr node, Boolean aBoolean) {
+        throw new UnsupportedOperationException(node.getClass().getCanonicalName());
+    }
+
+    @Override
+    public ResolvedType visit(OOPathChunk node, Boolean aBoolean) {
         throw new UnsupportedOperationException(node.getClass().getCanonicalName());
     }
 

@@ -51,6 +51,8 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 import org.mvel3.parser.ast.expr.PointFreeExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
@@ -60,8 +62,6 @@ import static com.github.javaparser.GeneratedJavaParserConstants.*;
 import static com.github.javaparser.ast.observer.ObservableProperty.*;
 import static com.github.javaparser.printer.concretesyntaxmodel.CsmConditional.Condition.*;
 import static com.github.javaparser.printer.concretesyntaxmodel.CsmElement.*;
-
-
 
 /**
  * The Concrete Syntax Model for a single node type. It knows the syntax used to represent a certain element in Java
@@ -186,6 +186,37 @@ public class ConcreteSyntaxModel {
         concreteSyntaxModelByClass.put(WithStatement.class, sequence(comment(), string(GeneratedJavaParserConstants.IDENTIFIER, "with"), space(), string(GeneratedJavaParserConstants.LPAREN), child(ObservableProperty.EXPRESSION), string(GeneratedJavaParserConstants.RPAREN), space(), string(GeneratedJavaParserConstants.LBRACE), space(), list(ObservableProperty.STATEMENTS, sequence(string(GeneratedJavaParserConstants.SEMICOLON), space())), conditional(ObservableProperty.STATEMENTS, IS_NOT_EMPTY, string(GeneratedJavaParserConstants.SEMICOLON)), space(), string(GeneratedJavaParserConstants.RBRACE)));
         concreteSyntaxModelByClass.put(NullSafeFieldAccessExpr.class, sequence(comment(), child(ObservableProperty.SCOPE), string(GeneratedJavaParserConstants.IDENTIFIER, "!"), string(GeneratedJavaParserConstants.DOT), child(ObservableProperty.NAME)));
         concreteSyntaxModelByClass.put(NullSafeMethodCallExpr.class, sequence(comment(), conditional(ObservableProperty.SCOPE, IS_PRESENT, sequence(child(ObservableProperty.SCOPE), string(GeneratedJavaParserConstants.IDENTIFIER, "!"), string(GeneratedJavaParserConstants.DOT))), list(ObservableProperty.TYPE_ARGUMENTS, sequence(string(GeneratedJavaParserConstants.COMMA), space()), string(GeneratedJavaParserConstants.LT), string(GeneratedJavaParserConstants.GT)), child(ObservableProperty.NAME), string(GeneratedJavaParserConstants.LPAREN), list(ObservableProperty.ARGUMENTS, sequence(string(GeneratedJavaParserConstants.COMMA), space())), string(GeneratedJavaParserConstants.RPAREN)));
+        concreteSyntaxModelByClass.put(OOPathExpr.class, sequence(comment(), list(ObservableProperty.CHUNKS, none(), none(), none())));
+        concreteSyntaxModelByClass.put(OOPathChunk.class, (node, printer) -> {
+            OOPathChunk chunk = (OOPathChunk) node;
+            comment().prettyPrint(node, printer);
+            if (chunk.isSingleValue()) {
+                printer.print(".");
+            } else {
+                if (chunk.isPassive()) {
+                    printer.print("?");
+                }
+                printer.print("/");
+            }
+            if (chunk.getField() != null) {
+                forClass(chunk.getField().getClass()).prettyPrint(chunk.getField(), printer);
+            }
+            if (chunk.getInlineCast() != null) {
+                printer.print("#");
+                forClass(chunk.getInlineCast().getClass()).prettyPrint(chunk.getInlineCast(), printer);
+            }
+            List<DrlxExpression> conditions = chunk.getConditions();
+            if (!conditions.isEmpty()) {
+                printer.print("[");
+                for (int i = 0; i < conditions.size(); i++) {
+                    forClass(conditions.get(i).getClass()).prettyPrint(conditions.get(i), printer);
+                    if (i < conditions.size() - 1) {
+                        printer.print(",");
+                    }
+                }
+                printer.print("]");
+            }
+        });
         // /
         // / Statements
         // /

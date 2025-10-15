@@ -50,6 +50,8 @@ import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.AbstractContextStatement;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 
 /**
  * A visitor that calculates deep node equality by comparing all properties and child nodes of the node.
@@ -666,6 +668,16 @@ public class ObjectIdentityEqualsVisitor implements GenericVisitor<Boolean, Visi
 
     @Override
     public Boolean visit(final WithStatement n, final Visitable arg) {
+        return n == arg;
+    }
+
+    @Override
+    public Boolean visit(final OOPathChunk n, final Visitable arg) {
+        return n == arg;
+    }
+
+    @Override
+    public Boolean visit(final OOPathExpr n, final Visitable arg) {
         return n == arg;
     }
 }

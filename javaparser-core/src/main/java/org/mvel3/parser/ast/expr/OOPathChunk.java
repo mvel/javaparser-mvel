@@ -26,6 +26,15 @@ import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
+import java.util.Optional;
+import java.util.function.Consumer;
+import com.github.javaparser.ast.observer.ObservableProperty;
+import static com.github.javaparser.utils.Utils.assertNotNull;
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.visitor.CloneVisitor;
+import com.github.javaparser.metamodel.OOPathChunkMetaModel;
+import com.github.javaparser.metamodel.JavaParserMetaModel;
+import com.github.javaparser.ast.Generated;
 
 public class OOPathChunk extends Expression {
 
@@ -44,17 +53,24 @@ public class OOPathChunk extends Expression {
         this(null, field, inlineCast, condition);
     }
 
-    public OOPathChunk(TokenRange range, SimpleName field, SimpleName inlineCast, NodeList<DrlxExpression> condition) {
-        super(range);
-        this.field = field;
-        this.inlineCast = inlineCast;
-        this.condition = condition;
+    /**
+     * This constructor is used by the parser and is considered private.
+     */
+    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public OOPathChunk(TokenRange tokenRange, SimpleName field, SimpleName inlineCast, NodeList<DrlxExpression> condition) {
+        super(tokenRange);
+        setField(field);
+        setInlineCast(inlineCast);
+        setCondition(condition);
+        customInitialization();
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public SimpleName getField() {
         return field;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public SimpleName getInlineCast() {
         return inlineCast;
     }
@@ -64,13 +80,15 @@ public class OOPathChunk extends Expression {
     }
 
     @Override
-    public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+        return v.visit(this, arg);
     }
 
     @Override
-    public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+        v.visit(this, arg);
     }
 
     public OOPathChunk singleValue() {
@@ -78,6 +96,7 @@ public class OOPathChunk extends Expression {
         return this;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public boolean isSingleValue() {
         return singleValue;
     }
@@ -87,7 +106,134 @@ public class OOPathChunk extends Expression {
         return this;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public boolean isPassive() {
         return passive;
+    }
+
+    @Override
+    public boolean isOOPathChunk() {
+        return true;
+    }
+
+    @Override
+    public OOPathChunk asOOPathChunk() {
+        return this;
+    }
+
+    @Override
+    public Optional<OOPathChunk> toOOPathChunk() {
+        return Optional.of(this);
+    }
+
+    public void ifOOPathChunk(Consumer<OOPathChunk> action) {
+        action.accept(this);
+    }
+
+    public NodeList<DrlxExpression> getCondition() {
+        return condition;
+    }
+
+    public OOPathChunk setCondition(final NodeList<DrlxExpression> condition) {
+        assertNotNull(condition);
+        if (condition == this.condition) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.CONDITION, this.condition, condition);
+        if (this.condition != null)
+            this.condition.setParentNode(null);
+        this.condition = condition;
+        setAsParentNodeOf(condition);
+        return this;
+    }
+
+    public OOPathChunk setField(final SimpleName field) {
+        assertNotNull(field);
+        if (field == this.field) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.FIELD, this.field, field);
+        if (this.field != null)
+            this.field.setParentNode(null);
+        this.field = field;
+        setAsParentNodeOf(field);
+        return this;
+    }
+
+    public OOPathChunk setInlineCast(final SimpleName inlineCast) {
+        assertNotNull(inlineCast);
+        if (inlineCast == this.inlineCast) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.INLINE_CAST, this.inlineCast, inlineCast);
+        if (this.inlineCast != null)
+            this.inlineCast.setParentNode(null);
+        this.inlineCast = inlineCast;
+        setAsParentNodeOf(inlineCast);
+        return this;
+    }
+
+    public OOPathChunk setPassive(final boolean passive) {
+        if (passive == this.passive) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.PASSIVE, this.passive, passive);
+        this.passive = passive;
+        return this;
+    }
+
+    public OOPathChunk setSingleValue(final boolean singleValue) {
+        if (singleValue == this.singleValue) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.SINGLE_VALUE, this.singleValue, singleValue);
+        this.singleValue = singleValue;
+        return this;
+    }
+
+    @Override
+    public boolean remove(Node node) {
+        if (node == null) {
+            return false;
+        }
+        for (int i = 0; i < condition.size(); i++) {
+            if (condition.get(i) == node) {
+                condition.remove(i);
+                return true;
+            }
+        }
+        return super.remove(node);
+    }
+
+    @Override
+    public boolean replace(Node node, Node replacementNode) {
+        if (node == null) {
+            return false;
+        }
+        for (int i = 0; i < condition.size(); i++) {
+            if (condition.get(i) == node) {
+                condition.set(i, (DrlxExpression) replacementNode);
+                return true;
+            }
+        }
+        if (node == field) {
+            setField((SimpleName) replacementNode);
+            return true;
+        }
+        if (node == inlineCast) {
+            setInlineCast((SimpleName) replacementNode);
+            return true;
+        }
+        return super.replace(node, replacementNode);
+    }
+
+    @Override
+    public OOPathChunk clone() {
+        return (OOPathChunk) accept(new CloneVisitor(), null);
+    }
+
+    @Override
+    public OOPathChunkMetaModel getMetaModel() {
+        return JavaParserMetaModel.oOPathChunkMetaModel;
     }
 }

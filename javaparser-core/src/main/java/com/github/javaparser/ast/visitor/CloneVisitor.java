@@ -53,6 +53,8 @@ import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.AbstractContextStatement;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 
 /**
  * A visitor that clones (copies) a node and all its children.
@@ -1559,6 +1561,30 @@ public class CloneVisitor implements GenericVisitor<Visitable, Object> {
         Expression target = cloneNode(n.getTarget(), arg);
         Comment comment = cloneNode(n.getComment(), arg);
         WithStatement r = new WithStatement(n.getTokenRange().orElse(null), target, expressions);
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final OOPathChunk n, final Object arg) {
+        NodeList<DrlxExpression> condition = cloneList(n.getCondition(), arg);
+        SimpleName field = cloneNode(n.getField(), arg);
+        SimpleName inlineCast = cloneNode(n.getInlineCast(), arg);
+        Comment comment = cloneNode(n.getComment(), arg);
+        OOPathChunk r = new OOPathChunk(n.getTokenRange().orElse(null), field, inlineCast, condition);
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final OOPathExpr n, final Object arg) {
+        NodeList<OOPathChunk> chunks = cloneList(n.getChunks(), arg);
+        Comment comment = cloneNode(n.getComment(), arg);
+        OOPathExpr r = new OOPathExpr(n.getTokenRange().orElse(null), chunks);
         r.setComment(comment);
         n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
         copyData(n, r);

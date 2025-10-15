@@ -51,6 +51,8 @@ import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.AbstractContextStatement;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 
 public class NoCommentEqualsVisitor implements GenericVisitor<Boolean, Visitable> {
 
@@ -1402,6 +1404,30 @@ public class NoCommentEqualsVisitor implements GenericVisitor<Boolean, Visitable
         if (!nodesEquals(n.getExpressions(), n2.getExpressions()))
             return false;
         if (!nodeEquals(n.getTarget(), n2.getTarget()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final OOPathChunk n, final Visitable arg) {
+        final OOPathChunk n2 = (OOPathChunk) arg;
+        if (!nodesEquals(n.getCondition(), n2.getCondition()))
+            return false;
+        if (!nodeEquals(n.getField(), n2.getField()))
+            return false;
+        if (!nodeEquals(n.getInlineCast(), n2.getInlineCast()))
+            return false;
+        if (!objEquals(n.isPassive(), n2.isPassive()))
+            return false;
+        if (!objEquals(n.isSingleValue(), n2.isSingleValue()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final OOPathExpr n, final Visitable arg) {
+        final OOPathExpr n2 = (OOPathExpr) arg;
+        if (!nodesEquals(n.getChunks(), n2.getChunks()))
             return false;
         return true;
     }

@@ -58,6 +58,8 @@ import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.AbstractContextStatement;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 
 /**
  * This visitor can be used to save time when some specific nodes needs
@@ -1607,6 +1609,30 @@ public class ModifierVisitor<A> implements GenericVisitor<Visitable, A> {
             return null;
         n.setExpressions(expressions);
         n.setTarget(target);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final OOPathChunk n, final A arg) {
+        NodeList<DrlxExpression> condition = modifyList(n.getCondition(), arg);
+        SimpleName field = (SimpleName) n.getField().accept(this, arg);
+        SimpleName inlineCast = (SimpleName) n.getInlineCast().accept(this, arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        if (field == null || inlineCast == null)
+            return null;
+        n.setCondition(condition);
+        n.setField(field);
+        n.setInlineCast(inlineCast);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final OOPathExpr n, final A arg) {
+        NodeList<OOPathChunk> chunks = modifyList(n.getChunks(), arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        n.setChunks(chunks);
         n.setComment(comment);
         return n;
     }

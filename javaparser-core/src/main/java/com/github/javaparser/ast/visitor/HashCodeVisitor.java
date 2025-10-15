@@ -50,6 +50,8 @@ import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.AbstractContextStatement;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 
 /**
  * A visitor that calculates a deep hash code for a node by using the hash codes of all its properties,
@@ -587,5 +589,15 @@ public class HashCodeVisitor implements GenericVisitor<Integer, Void> {
     @Override
     public Integer visit(final WithStatement n, final Void arg) {
         return (n.getExpressions().accept(this, arg)) * 31 + (n.getTarget().accept(this, arg)) * 31 + (n.getComment().isPresent() ? n.getComment().get().accept(this, arg) : 0);
+    }
+
+    @Override
+    public Integer visit(final OOPathChunk n, final Void arg) {
+        return (n.getCondition().accept(this, arg)) * 31 + (n.getField().accept(this, arg)) * 31 + (n.getInlineCast().accept(this, arg)) * 31 + (n.isPassive() ? 1 : 0) * 31 + (n.isSingleValue() ? 1 : 0) * 31 + (n.getComment().isPresent() ? n.getComment().get().accept(this, arg) : 0);
+    }
+
+    @Override
+    public Integer visit(final OOPathExpr n, final Void arg) {
+        return (n.getChunks().accept(this, arg)) * 31 + (n.getComment().isPresent() ? n.getComment().get().accept(this, arg) : 0);
     }
 }

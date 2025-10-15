@@ -54,6 +54,8 @@ import org.mvel3.parser.ast.expr.TemporalChunkExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 
 /**
  * A base class for all expressions.
@@ -1256,5 +1258,35 @@ public abstract class Expression extends Node {
 
     @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
     public void ifTemporalLiteralInfiniteChunkExpr(Consumer<TemporalLiteralInfiniteChunkExpr> action) {
+    }
+
+    public boolean isOOPathChunk() {
+        return false;
+    }
+
+    public OOPathChunk asOOPathChunk() {
+        throw new IllegalStateException(f("%s is not OOPathChunk, it is %s", this, this.getClass().getSimpleName()));
+    }
+
+    public Optional<OOPathChunk> toOOPathChunk() {
+        return Optional.empty();
+    }
+
+    public void ifOOPathChunk(Consumer<OOPathChunk> action) {
+    }
+
+    public boolean isOOPathExpr() {
+        return false;
+    }
+
+    public OOPathExpr asOOPathExpr() {
+        throw new IllegalStateException(f("%s is not OOPathExpr, it is %s", this, this.getClass().getSimpleName()));
+    }
+
+    public Optional<OOPathExpr> toOOPathExpr() {
+        return Optional.empty();
+    }
+
+    public void ifOOPathExpr(Consumer<OOPathExpr> action) {
     }
 }

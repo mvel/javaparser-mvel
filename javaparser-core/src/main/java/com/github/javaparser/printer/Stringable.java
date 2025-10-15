@@ -20,7 +20,6 @@
  */
 package com.github.javaparser.printer;
 
-
 /**
  * Something that has a printable form. I.e., it can be converted to a user-facing String.
  */

@@ -25,6 +25,15 @@ import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
+import java.util.Optional;
+import java.util.function.Consumer;
+import com.github.javaparser.ast.observer.ObservableProperty;
+import static com.github.javaparser.utils.Utils.assertNotNull;
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.visitor.CloneVisitor;
+import com.github.javaparser.metamodel.OOPathExprMetaModel;
+import com.github.javaparser.metamodel.JavaParserMetaModel;
+import com.github.javaparser.ast.Generated;
 
 public class OOPathExpr extends Expression {
 
@@ -35,22 +44,100 @@ public class OOPathExpr extends Expression {
         this(null, chunks);
     }
 
-    public OOPathExpr(TokenRange range, NodeList<OOPathChunk> chunks) {
-        super(range);
-        this.chunks = chunks;
+    /**
+     * This constructor is used by the parser and is considered private.
+     */
+    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public OOPathExpr(TokenRange tokenRange, NodeList<OOPathChunk> chunks) {
+        super(tokenRange);
+        setChunks(chunks);
+        customInitialization();
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public NodeList<OOPathChunk> getChunks() {
         return chunks;
     }
 
     @Override
-    public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+        return v.visit(this, arg);
     }
 
     @Override
-    public <A> void accept(VoidVisitor<A> v, A arg) {
-        ((DrlVoidVisitor<A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+        v.visit(this, arg);
+    }
+
+    @Override
+    public boolean isOOPathExpr() {
+        return true;
+    }
+
+    @Override
+    public OOPathExpr asOOPathExpr() {
+        return this;
+    }
+
+    @Override
+    public Optional<OOPathExpr> toOOPathExpr() {
+        return Optional.of(this);
+    }
+
+    public void ifOOPathExpr(Consumer<OOPathExpr> action) {
+        action.accept(this);
+    }
+
+    public OOPathExpr setChunks(final NodeList<OOPathChunk> chunks) {
+        assertNotNull(chunks);
+        if (chunks == this.chunks) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.CHUNKS, this.chunks, chunks);
+        if (this.chunks != null)
+            this.chunks.setParentNode(null);
+        this.chunks = chunks;
+        setAsParentNodeOf(chunks);
+        return this;
+    }
+
+    @Override
+    public boolean remove(Node node) {
+        if (node == null) {
+            return false;
+        }
+        for (int i = 0; i < chunks.size(); i++) {
+            if (chunks.get(i) == node) {
+                chunks.remove(i);
+                return true;
+            }
+        }
+        return super.remove(node);
+    }
+
+    @Override
+    public boolean replace(Node node, Node replacementNode) {
+        if (node == null) {
+            return false;
+        }
+        for (int i = 0; i < chunks.size(); i++) {
+            if (chunks.get(i) == node) {
+                chunks.set(i, (OOPathChunk) replacementNode);
+                return true;
+            }
+        }
+        return super.replace(node, replacementNode);
+    }
+
+    @Override
+    public OOPathExpr clone() {
+        return (OOPathExpr) accept(new CloneVisitor(), null);
+    }
+
+    @Override
+    public OOPathExprMetaModel getMetaModel() {
+        return JavaParserMetaModel.oOPathExprMetaModel;
     }
 }

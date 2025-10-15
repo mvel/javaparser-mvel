@@ -53,6 +53,8 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 import org.mvel3.parser.ast.expr.PointFreeExpr;
 import org.mvel3.parser.ast.expr.TemporalChunkExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
@@ -883,6 +885,45 @@ public class PrettyPrintVisitor implements VoidVisitor<Void> {
     }
 
     @Override
+    public void visit(final OOPathExpr n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        for (OOPathChunk chunk : n.getChunks()) {
+            chunk.accept(this, arg);
+        }
+    }
+
+    @Override
+    public void visit(final OOPathChunk n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        if (n.isSingleValue()) {
+            printer.print(".");
+        } else {
+            if (n.isPassive()) {
+                printer.print("?");
+            }
+            printer.print("/");
+        }
+        n.getField().accept(this, arg);
+        if (n.getInlineCast() != null) {
+            printer.print("#");
+            n.getInlineCast().accept(this, arg);
+        }
+        List<DrlxExpression> conditions = n.getConditions();
+        if (!conditions.isEmpty()) {
+            printer.print("[");
+            for (int i = 0; i < conditions.size(); i++) {
+                conditions.get(i).accept(this, arg);
+                if (i < conditions.size() - 1) {
+                    printer.print(",");
+                }
+            }
+            printer.print("]");
+        }
+    }
+
+    @Override
     public void visit(final TemporalLiteralExpr n, final Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);
         printComment(n.getComment(), arg);
@@ -945,7 +986,6 @@ public class PrettyPrintVisitor implements VoidVisitor<Void> {
         visitContextStatement(n, arg);
     }
 
-
     private void visitContextStatement(AbstractContextStatement<?, ?> contextExpression, Void arg) {
         if (contextExpression.getTarget() != null) {
             contextExpression.getTarget().accept(this, arg);
@@ -964,6 +1004,7 @@ public class PrettyPrintVisitor implements VoidVisitor<Void> {
         }
         printer.print(" }");
     }
+
     @Override
     public void visit(final ClassExpr n, final Void arg) {
         printOrphanCommentsBeforeThisChildNode(n);

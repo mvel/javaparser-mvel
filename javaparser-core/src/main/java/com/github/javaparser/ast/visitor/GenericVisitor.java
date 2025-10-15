@@ -50,6 +50,8 @@ import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.AbstractContextStatement;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 
 /**
  * A visitor that has a return value.
@@ -304,4 +306,8 @@ public interface GenericVisitor<R, A> {
     R visit(ModifyStatement n, A arg);
 
     R visit(WithStatement n, A arg);
+
+    R visit(OOPathChunk n, A arg);
+
+    R visit(OOPathExpr n, A arg);
 }

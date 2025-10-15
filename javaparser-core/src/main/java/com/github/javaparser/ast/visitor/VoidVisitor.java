@@ -50,6 +50,8 @@ import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.AbstractContextStatement;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 
 /**
  * A visitor that does not return anything.
@@ -299,4 +301,8 @@ public interface VoidVisitor<A> {
     void visit(ModifyStatement n, A arg);
 
     void visit(WithStatement n, A arg);
+
+    void visit(OOPathChunk n, A arg);
+
+    void visit(OOPathExpr n, A arg);
 }

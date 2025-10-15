@@ -50,6 +50,8 @@ import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.AbstractContextStatement;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
 
 /**
  * A visitor that returns nothing, and has a default implementation for all its visit
@@ -915,6 +917,20 @@ public abstract class VoidVisitorAdapter<A> implements VoidVisitor<A> {
     public void visit(final WithStatement n, final A arg) {
         n.getExpressions().forEach(p -> p.accept(this, arg));
         n.getTarget().accept(this, arg);
+        n.getComment().ifPresent(l -> l.accept(this, arg));
+    }
+
+    @Override
+    public void visit(final OOPathChunk n, final A arg) {
+        n.getCondition().forEach(p -> p.accept(this, arg));
+        n.getField().accept(this, arg);
+        n.getInlineCast().accept(this, arg);
+        n.getComment().ifPresent(l -> l.accept(this, arg));
+    }
+
+    @Override
+    public void visit(final OOPathExpr n, final A arg) {
+        n.getChunks().forEach(p -> p.accept(this, arg));
         n.getComment().ifPresent(l -> l.accept(this, arg));
     }
 }
