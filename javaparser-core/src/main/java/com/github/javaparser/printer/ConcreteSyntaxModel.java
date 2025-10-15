@@ -54,6 +54,11 @@ import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
 import org.mvel3.parser.ast.expr.OOPathChunk;
 import org.mvel3.parser.ast.expr.OOPathExpr;
 import org.mvel3.parser.ast.expr.PointFreeExpr;
+import org.mvel3.parser.ast.expr.RuleBody;
+import org.mvel3.parser.ast.expr.RuleConsequence;
+import org.mvel3.parser.ast.expr.RuleDeclaration;
+import org.mvel3.parser.ast.expr.RuleJoinedPatterns;
+import org.mvel3.parser.ast.expr.RulePattern;
 import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
@@ -217,6 +222,11 @@ public class ConcreteSyntaxModel {
                 printer.print("]");
             }
         });
+        concreteSyntaxModelByClass.put(RuleDeclaration.class, sequence(comment(), memberAnnotations(), modifiers(), string(GeneratedJavaParserConstants.IDENTIFIER, "rule"), space(), child(ObservableProperty.NAME), space(), block(sequence(newline(), child(ObservableProperty.RULE_BODY), newline()))));
+        concreteSyntaxModelByClass.put(RuleBody.class, sequence(comment(), list(ObservableProperty.ITEMS, none(), newline(), none(), newline())));
+        concreteSyntaxModelByClass.put(RulePattern.class, sequence(comment(), child(ObservableProperty.TYPE), space(), child(ObservableProperty.BIND), space(), string(GeneratedJavaParserConstants.COLON), space(), child(ObservableProperty.EXPR)));
+        concreteSyntaxModelByClass.put(RuleJoinedPatterns.class, sequence(comment(), attribute(ObservableProperty.TYPE), space(), string(GeneratedJavaParserConstants.LPAREN), list(ObservableProperty.ITEMS, sequence(string(GeneratedJavaParserConstants.COMMA), space())), string(GeneratedJavaParserConstants.RPAREN)));
+        concreteSyntaxModelByClass.put(RuleConsequence.class, sequence(comment(), string(GeneratedJavaParserConstants.IDENTIFIER, "do"), space(), child(ObservableProperty.STATEMENT)));
         // /
         // / Statements
         // /

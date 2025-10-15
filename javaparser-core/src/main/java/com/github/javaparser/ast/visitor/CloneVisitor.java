@@ -55,6 +55,12 @@ import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
 import org.mvel3.parser.ast.expr.OOPathChunk;
 import org.mvel3.parser.ast.expr.OOPathExpr;
+import org.mvel3.parser.ast.expr.RuleBody;
+import org.mvel3.parser.ast.expr.RuleConsequence;
+import org.mvel3.parser.ast.expr.RuleDeclaration;
+import org.mvel3.parser.ast.expr.RuleJoinedPatterns;
+import org.mvel3.parser.ast.expr.RulePattern;
+import org.mvel3.parser.ast.expr.RuleItem;
 
 /**
  * A visitor that clones (copies) a node and all its children.
@@ -1571,8 +1577,7 @@ public class CloneVisitor implements GenericVisitor<Visitable, Object> {
     public Visitable visit(final OOPathChunk n, final Object arg) {
         NodeList<DrlxExpression> condition = cloneList(n.getCondition(), arg);
         SimpleName field = cloneNode(n.getField(), arg);
-        Optional<SimpleName> inlineCastOptional = n.getInlineCast();
-        SimpleName inlineCast = cloneNode(inlineCastOptional, arg);
+        SimpleName inlineCast = cloneNode(n.getInlineCast(), arg);
         Comment comment = cloneNode(n.getComment(), arg);
         OOPathChunk r = new OOPathChunk(n.getTokenRange().orElse(null), field, inlineCast, condition);
         r.setComment(comment);
@@ -1586,6 +1591,67 @@ public class CloneVisitor implements GenericVisitor<Visitable, Object> {
         NodeList<OOPathChunk> chunks = cloneList(n.getChunks(), arg);
         Comment comment = cloneNode(n.getComment(), arg);
         OOPathExpr r = new OOPathExpr(n.getTokenRange().orElse(null), chunks);
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final RuleBody n, final Object arg) {
+        NodeList<RuleItem> items = cloneList(n.getItems(), arg);
+        Comment comment = cloneNode(n.getComment(), arg);
+        RuleBody r = new RuleBody(n.getTokenRange().orElse(null), items);
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final RuleConsequence n, final Object arg) {
+        Statement statement = cloneNode(n.getStatement(), arg);
+        Comment comment = cloneNode(n.getComment(), arg);
+        RuleConsequence r = new RuleConsequence(n.getTokenRange().orElse(null), statement);
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final RuleDeclaration n, final Object arg) {
+        RuleBody ruleBody = cloneNode(n.getRuleBody(), arg);
+        NodeList<BodyDeclaration<?>> members = cloneList(n.getMembers(), arg);
+        NodeList<Modifier> modifiers = cloneList(n.getModifiers(), arg);
+        SimpleName name = cloneNode(n.getName(), arg);
+        NodeList<AnnotationExpr> annotations = cloneList(n.getAnnotations(), arg);
+        Comment comment = cloneNode(n.getComment(), arg);
+        RuleDeclaration r = new RuleDeclaration(n.getTokenRange().orElse(null), modifiers, annotations, name, members, ruleBody);
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final RuleJoinedPatterns n, final Object arg) {
+        NodeList<RuleItem> items = cloneList(n.getItems(), arg);
+        Comment comment = cloneNode(n.getComment(), arg);
+        RuleJoinedPatterns r = new RuleJoinedPatterns(n.getTokenRange().orElse(null), n.getType(), items);
+        r.setComment(comment);
+        n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
+        copyData(n, r);
+        return r;
+    }
+
+    @Override
+    public Visitable visit(final RulePattern n, final Object arg) {
+        SimpleName bind = cloneNode(n.getBind(), arg);
+        OOPathExpr expr = cloneNode(n.getExpr(), arg);
+        SimpleName type = cloneNode(n.getType(), arg);
+        Comment comment = cloneNode(n.getComment(), arg);
+        RulePattern r = new RulePattern(n.getTokenRange().orElse(null), type, bind, expr);
         r.setComment(comment);
         n.getOrphanComments().stream().map(Comment::clone).forEach(r::addOrphanComment);
         copyData(n, r);

@@ -52,6 +52,11 @@ import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
 import org.mvel3.parser.ast.expr.OOPathChunk;
 import org.mvel3.parser.ast.expr.OOPathExpr;
+import org.mvel3.parser.ast.expr.RuleBody;
+import org.mvel3.parser.ast.expr.RuleConsequence;
+import org.mvel3.parser.ast.expr.RuleDeclaration;
+import org.mvel3.parser.ast.expr.RuleJoinedPatterns;
+import org.mvel3.parser.ast.expr.RulePattern;
 
 /**
  * A visitor that does not return anything.
@@ -305,4 +310,14 @@ public interface VoidVisitor<A> {
     void visit(OOPathChunk n, A arg);
 
     void visit(OOPathExpr n, A arg);
+
+    void visit(RuleBody n, A arg);
+
+    void visit(RuleConsequence n, A arg);
+
+    void visit(RuleDeclaration n, A arg);
+
+    void visit(RuleJoinedPatterns n, A arg);
+
+    void visit(RulePattern n, A arg);
 }

@@ -82,13 +82,18 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.OOPathChunk;
+import org.mvel3.parser.ast.expr.OOPathExpr;
+import org.mvel3.parser.ast.expr.RuleBody;
+import org.mvel3.parser.ast.expr.RuleConsequence;
+import org.mvel3.parser.ast.expr.RuleDeclaration;
+import org.mvel3.parser.ast.expr.RuleJoinedPatterns;
+import org.mvel3.parser.ast.expr.RulePattern;
 import org.mvel3.parser.ast.expr.TemporalChunkExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralChunkExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralExpr;
 import org.mvel3.parser.ast.expr.TemporalLiteralInfiniteChunkExpr;
 import org.mvel3.parser.ast.expr.WithStatement;
-import org.mvel3.parser.ast.expr.OOPathChunk;
-import org.mvel3.parser.ast.expr.OOPathExpr;
 
 public class TypeExtractor extends DefaultVisitorAdapter {
 
@@ -275,6 +280,31 @@ public class TypeExtractor extends DefaultVisitorAdapter {
 
     @Override
     public ResolvedType visit(OOPathChunk node, Boolean solveLambdas) {
+        return objectReferenceType;
+    }
+
+    @Override
+    public ResolvedType visit(RuleDeclaration node, Boolean solveLambdas) {
+        return objectReferenceType;
+    }
+
+    @Override
+    public ResolvedType visit(RuleBody node, Boolean solveLambdas) {
+        return objectReferenceType;
+    }
+
+    @Override
+    public ResolvedType visit(RulePattern node, Boolean solveLambdas) {
+        return objectReferenceType;
+    }
+
+    @Override
+    public ResolvedType visit(RuleJoinedPatterns node, Boolean solveLambdas) {
+        return objectReferenceType;
+    }
+
+    @Override
+    public ResolvedType visit(RuleConsequence node, Boolean solveLambdas) {
         return objectReferenceType;
     }
 

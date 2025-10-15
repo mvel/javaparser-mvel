@@ -31,6 +31,15 @@ import com.github.javaparser.resolution.declarations.ResolvedReferenceTypeDeclar
 import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitorAdapter;
+import java.util.Optional;
+import java.util.function.Consumer;
+import com.github.javaparser.ast.observer.ObservableProperty;
+import static com.github.javaparser.utils.Utils.assertNotNull;
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.visitor.CloneVisitor;
+import com.github.javaparser.metamodel.RuleDeclarationMetaModel;
+import com.github.javaparser.metamodel.JavaParserMetaModel;
+import com.github.javaparser.ast.Generated;
 
 /**
  * Represents a rule declaration in a DRL (Drools Rule Language) file.
@@ -51,15 +60,20 @@ public class RuleDeclaration extends TypeDeclaration<RuleDeclaration> {
         this(null, modifiers, annotations, name, members, ruleBody);
     }
 
-    // expected to be MainConstructor
-    public RuleDeclaration(TokenRange range, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name,  NodeList<BodyDeclaration<?>> members, RuleBody ruleBody) {
-        super(range, modifiers, annotations, name, members);
-        this.ruleBody = ruleBody;
+    /**
+     * This constructor is used by the parser and is considered private.
+     */
+    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public RuleDeclaration(TokenRange tokenRange, NodeList<Modifier> modifiers, NodeList<AnnotationExpr> annotations, SimpleName name, NodeList<BodyDeclaration<?>> members, RuleBody ruleBody) {
+        super(tokenRange, modifiers, annotations, name, members);
+        setRuleBody(ruleBody);
+        customInitialization();
     }
 
     @Override
-    public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
-        return ((DrlGenericVisitor<R, A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <R, A> R accept(final GenericVisitor<R, A> v, final A arg) {
+        return v.visit(this, arg);
     }
 
     public static <A> VoidVisitor<A> getDrlVoidVisitor(VoidVisitor<A> v) {
@@ -70,11 +84,12 @@ public class RuleDeclaration extends TypeDeclaration<RuleDeclaration> {
     }
 
     @Override
-    public <A> void accept(VoidVisitor<A> v, A arg) {
-        v = getDrlVoidVisitor(v);
-        ((DrlVoidVisitor<A>) v).visit(this, arg);
+    @Generated("com.github.javaparser.generator.core.node.AcceptGenerator")
+    public <A> void accept(final VoidVisitor<A> v, final A arg) {
+        v.visit(this, arg);
     }
 
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
     public RuleBody getRuleBody() {
         return ruleBody;
     }
@@ -82,5 +97,67 @@ public class RuleDeclaration extends TypeDeclaration<RuleDeclaration> {
     @Override
     public ResolvedReferenceTypeDeclaration resolve() {
         return null;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public boolean isRuleDeclaration() {
+        return true;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public RuleDeclaration asRuleDeclaration() {
+        return this;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public Optional<RuleDeclaration> toRuleDeclaration() {
+        return Optional.of(this);
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.TypeCastingGenerator")
+    public void ifRuleDeclaration(Consumer<RuleDeclaration> action) {
+        action.accept(this);
+    }
+
+    @Generated("com.github.javaparser.generator.core.node.PropertyGenerator")
+    public RuleDeclaration setRuleBody(final RuleBody ruleBody) {
+        assertNotNull(ruleBody);
+        if (ruleBody == this.ruleBody) {
+            return this;
+        }
+        notifyPropertyChange(ObservableProperty.RULE_BODY, this.ruleBody, ruleBody);
+        if (this.ruleBody != null)
+            this.ruleBody.setParentNode(null);
+        this.ruleBody = ruleBody;
+        setAsParentNodeOf(ruleBody);
+        return this;
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.ReplaceMethodGenerator")
+    public boolean replace(Node node, Node replacementNode) {
+        if (node == null) {
+            return false;
+        }
+        if (node == ruleBody) {
+            setRuleBody((RuleBody) replacementNode);
+            return true;
+        }
+        return super.replace(node, replacementNode);
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    public RuleDeclaration clone() {
+        return (RuleDeclaration) accept(new CloneVisitor(), null);
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    public RuleDeclarationMetaModel getMetaModel() {
+        return JavaParserMetaModel.ruleDeclarationMetaModel;
     }
 }

@@ -52,6 +52,11 @@ import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
 import org.mvel3.parser.ast.expr.OOPathChunk;
 import org.mvel3.parser.ast.expr.OOPathExpr;
+import org.mvel3.parser.ast.expr.RuleBody;
+import org.mvel3.parser.ast.expr.RuleConsequence;
+import org.mvel3.parser.ast.expr.RuleDeclaration;
+import org.mvel3.parser.ast.expr.RuleJoinedPatterns;
+import org.mvel3.parser.ast.expr.RulePattern;
 
 /**
  * A visitor that has a return value.
@@ -310,4 +315,14 @@ public interface GenericVisitor<R, A> {
     R visit(OOPathChunk n, A arg);
 
     R visit(OOPathExpr n, A arg);
+
+    R visit(RuleBody n, A arg);
+
+    R visit(RuleConsequence n, A arg);
+
+    R visit(RuleDeclaration n, A arg);
+
+    R visit(RuleJoinedPatterns n, A arg);
+
+    R visit(RulePattern n, A arg);
 }

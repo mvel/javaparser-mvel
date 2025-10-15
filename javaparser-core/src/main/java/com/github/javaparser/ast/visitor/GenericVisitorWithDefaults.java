@@ -52,6 +52,11 @@ import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
 import org.mvel3.parser.ast.expr.OOPathChunk;
 import org.mvel3.parser.ast.expr.OOPathExpr;
+import org.mvel3.parser.ast.expr.RuleBody;
+import org.mvel3.parser.ast.expr.RuleConsequence;
+import org.mvel3.parser.ast.expr.RuleDeclaration;
+import org.mvel3.parser.ast.expr.RuleJoinedPatterns;
+import org.mvel3.parser.ast.expr.RulePattern;
 
 /**
  * A visitor that has a return value (R), and has default methods that are used when a specific visit method is not
@@ -685,6 +690,31 @@ public abstract class GenericVisitorWithDefaults<R, A> implements GenericVisitor
 
     @Override
     public R visit(final OOPathExpr n, final A arg) {
+        return defaultAction(n, arg);
+    }
+
+    @Override
+    public R visit(final RuleBody n, final A arg) {
+        return defaultAction(n, arg);
+    }
+
+    @Override
+    public R visit(final RuleConsequence n, final A arg) {
+        return defaultAction(n, arg);
+    }
+
+    @Override
+    public R visit(final RuleDeclaration n, final A arg) {
+        return defaultAction(n, arg);
+    }
+
+    @Override
+    public R visit(final RuleJoinedPatterns n, final A arg) {
+        return defaultAction(n, arg);
+    }
+
+    @Override
+    public R visit(final RulePattern n, final A arg) {
         return defaultAction(n, arg);
     }
 }

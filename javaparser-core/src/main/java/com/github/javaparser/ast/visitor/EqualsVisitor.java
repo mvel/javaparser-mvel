@@ -54,6 +54,11 @@ import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
 import org.mvel3.parser.ast.expr.OOPathChunk;
 import org.mvel3.parser.ast.expr.OOPathExpr;
+import org.mvel3.parser.ast.expr.RuleBody;
+import org.mvel3.parser.ast.expr.RuleConsequence;
+import org.mvel3.parser.ast.expr.RuleDeclaration;
+import org.mvel3.parser.ast.expr.RuleJoinedPatterns;
+import org.mvel3.parser.ast.expr.RulePattern;
 
 /**
  * A visitor that calculates deep node equality by comparing all properties and child nodes of the node.
@@ -1724,6 +1729,70 @@ public class EqualsVisitor implements GenericVisitor<Boolean, Visitable> {
     public Boolean visit(final OOPathExpr n, final Visitable arg) {
         final OOPathExpr n2 = (OOPathExpr) arg;
         if (!nodesEquals(n.getChunks(), n2.getChunks()))
+            return false;
+        if (!nodeEquals(n.getComment(), n2.getComment()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final RuleBody n, final Visitable arg) {
+        final RuleBody n2 = (RuleBody) arg;
+        if (!nodesEquals(n.getItems(), n2.getItems()))
+            return false;
+        if (!nodeEquals(n.getComment(), n2.getComment()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final RuleConsequence n, final Visitable arg) {
+        final RuleConsequence n2 = (RuleConsequence) arg;
+        if (!nodeEquals(n.getStatement(), n2.getStatement()))
+            return false;
+        if (!nodeEquals(n.getComment(), n2.getComment()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final RuleDeclaration n, final Visitable arg) {
+        final RuleDeclaration n2 = (RuleDeclaration) arg;
+        if (!nodeEquals(n.getRuleBody(), n2.getRuleBody()))
+            return false;
+        if (!nodesEquals(n.getMembers(), n2.getMembers()))
+            return false;
+        if (!nodesEquals(n.getModifiers(), n2.getModifiers()))
+            return false;
+        if (!nodeEquals(n.getName(), n2.getName()))
+            return false;
+        if (!nodesEquals(n.getAnnotations(), n2.getAnnotations()))
+            return false;
+        if (!nodeEquals(n.getComment(), n2.getComment()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final RuleJoinedPatterns n, final Visitable arg) {
+        final RuleJoinedPatterns n2 = (RuleJoinedPatterns) arg;
+        if (!nodesEquals(n.getItems(), n2.getItems()))
+            return false;
+        if (!objEquals(n.getType(), n2.getType()))
+            return false;
+        if (!nodeEquals(n.getComment(), n2.getComment()))
+            return false;
+        return true;
+    }
+
+    @Override
+    public Boolean visit(final RulePattern n, final Visitable arg) {
+        final RulePattern n2 = (RulePattern) arg;
+        if (!nodeEquals(n.getBind(), n2.getBind()))
+            return false;
+        if (!nodeEquals(n.getExpr(), n2.getExpr()))
+            return false;
+        if (!nodeEquals(n.getType(), n2.getType()))
             return false;
         if (!nodeEquals(n.getComment(), n2.getComment()))
             return false;

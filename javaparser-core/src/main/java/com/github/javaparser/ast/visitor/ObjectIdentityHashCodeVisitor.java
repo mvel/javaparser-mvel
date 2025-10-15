@@ -52,6 +52,11 @@ import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
 import org.mvel3.parser.ast.expr.OOPathChunk;
 import org.mvel3.parser.ast.expr.OOPathExpr;
+import org.mvel3.parser.ast.expr.RuleBody;
+import org.mvel3.parser.ast.expr.RuleConsequence;
+import org.mvel3.parser.ast.expr.RuleDeclaration;
+import org.mvel3.parser.ast.expr.RuleJoinedPatterns;
+import org.mvel3.parser.ast.expr.RulePattern;
 
 /**
  * A visitor that calculates a deep hash code for a node by using the hash codes of all its properties,
@@ -590,6 +595,31 @@ public class ObjectIdentityHashCodeVisitor implements GenericVisitor<Integer, Vo
 
     @Override
     public Integer visit(final OOPathExpr n, final Void arg) {
+        return n.hashCode();
+    }
+
+    @Override
+    public Integer visit(final RuleBody n, final Void arg) {
+        return n.hashCode();
+    }
+
+    @Override
+    public Integer visit(final RuleConsequence n, final Void arg) {
+        return n.hashCode();
+    }
+
+    @Override
+    public Integer visit(final RuleDeclaration n, final Void arg) {
+        return n.hashCode();
+    }
+
+    @Override
+    public Integer visit(final RuleJoinedPatterns n, final Void arg) {
+        return n.hashCode();
+    }
+
+    @Override
+    public Integer visit(final RulePattern n, final Void arg) {
         return n.hashCode();
     }
 }

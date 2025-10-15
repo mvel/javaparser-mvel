@@ -19,7 +19,11 @@ package org.mvel3.parser.ast.expr;
 
 import com.github.javaparser.TokenRange;
 import com.github.javaparser.ast.AllFieldsConstructor;
+import com.github.javaparser.ast.Generated;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.visitor.CloneVisitor;
+import com.github.javaparser.metamodel.RuleItemMetaModel;
+import com.github.javaparser.metamodel.JavaParserMetaModel;
 
 public abstract class RuleItem extends Node {
 
@@ -28,7 +32,24 @@ public abstract class RuleItem extends Node {
         this(null);
     }
 
-    public RuleItem(TokenRange range) {
-        super(range);
+    /**
+     * This constructor is used by the parser and is considered private.
+     */
+    @Generated("com.github.javaparser.generator.core.node.MainConstructorGenerator")
+    public RuleItem(TokenRange tokenRange) {
+        super(tokenRange);
+        customInitialization();
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.CloneGenerator")
+    public RuleItem clone() {
+        return (RuleItem) accept(new CloneVisitor(), null);
+    }
+
+    @Override
+    @Generated("com.github.javaparser.generator.core.node.GetMetaModelGenerator")
+    public RuleItemMetaModel getMetaModel() {
+        return JavaParserMetaModel.ruleItemMetaModel;
     }
 }

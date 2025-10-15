@@ -52,6 +52,11 @@ import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
 import org.mvel3.parser.ast.expr.OOPathChunk;
 import org.mvel3.parser.ast.expr.OOPathExpr;
+import org.mvel3.parser.ast.expr.RuleBody;
+import org.mvel3.parser.ast.expr.RuleConsequence;
+import org.mvel3.parser.ast.expr.RuleDeclaration;
+import org.mvel3.parser.ast.expr.RuleJoinedPatterns;
+import org.mvel3.parser.ast.expr.RulePattern;
 
 /**
  * A visitor that returns nothing, and has default methods that are used when a specific visit method is not
@@ -681,6 +686,31 @@ public abstract class VoidVisitorWithDefaults<A> implements VoidVisitor<A> {
 
     @Override
     public void visit(final OOPathExpr n, final A arg) {
+        defaultAction(n, arg);
+    }
+
+    @Override
+    public void visit(final RuleBody n, final A arg) {
+        defaultAction(n, arg);
+    }
+
+    @Override
+    public void visit(final RuleConsequence n, final A arg) {
+        defaultAction(n, arg);
+    }
+
+    @Override
+    public void visit(final RuleDeclaration n, final A arg) {
+        defaultAction(n, arg);
+    }
+
+    @Override
+    public void visit(final RuleJoinedPatterns n, final A arg) {
+        defaultAction(n, arg);
+    }
+
+    @Override
+    public void visit(final RulePattern n, final A arg) {
         defaultAction(n, arg);
     }
 }

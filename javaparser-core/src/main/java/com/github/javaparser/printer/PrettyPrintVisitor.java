@@ -53,6 +53,12 @@ import org.mvel3.parser.ast.expr.MapCreationLiteralExpressionKeyValuePair;
 import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.NullSafeFieldAccessExpr;
 import org.mvel3.parser.ast.expr.NullSafeMethodCallExpr;
+import org.mvel3.parser.ast.expr.RuleBody;
+import org.mvel3.parser.ast.expr.RuleConsequence;
+import org.mvel3.parser.ast.expr.RuleDeclaration;
+import org.mvel3.parser.ast.expr.RuleJoinedPatterns;
+import org.mvel3.parser.ast.expr.RuleItem;
+import org.mvel3.parser.ast.expr.RulePattern;
 import org.mvel3.parser.ast.expr.OOPathChunk;
 import org.mvel3.parser.ast.expr.OOPathExpr;
 import org.mvel3.parser.ast.expr.PointFreeExpr;
@@ -891,6 +897,72 @@ public class PrettyPrintVisitor implements VoidVisitor<Void> {
         for (OOPathChunk chunk : n.getChunks()) {
             chunk.accept(this, arg);
         }
+    }
+
+    @Override
+    public void visit(final RuleDeclaration n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        printMemberAnnotations(n.getAnnotations(), arg);
+        printModifiers(n.getModifiers());
+        printer.print("rule ");
+        n.getName().accept(this, arg);
+        printer.println(" {");
+        printer.indent();
+        n.getRuleBody().accept(this, arg);
+        printer.unindent();
+        printOrphanCommentsEnding(n);
+        printer.println("}");
+    }
+
+    @Override
+    public void visit(final RuleBody n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        NodeList<RuleItem> items = n.getItems();
+        for (int i = 0; i < items.size(); i++) {
+            if (i > 0) {
+                printer.println();
+            }
+            items.get(i).accept(this, arg);
+        }
+        if (!items.isEmpty()) {
+            printer.println();
+        }
+    }
+
+    @Override
+    public void visit(final RulePattern n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        n.getType().accept(this, arg);
+        printer.print(" ");
+        n.getBind().accept(this, arg);
+        printer.print(" : ");
+        n.getExpr().accept(this, arg);
+    }
+
+    @Override
+    public void visit(final RuleJoinedPatterns n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        printer.print(n.getType().name());
+        printer.print(" (");
+        for (int i = 0; i < n.getItems().size(); i++) {
+            if (i > 0) {
+                printer.print(", ");
+            }
+            n.getItems().get(i).accept(this, arg);
+        }
+        printer.print(")");
+    }
+
+    @Override
+    public void visit(final RuleConsequence n, final Void arg) {
+        printOrphanCommentsBeforeThisChildNode(n);
+        printComment(n.getComment(), arg);
+        printer.print("do ");
+        n.getStatement().accept(this, arg);
     }
 
     @Override

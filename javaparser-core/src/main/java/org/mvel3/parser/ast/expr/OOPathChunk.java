@@ -259,6 +259,7 @@ public class OOPathChunk extends Expression {
         return JavaParserMetaModel.oOPathChunkMetaModel;
     }
 
+    @Generated("com.github.javaparser.generator.core.node.RemoveMethodGenerator")
     public OOPathChunk removeInlineCast() {
         return setInlineCast((SimpleName) null);
     }

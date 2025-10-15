@@ -60,6 +60,12 @@ import org.mvel3.parser.ast.expr.ModifyStatement;
 import org.mvel3.parser.ast.expr.WithStatement;
 import org.mvel3.parser.ast.expr.OOPathChunk;
 import org.mvel3.parser.ast.expr.OOPathExpr;
+import org.mvel3.parser.ast.expr.RuleBody;
+import org.mvel3.parser.ast.expr.RuleConsequence;
+import org.mvel3.parser.ast.expr.RuleDeclaration;
+import org.mvel3.parser.ast.expr.RuleJoinedPatterns;
+import org.mvel3.parser.ast.expr.RulePattern;
+import org.mvel3.parser.ast.expr.RuleItem;
 
 /**
  * This visitor can be used to save time when some specific nodes needs
@@ -1633,6 +1639,69 @@ public class ModifierVisitor<A> implements GenericVisitor<Visitable, A> {
         NodeList<OOPathChunk> chunks = modifyList(n.getChunks(), arg);
         Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
         n.setChunks(chunks);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final RuleBody n, final A arg) {
+        NodeList<RuleItem> items = modifyList(n.getItems(), arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        n.setItems(items);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final RuleConsequence n, final A arg) {
+        Statement statement = (Statement) n.getStatement().accept(this, arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        if (statement == null)
+            return null;
+        n.setStatement(statement);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final RuleDeclaration n, final A arg) {
+        NodeList<AnnotationExpr> annotations = modifyList(n.getAnnotations(), arg);
+        NodeList<Modifier> modifiers = modifyList(n.getModifiers(), arg);
+        RuleBody ruleBody = (RuleBody) n.getRuleBody().accept(this, arg);
+        NodeList<BodyDeclaration<?>> members = modifyList(n.getMembers(), arg);
+        SimpleName name = (SimpleName) n.getName().accept(this, arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        if (ruleBody == null || name == null)
+            return null;
+        n.setAnnotations(annotations);
+        n.setModifiers(modifiers);
+        n.setRuleBody(ruleBody);
+        n.setMembers(members);
+        n.setName(name);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final RuleJoinedPatterns n, final A arg) {
+        NodeList<RuleItem> items = modifyList(n.getItems(), arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        n.setItems(items);
+        n.setComment(comment);
+        return n;
+    }
+
+    @Override
+    public Visitable visit(final RulePattern n, final A arg) {
+        SimpleName bind = (SimpleName) n.getBind().accept(this, arg);
+        OOPathExpr expr = (OOPathExpr) n.getExpr().accept(this, arg);
+        SimpleName type = (SimpleName) n.getType().accept(this, arg);
+        Comment comment = n.getComment().map(s -> (Comment) s.accept(this, arg)).orElse(null);
+        if (bind == null || expr == null || type == null)
+            return null;
+        n.setBind(bind);
+        n.setExpr(expr);
+        n.setType(type);
         n.setComment(comment);
         return n;
     }
