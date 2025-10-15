@@ -108,8 +108,8 @@ public abstract class Generator {
         }
         final CallableDeclaration<?> existingCallable = existingCallables.get(0);
         callable.setJavadocComment(callable.getJavadocComment().orElse(existingCallable.getJavadocComment().orElse(null)));
-        annotateGenerated(callable);
         containingClassOrInterface.getMembers().replace(existingCallable, callable);
+        annotateGenerated(callable);
     }
 
     /**
