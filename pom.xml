@@ -11,15 +11,15 @@
         <module>javaparser-symbol-solver-testing</module>
     </modules>
 
-    <groupId>com.github.javaparser</groupId>
+    <groupId>org.mvel.javaparser</groupId>
     <artifactId>javaparser-parent</artifactId>
     <packaging>pom</packaging>
     <version>3.25.5-mvel3-1</version>
 
     <name>javaparser-parent</name>
-    <url>https://github.com/javaparser</url>
+    <url>https://github.com/mvel/javaparser-mvel</url>
     <inceptionYear>2007</inceptionYear>
-    <description>Java Parser and Abstract Syntax Tree for Java</description>
+    <description>Java Parser and Abstract Syntax Tree for Java with MVEL AST nodes</description>
 
     <licenses>
         <license>
@@ -96,6 +96,13 @@
             <url>https://github.com/maartenc</url>
             <id>maartenc</id>
         </developer>
+
+        <!-- for this fork -->
+        <developer>
+            <name>Toshiya Kobayashi</name>
+            <url>https://github.com/tkobayas</url>
+            <id>tkobayas</id>
+        </developer>
     </developers>
     <contributors>
         <contributor>
@@ -152,30 +159,28 @@
     </properties>
 
     <scm>
-        <connection>scm:git:git://github.com/javaparser/javaparser.git</connection>
-        <developerConnection>scm:git:git@github.com:javaparser/javaparser.git</developerConnection>
-        <url>https://github.com/javaparser/javaparser.git</url>
+        <connection>scm:git:https://github.com/mvel/javaparser-mvel.git</connection>
+        <developerConnection>scm:git:git@github.com:mvel/javaparser-mvel.git</developerConnection>
+        <url>https://github.com/mvel/javaparser-mvel</url>
         <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
         <system>GitHub Issue Tracker</system>
-        <url>https://github.com/javaparser/javaparser/issues</url>
+        <url>https://github.com/mvel/javaparser-mvel/issues</url>
     </issueManagement>
 
     <distributionManagement>
-        <!-- https://docs.github.com/en/actions/guides/publishing-java-packages-with-maven#publishing-packages-to-the-maven-central-repository -->
-        <!-- https://blog.sonatype.com/what-publishers-need-to-know-about-migrating-from-jcenter-/-bintray-to-the-central-repository -->
-        <!-- New: Publishing directly to Sonatype OSSRH (OSS Repository Hosting), for release to Maven Central -->
-        <!-- URLs available from: https://central.sonatype.org/pages/ossrh-guide.html#accessing-repositories -->
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>jboss-releases-repository</id>
+            <name>JBoss Releases Repository</name>
+            <url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</url>
         </repository>
+        <snapshotRepository>
+            <id>jboss-snapshots-repository</id>
+            <name>JBoss Snapshot Repository</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
     </distributionManagement>
 
 
