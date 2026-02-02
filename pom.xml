@@ -259,8 +259,7 @@
                         <tagNameFormat>@{project.version}</tagNameFormat>
                         <!-- When updating versions during release, synchronise versions of sub-modules with the parent-pom. -->
                         <autoVersionSubmodules>true</autoVersionSubmodules>
-                        <!-- During release:prepare, update the readme (via the "run-release" profile) and add it to git. -->
-                        <preparationGoals>-Prun-release clean verify scm:add scm:checkin</preparationGoals>
+                        <preparationGoals>clean verify</preparationGoals>
                         <!-- During release:perform, enable the release-specific profiles -->
                         <releaseProfiles>run-release</releaseProfiles>
                         <!-- Disable pushing of changes (i.e. false, for local testing) -->
@@ -455,46 +454,6 @@
             <id>run-release</id>
             <build>
                 <plugins>
-                    <!-- Update the readme with the new version number, but only when compiling a new release. -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>copy-readme</id>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${project.basedir}</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>${project.basedir}/doc</directory>
-                                            <includes>
-                                                <include>readme.md</include>
-                                            </includes>
-                                            <filtering>true</filtering>
-                                        </resource>
-                                    </resources>
-                                    <encoding>${project.build.sourceEncoding}</encoding>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <!-- Commit the updated readme file to the repo.  -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-scm-plugin</artifactId>
-                        <configuration>
-                            <includes>readme.md</includes>
-                            <message>[maven-release-plugin] update readme</message>
-                            <!-- disabled here, as it will be pushed separately -->
-                            <!-- (either once the release has finished being prepared, or manually) -->
-                            <pushChanges>false</pushChanges>
-                        </configuration>
-                    </plugin>
-
                     <!-- Source plugin - used to include source code within the release JAR -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
