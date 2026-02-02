@@ -32,7 +32,6 @@ import com.github.javaparser.metamodel.JavadocCommentMetaModel;
 import java.util.Optional;
 import java.util.function.Consumer;
 import static com.github.javaparser.StaticJavaParser.parseJavadoc;
-import com.github.javaparser.ast.Node;
 
 /**
  * A Javadoc comment. {@code /∗∗ a comment ∗/}

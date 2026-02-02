@@ -28,7 +28,6 @@ import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import com.github.javaparser.resolution.declarations.ResolvedReferenceTypeDeclaration;
-import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 import org.mvel3.parser.ast.visitor.DrlVoidVisitorAdapter;
 import java.util.Optional;

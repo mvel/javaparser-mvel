@@ -9,6 +9,7 @@ on:
 jobs:
 
   generate_changelog:
+    if: false # Temporarily disable the workflow until we finalize the release process
     name: Generate Changelog
     runs-on: ubuntu-latest
     steps:

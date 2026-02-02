@@ -8,6 +8,7 @@ on:
 name: Create Release from semantic versioning tag push
 
 jobs:
+  if: false # Temporarily disable the workflow until we finalize the release process
   build:
     name: Create Release
     runs-on: ubuntu-latest

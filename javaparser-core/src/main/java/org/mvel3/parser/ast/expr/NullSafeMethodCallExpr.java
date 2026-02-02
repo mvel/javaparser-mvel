@@ -43,8 +43,6 @@ import com.github.javaparser.ast.visitor.VoidVisitor;
 import com.github.javaparser.metamodel.OptionalProperty;
 import com.github.javaparser.resolution.Resolvable;
 import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
-import org.mvel3.parser.ast.visitor.DrlGenericVisitor;
-import org.mvel3.parser.ast.visitor.DrlVoidVisitor;
 import static com.github.javaparser.utils.Utils.assertNotNull;
 import java.util.function.Consumer;
 import com.github.javaparser.metamodel.NullSafeMethodCallExprMetaModel;

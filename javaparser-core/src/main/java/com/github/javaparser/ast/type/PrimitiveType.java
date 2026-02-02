@@ -40,7 +40,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import static com.github.javaparser.StaticJavaParser.parseClassOrInterfaceType;
 import static com.github.javaparser.utils.Utils.assertNotNull;
-import com.github.javaparser.ast.Node;
 
 /**
  * A primitive type.

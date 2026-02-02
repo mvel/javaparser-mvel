@@ -36,7 +36,6 @@ import com.github.javaparser.resolution.declarations.ResolvedValueDeclaration;
 import java.util.Optional;
 import java.util.function.Consumer;
 import com.github.javaparser.ast.observer.ObservableProperty;
-import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.visitor.CloneVisitor;
 import com.github.javaparser.metamodel.DrlNameExprMetaModel;
 import com.github.javaparser.metamodel.JavaParserMetaModel;
