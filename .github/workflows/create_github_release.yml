@@ -1,9 +1,12 @@
 on:
   push:
     tags:
-      - '[0-9]+.*-mvel3-*' # Matches tags like 3.25.5-mvel3-1
+      - '[0-9]*-mvel3-*' # Matches tags like 3.25.5-mvel3-1
 
 name: Create Release from tag push
+
+permissions:
+  contents: write
 
 jobs:
   build:
