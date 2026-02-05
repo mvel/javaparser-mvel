@@ -8,6 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
 
     <artifactId>javaparser-symbol-solver-core</artifactId>
+    <name>javaparser-symbol-solver-core</name>
     <packaging>jar</packaging>
     <description>A Symbol Solver for Java, built on top of JavaParser (core)</description>
 

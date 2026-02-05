@@ -7,6 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>javaparser-core-testing</artifactId>
+    <name>javaparser-core-testing</name>
     <description>The test suite for javaparser-core</description>
 
     <licenses>
