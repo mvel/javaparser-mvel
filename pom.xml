@@ -14,7 +14,7 @@
     <groupId>org.mvel.javaparser</groupId>
     <artifactId>javaparser-parent</artifactId>
     <packaging>pom</packaging>
-    <version>3.25.5-mvel3-2-SNAPSHOT</version>
+    <version>3.25.5-mvel3-SNAPSHOT</version>
 
     <name>javaparser-parent</name>
     <url>https://github.com/mvel/javaparser-mvel</url>
