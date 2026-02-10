@@ -2,7 +2,7 @@
 	<parent>
 		<artifactId>javaparser-parent</artifactId>
 		<groupId>org.mvel.javaparser</groupId>
-		<version>3.25.5-mvel3-2-SNAPSHOT</version>
+		<version>3.25.5-mvel3-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
